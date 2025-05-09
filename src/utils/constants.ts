@@ -1,4 +1,4 @@
-export const API_URL = 'http://api.volt-worx.com/api';
+export const API_URL = 'https://api.volt-worx.com/api';
 
 export const USER_ROLES = {
   STUDENT: 'student',
