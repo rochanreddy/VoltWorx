@@ -307,10 +307,10 @@ function StartupDashboard() {
           <LoadingSpinner size="large" />
         </div>
       ) : displayedTasks.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="w-full max-w-screen-lg mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {displayedTasks.map((task: any) => (
-              <div key={task._id} className="group relative">
+              <div key={task._id} className="group relative min-w-0">
                 <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
                 <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
                   <TaskCard

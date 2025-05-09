@@ -95,15 +95,17 @@ function Landing() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur-3xl opacity-20"></div>
               <div className="relative bg-purple-800/20 backdrop-blur-md rounded-xl p-10 border border-purple-500/30 shadow-lg">
-                <div className="flex items-center mb-6">
+                <div className="flex items-center mb-6 relative">
                   <div className="h-12 w-12 rounded-full bg-purple-500/30 flex items-center justify-center">
                     <Zap className="h-6 w-6 text-purple-300" />
                   </div>
-                  <div className="ml-4">
+                  <div className="ml-4 flex-1">
                     <h3 className="text-2xl font-semibold text-white">Innovation Challenge</h3>
                     <p className="text-purple-200/80 text-sm">Submit by Dec 15, 2025</p>
                   </div>
-                  <span className="ml-auto bg-blue-500/30 text-blue-300 text-xs px-3 py-1 rounded-full">5 spots left</span>
+                  <span className="ml-auto bg-blue-500/30 text-blue-300 text-xs px-2 py-0.5 rounded-full whitespace-nowrap absolute right-0 top-0 mt-2 mr-2 sm:static sm:mt-0 sm:mr-0 sm:ml-4 sm:relative sm:px-3 sm:py-1">
+                    5 spots left
+                  </span>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start">
