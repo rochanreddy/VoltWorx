@@ -5,7 +5,6 @@ import { body, validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 import Task from '../models/Task.js';
 import Startup from '../models/Startup.js';
-import TopStudent from '../models/TopStudent.js';
 
 const router = express.Router();
 
@@ -78,15 +77,6 @@ router.post(
           success: false,
           message: 'Task does not belong to this startup',
           debug: { projectId, taskStartup: task.startup, startupId, taskDocument: task }
-        });
-      }
-
-      // Check if a top student is already selected for this project
-      const existingTopStudent = await TopStudent.findOne({ projectId });
-      if (existingTopStudent) {
-        return res.status(400).json({
-          success: false,
-          message: 'A top student has already been selected for this project. You cannot select "No Top Student".'
         });
       }
 
