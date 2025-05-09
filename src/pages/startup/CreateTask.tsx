@@ -14,7 +14,7 @@ declare global {
 
 // Create axios instance with base URL and default config
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://api.volt-worx.com/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
