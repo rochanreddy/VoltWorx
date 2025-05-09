@@ -116,14 +116,14 @@ function StartupDashboard() {
 
       console.log('Sending top student data:', topStudentData);
 
-      const response = await fetch('/api/top-students/select', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/top-students/select`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(topStudentData),
-      });
+      });
 
       console.log('Response status:', response.status);
       console.log('Response headers:', Object.fromEntries(response.headers.entries()));
@@ -156,6 +156,45 @@ function StartupDashboard() {
     } catch (error) {
       console.error('Error selecting top student:', error);
       alert(error instanceof Error ? error.message : 'Failed to select top student');
+    }
+  };
+
+  const handleNoTopStudent = async (task: Task) => {
+    try {
+      if (!user?._id || !user?.name || !user?.company) {
+        alert('Invalid startup data. Please try again.');
+        return;
+      }
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in again to continue');
+        return;
+      }
+      const noTopStudentData = {
+        startupId: user._id,
+        startupName: user.name,
+        company: user.company,
+        startupEmail: user.email,
+        projectId: task._id,
+        reason: '' // Optionally, prompt for a reason
+      };
+      const response = await fetch('/api/no-top-students/select', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(noTopStudentData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert('No Top Student recorded successfully!');
+        await loadTasks();
+      } else {
+        throw new Error(data.message || 'Failed to record No Top Student');
+      }
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Failed to record No Top Student');
     }
   };
 
@@ -306,6 +345,13 @@ function StartupDashboard() {
                         </div>
                       ))}
                     </div>
+                    {/* No Top Student Button */}
+                    <button
+                      onClick={() => handleNoTopStudent(task)}
+                      className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                    >
+                      No Top Student
+                    </button>
                   </div>
                 )}
               </div>

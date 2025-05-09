@@ -13,6 +13,7 @@ import startupRoutes from './routes/startups.js';
 import communityRoutes from './routes/community.js';
 import topStudentsRoutes from './routes/topStudents.js';
 import paymentsRouter from './routes/payments.js';
+import noTopStudentsRoutes from './routes/noTopStudents.js';
 
 // Load environment variables
 dotenv.config();
@@ -73,6 +74,7 @@ app.use('/api/startups', startupRoutes);
 app.use('/api/community', communityRoutes);
 app.use('/api/top-students', topStudentsRoutes);
 app.use('/api/payments', paymentsRouter);
+app.use('/api/no-top-students', noTopStudentsRoutes);
 
 // Health check route
 app.get('/api/health', (_req, res) => {

@@ -50,11 +50,11 @@ function Login() {
         role: role // Send the selected role to the backend
       };
       console.log('Sending payload to backend:', payload);
-      const response = await fetch('/api/auth/google', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      });
+      });
       let data: any = {};
       let rawText = '';
       try {
