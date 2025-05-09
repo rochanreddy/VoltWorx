@@ -123,7 +123,7 @@ function StartupDashboard() {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(topStudentData),
-      });
+      });
 
       console.log('Response status:', response.status);
       console.log('Response headers:', Object.fromEntries(response.headers.entries()));
@@ -178,7 +178,7 @@ function StartupDashboard() {
         projectId: task._id,
         reason: '' // Optionally, prompt for a reason
       };
-      const response = await fetch('/api/no-top-students/select', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/no-top-students/select`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
