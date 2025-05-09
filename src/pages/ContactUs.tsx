@@ -30,7 +30,7 @@ function ContactUs() {
               </a>
               <br />
               <p>
-              plot no 608,vv nagar,kukatpally,hyderabad, Telangana,500072
+              address: plot no 608,vv nagar,kukatpally,hyderabad, Telangana,500072
               </p>
               <br />
               <p>
