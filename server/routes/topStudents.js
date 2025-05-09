@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import Task from '../models/Task.js';
 import Student from '../models/Student.js';
 import Startup from '../models/Startup.js';
+import NoTopStudent from '../models/NoTopStudent.js';
 
 const router = express.Router();
 
@@ -107,6 +108,15 @@ router.post(
           success: false,
           message: 'Task does not belong to this startup',
           debug: { projectId, taskStartup: task.startup, startupId, taskDocument: task }
+        });
+      }
+
+      // Check if a no top student is already selected for this project
+      const existingNoTopStudent = await NoTopStudent.findOne({ projectId });
+      if (existingNoTopStudent) {
+        return res.status(400).json({
+          success: false,
+          message: 'A "No Top Student" record already exists for this project. You cannot select a top student.'
         });
       }
 
