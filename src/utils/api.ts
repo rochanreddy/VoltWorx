@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { API_URL } from './constants';
 
 // Create axios instance with base URL
+export const API_URL = import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api';
+
 const api = axios.create({
   baseURL: API_URL
 });
@@ -47,7 +48,7 @@ export const checkAuthStatus = () => api.get('/auth/me');
 
 export const fetchStudentProjects = async (studentId: string) => {
   try {
-    const response = await axios.get(`${API_URL}/api/students/submissions`);
+    const response = await axios.get(`${API_URL}/students/submissions`);
     return response.data;
   } catch (error) {
     throw error;
