@@ -12,6 +12,9 @@ interface TaskCardProps {
     deadline: string;
     totalSlots: number;
     filledSlots: number;
+    payment?: {
+      amount: number;
+    };
   };
   showJoinButton?: boolean;
   onJoin?: () => void;
@@ -104,6 +107,9 @@ function TaskCard({ task, showJoinButton = true, onJoin, isJoined = false, isSta
             <span>
               {filledSlots}/{totalSlots} spots filled
             </span>
+          </div>
+          <div className="flex items-center">
+            <span className="font-semibold text-green-400">₹{task.payment?.amount || 0}</span>
           </div>
         </div>
         
