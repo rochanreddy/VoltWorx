@@ -235,11 +235,11 @@ function StartupDashboard() {
       <div className="group relative mb-8">
         <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
         <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-          <nav className="flex space-x-4 sm:space-x-8 overflow-x-auto whitespace-nowrap min-w-0 px-2 sm:px-0" aria-label="Tabs">
+          <nav className="flex space-x-8" aria-label="Tabs">
             <button
               onClick={() => setActiveTab('active')}
               className={cn(
-                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm min-w-0 border-r border-white/10 sm:border-none",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'active'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
@@ -256,7 +256,7 @@ function StartupDashboard() {
             <button
               onClick={() => setActiveTab('completed')}
               className={cn(
-                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm min-w-0 border-r border-white/10 sm:border-none",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'completed'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
@@ -273,7 +273,7 @@ function StartupDashboard() {
             <button
               onClick={() => setActiveTab('all')}
               className={cn(
-                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm min-w-0",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'all'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
