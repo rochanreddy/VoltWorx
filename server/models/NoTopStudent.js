@@ -33,6 +33,14 @@ const noTopStudentSchema = new mongoose.Schema({
   selectionDate: {
     type: Date,
     default: Date.now
+  },
+  paymentId: {
+    type: String,
+    default: ''
+  },
+  money: {
+    type: Number,
+    default: 0
   }
 }, {
   timestamps: true
