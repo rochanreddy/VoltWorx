@@ -103,7 +103,8 @@ function Landing() {
                     <h3 className="text-2xl font-semibold text-white">Innovation Challenge</h3>
                     <p className="text-purple-200/80 text-sm">Submit by Dec 15, 2025</p>
                   </div>
-                  <span className="ml-auto bg-blue-500/30 text-blue-300 text-xs px-2 py-0.5 rounded-full whitespace-nowrap absolute right-0 top-0 mt-2 mr-2 sm:static sm:mt-0 sm:mr-0 sm:ml-4 sm:relative sm:px-3 sm:py-1">
+                  {/* Responsive spots left badge: hidden on mobile, shown on sm+ */}
+                  <span className="hidden sm:inline-block bg-blue-500/30 text-blue-300 text-xs px-3 py-1 rounded-full whitespace-nowrap ml-4">
                     5 spots left
                   </span>
                 </div>
