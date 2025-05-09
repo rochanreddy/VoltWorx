@@ -213,7 +213,7 @@ function StartupDashboard() {
   const isSelectionMade = (task: any) => task.topStudentSelected || task.noTopStudentSelected;
 
   return (
-    <div className="container py-8">
+    <div className="container max-w-full px-2 py-8">
       {/* Header Section */}
       <div className="group relative mb-8">
         <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
@@ -307,64 +307,66 @@ function StartupDashboard() {
           <LoadingSpinner size="large" />
         </div>
       ) : displayedTasks.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {displayedTasks.map((task: any) => (
-            <div key={task._id} className="group relative">
-              <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
-              <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-                <TaskCard
-                  task={task}
-                  showJoinButton={false}
-                  isStartup={true}
-                  onDelete={() => handleDeleteTask(task._id)}
-                />
-                
-                {/* Submissions Section */}
-                {task.submissions && task.submissions.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <h3 className="text-sm font-medium text-gray-300 mb-2">Submissions</h3>
-                    <div className="space-y-2">
-                      {task.submissions.map((submission: Task['submissions'][0]) => (
-                        <div key={submission._id} className="flex items-center justify-between p-2 bg-gray-800/50 rounded-lg">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-sm text-gray-300">
-                              {submission.student.name}
-                            </span>
-                          </div>
-                          <a
-                            href={submission.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-purple-300 hover:text-purple-200 transition-colors"
-                          >
-                            View Submission
-                          </a>
-                          {/* Show Select Top Student button only after deadline and if no selection made */}
-                          {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
-                            <button
-                              onClick={() => handleSelectTopStudent(submission, task)}
-                              className="ml-4 px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+        <div className="overflow-x-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {displayedTasks.map((task: any) => (
+              <div key={task._id} className="group relative">
+                <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
+                <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+                  <TaskCard
+                    task={task}
+                    showJoinButton={false}
+                    isStartup={true}
+                    onDelete={() => handleDeleteTask(task._id)}
+                  />
+                  
+                  {/* Submissions Section */}
+                  {task.submissions && task.submissions.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-white/10">
+                      <h3 className="text-sm font-medium text-gray-300 mb-2">Submissions</h3>
+                      <div className="space-y-2">
+                        {task.submissions.map((submission: Task['submissions'][0]) => (
+                          <div key={submission._id} className="flex items-center justify-between p-2 bg-gray-800/50 rounded-lg">
+                            <div className="flex items-center space-x-2">
+                              <span className="text-sm text-gray-300">
+                                {submission.student.name}
+                              </span>
+                            </div>
+                            <a
+                              href={submission.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm text-purple-300 hover:text-purple-200 transition-colors"
                             >
-                              Select Top Student
-                            </button>
-                          )}
-                        </div>
-                      ))}
+                              View Submission
+                            </a>
+                            {/* Show Select Top Student button only after deadline and if no selection made */}
+                            {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
+                              <button
+                                onClick={() => handleSelectTopStudent(submission, task)}
+                                className="ml-4 px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                              >
+                                Select Top Student
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {/* Show No Top Student button only after deadline and if no selection made */}
+                      {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
+                        <button
+                          onClick={() => handleNoTopStudent(task)}
+                          className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                        >
+                          No Top Student
+                        </button>
+                      )}
                     </div>
-                    {/* Show No Top Student button only after deadline and if no selection made */}
-                    {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
-                      <button
-                        onClick={() => handleNoTopStudent(task)}
-                        className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-                      >
-                        No Top Student
-                      </button>
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ) : (
         <div className="group relative">
