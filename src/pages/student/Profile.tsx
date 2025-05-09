@@ -229,7 +229,7 @@ Average Rating: ${averageRating.toFixed(1)}/5
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">{user?.name}</h1>
-                <p className="text-purple-200/80 mb-4">{user?.email}</p>
+                <p className="text-purple-200/80 mb-4 break-all max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl truncate">{user?.email}</p>
                 
                 <div className="flex flex-wrap gap-4 mb-4">
                   {profile?.location && (

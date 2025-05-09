@@ -161,8 +161,8 @@ function StudentDashboard() {
           </div>
 
           {/* Category Filter and Show All/Matched Toggle */}
-          <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-            <div className="flex items-center gap-2">
+          <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <Filter className="h-5 w-5 text-purple-300" />
               <span className="text-sm font-medium text-gray-300">Filter by Category:</span>
             </div>
@@ -181,7 +181,7 @@ function StudentDashboard() {
               </select>
               <button
                 onClick={() => setShowAll((prev) => !prev)}
-                className="w-full sm:w-auto px-3 py-1.5 rounded-md bg-purple-600 text-white text-xs font-medium hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors"
+                className="w-full sm:w-auto px-3 py-1.5 rounded-md bg-purple-600 text-white text-xs font-medium hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors whitespace-nowrap"
               >
                 {showAll ? 'Show Matched Projects' : 'Show All Projects'}
               </button>
