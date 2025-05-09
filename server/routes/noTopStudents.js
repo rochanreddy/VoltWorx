@@ -19,7 +19,9 @@ router.post(
     body('company').notEmpty().withMessage('Company name is required'),
     body('startupEmail').isEmail().withMessage('Invalid startup email format'),
     body('projectId').isMongoId().withMessage('Invalid project ID'),
-    body('reason').optional().isString()
+    body('reason').optional().isString(),
+    body('paymentId').optional().isString(),
+    body('money').optional().isNumeric()
   ],
   async (req, res) => {
     try {
@@ -38,7 +40,9 @@ router.post(
         company,
         startupEmail,
         projectId,
-        reason
+        reason,
+        paymentId,
+        money
       } = req.body;
 
       // Validate MongoDB ObjectIds
@@ -92,7 +96,9 @@ router.post(
         company,
         startupEmail,
         projectId,
-        reason: reason || ''
+        reason: reason || '',
+        paymentId: paymentId || '',
+        money: money || 0
       });
 
       await noTopStudent.save();
