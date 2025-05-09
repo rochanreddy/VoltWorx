@@ -71,6 +71,13 @@ router.post(
           debug: { projectId }
         });
       }
+      // Prevent selection before deadline
+      if (new Date(task.deadline) > new Date()) {
+        return res.status(400).json({
+          success: false,
+          message: 'You can only select No Top Student after the task deadline has passed.'
+        });
+      }
       // Check if task belongs to the startup
       if (String(task.startup) !== String(startupId)) {
         return res.status(403).json({

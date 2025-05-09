@@ -100,6 +100,13 @@ router.post(
           debug: { projectId }
         });
       }
+      // Prevent selection before deadline
+      if (new Date(task.deadline) > new Date()) {
+        return res.status(400).json({
+          success: false,
+          message: 'You can only select a top student after the task deadline has passed.'
+        });
+      }
       // Check if task belongs to the startup
       if (String(task.startup) !== String(startupId)) {
         console.error('❌ Task does not belong to this startup:', { projectId, taskStartup: task.startup, startupId });

@@ -317,7 +317,7 @@ function StartupDashboard() {
                 />
                 
                 {/* Submissions Section */}
-                {task.submissions && task.submissions.length > 0 && (
+                {task.submissions && task.submissions.length > 0 && isPastDeadline(task.deadline) && (
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <h3 className="text-sm font-medium text-gray-300 mb-2">Submissions</h3>
                     <div className="space-y-2">
