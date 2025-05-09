@@ -209,6 +209,9 @@ function StartupDashboard() {
         ? completedTasks 
         : tasks;
 
+  // Helper to check if selection is already made
+  const isSelectionMade = (task: any) => task.topStudentSelected || task.noTopStudentSelected;
+
   return (
     <div className="container py-8">
       {/* Header Section */}
@@ -317,7 +320,7 @@ function StartupDashboard() {
                 />
                 
                 {/* Submissions Section */}
-                {task.submissions && task.submissions.length > 0 && isPastDeadline(task.deadline) && (
+                {task.submissions && task.submissions.length > 0 && (
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <h3 className="text-sm font-medium text-gray-300 mb-2">Submissions</h3>
                     <div className="space-y-2">
@@ -336,22 +339,27 @@ function StartupDashboard() {
                           >
                             View Submission
                           </a>
-                          <button
-                            onClick={() => handleSelectTopStudent(submission, task)}
-                            className="ml-4 px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
-                          >
-                            Select Top Student
-                          </button>
+                          {/* Show Select Top Student button only after deadline and if no selection made */}
+                          {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
+                            <button
+                              onClick={() => handleSelectTopStudent(submission, task)}
+                              className="ml-4 px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                            >
+                              Select Top Student
+                            </button>
+                          )}
                         </div>
                       ))}
                     </div>
-                    {/* No Top Student Button */}
-                    <button
-                      onClick={() => handleNoTopStudent(task)}
-                      className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-                    >
-                      No Top Student
-                    </button>
+                    {/* Show No Top Student button only after deadline and if no selection made */}
+                    {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
+                      <button
+                        onClick={() => handleNoTopStudent(task)}
+                        className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                      >
+                        No Top Student
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
