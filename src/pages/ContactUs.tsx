@@ -28,9 +28,11 @@ function ContactUs() {
               <a href="mailto:team.voltworx@gmail.com" className="text-blue-400 hover:text-blue-300">
                 team.voltworx@gmail.com
               </a>
+              <br />
               <p>
               plot no 608,vv nagar,kukatpally,hyderabad, Telangana,500072
               </p>
+              <br />
               <p>
                 phone number: +91 9059682992
               </p>
