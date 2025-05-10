@@ -7,9 +7,9 @@ import Task from '../models/Task.js';
 const router = express.Router();
 
 // Cashfree credentials (use environment variables in production!)
-const CASHFREE_APP_ID = 'TEST10609211de6ed1cdc721c0c3d87711290601';
-const CASHFREE_SECRET = 'cfsk_ma_test_20f71dc9d96264fb295173d9102d5bc2_6470e097';
-const CASHFREE_BASE_URL = 'https://sandbox.cashfree.com/pg';
+const CASHFREE_APP_ID = process.env.CASHFREE_APP_ID;
+const CASHFREE_SECRET = process.env.CASHFREE_SECRET;
+const CASHFREE_BASE_URL = process.env.CASHFREE_BASE_URL || 'https://sandbox.cashfree.com/pg';
 
 // Debug middleware for payments routes
 router.use((req, res, next) => {
@@ -25,9 +25,12 @@ router.get('/test', (req, res) => {
 // Create a Cashfree order
 router.post('/create-order', async (req, res) => {
   try {
-    const { amount } = req.body;
+    const { amount, customer_email, customer_phone, customer_id } = req.body;
     if (!amount || amount < 100) {
       return res.status(400).json({ message: 'Amount must be at least ₹100' });
+    }
+    if (!customer_email || !customer_phone) {
+      return res.status(400).json({ message: 'Customer email and phone are required' });
     }
     const orderId = 'order_' + Date.now();
     const orderPayload = {
@@ -35,9 +38,9 @@ router.post('/create-order', async (req, res) => {
       order_amount: amount,
       order_currency: 'INR',
       customer_details: {
-        customer_id: 'cust_' + Date.now(),
-        customer_email: 'test@example.com',
-        customer_phone: '9999999999'
+        customer_id: customer_id || ('cust_' + Date.now()),
+        customer_email,
+        customer_phone
       }
     };
     const response = await axios.post(

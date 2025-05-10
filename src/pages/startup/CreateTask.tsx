@@ -62,6 +62,8 @@ function CreateTask() {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const minDate = tomorrow.toISOString().split('T')[0];
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}'); // Adjust as needed for your auth context
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -115,7 +117,10 @@ function CreateTask() {
       }
       // Create Cashfree order
       const orderResponse = await api.post('/payments/create-order', {
-        amount: formData.payment.amount
+        amount: formData.payment.amount,
+        customer_email: user.email,
+        customer_phone: user.phone || '9999999999',
+        customer_id: user._id || undefined
       });
       const order = orderResponse.data;
       if (!order || !order.order_token) {
