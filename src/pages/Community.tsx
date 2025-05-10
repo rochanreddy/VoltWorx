@@ -5,7 +5,7 @@ import Chat from '../components/Chat';
 import Messages from '../components/Messages';
 
 interface Post {
-  id: string;
+  id: number;
   author: {
     id: string;
     name: string;
@@ -23,6 +23,47 @@ interface Post {
   mediaUrl?: string;
   interestedUsers: number;
 }
+
+const STORAGE_KEY = 'community_posts';
+
+const INITIAL_POSTS: Post[] = [
+  {
+    id: 1,
+    author: {
+      id: '1',
+      name: 'mithresh',
+      avatar: 'https://i.pravatar.cc/150?img=1',
+      role: 'Student'
+    },
+    title: 'AI-Powered Learning Platform',
+    content: 'Looking for collaborators for a React Native project. Anyone interested in mobile app development?',
+    timestamp: '2 hours ago',
+    likes: 15,
+    comments: 5,
+    tags: ['React Native', 'Mobile Development', 'Collaboration'],
+    category: 'EdTech',
+    lookingFor: ['Developer', 'Designer', 'Marketer'],
+    interestedUsers: 3
+  },
+  {
+    id: 2,
+    author: {
+      id: '2',
+      name: 'akhil',
+      avatar: 'https://i.pravatar.cc/150?img=2',
+      role: 'Intern'
+    },
+    title: 'HealthTech Startup',
+    content: 'Just completed my internship at Google! Happy to share my experience and tips for anyone interested.',
+    timestamp: '5 hours ago',
+    likes: 25,
+    comments: 8,
+    tags: ['Internship', 'Career', 'Experience'],
+    category: 'HealthTech',
+    lookingFor: ['Developer', 'Data Scientist'],
+    interestedUsers: 5
+  }
+];
 
 const ROLES = [
   'Developer',
@@ -54,9 +95,9 @@ const Community: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChat, setShowChat] = useState(false);
   const [selectedUser, setSelectedUser] = useState<{ id: string; name: string } | null>(null);
-  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
   const { user, isAuthenticated } = useAuth();
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [showMessages, setShowMessages] = useState(false);
 
   // Categories for filtering
@@ -78,56 +119,84 @@ const Community: React.FC = () => {
     'AR/VR'
   ];
 
-  // Fetch posts from backend on mount
+  // Load posts from local storage on component mount
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/community`);
-        const data = await response.json();
-        setPosts(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
+    const loadPosts = () => {
+      const savedPosts = localStorage.getItem(STORAGE_KEY);
+      if (savedPosts) {
+        try {
+          const parsedPosts = JSON.parse(savedPosts);
+          if (Array.isArray(parsedPosts) && parsedPosts.length > 0) {
+            setPosts(parsedPosts);
+          } else {
+            setPosts(INITIAL_POSTS);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+          }
+        } catch (error) {
+          console.error('Error parsing saved posts:', error);
+          setPosts(INITIAL_POSTS);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+        }
+      } else {
+        setPosts(INITIAL_POSTS);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
       }
     };
-    fetchPosts();
+
+    loadPosts();
   }, []);
 
-  // Create post via backend
-  const handlePostSubmit = async () => {
+  const handlePostSubmit = () => {
     if (!user || !newPost.title.trim() || !newPost.content.trim() || !newPost.category) {
       return;
     }
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/community`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          title: newPost.title,
-          content: newPost.content,
-          category: newPost.category,
-          lookingFor: newPost.lookingFor,
-          tags: [], // add tags if needed
-        })
-      });
-      if (!response.ok) throw new Error('Failed to create post');
-      const createdPost = await response.json();
-      setPosts(prev => [createdPost, ...prev]);
-      setNewPost({
-        title: '',
-        content: '',
-        category: '',
-        lookingFor: [],
-        customRole: ''
-      });
-      setShowPostForm(false);
-    } catch (error) {
-      console.error('Error creating post:', error);
-    }
+
+    const newPostObj: Post = {
+      id: Date.now(),
+      author: {
+        id: user._id,
+        name: user.name,
+        avatar: 'https://i.pravatar.cc/150?img=3',
+        role: user.role || 'Student'
+      },
+      title: newPost.title,
+      content: newPost.content,
+      timestamp: 'Just now',
+      likes: 0,
+      comments: 0,
+      tags: [],
+      category: newPost.category,
+      lookingFor: newPost.lookingFor,
+      interestedUsers: 0
+    };
+
+    // Get current posts from local storage
+    const currentPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(INITIAL_POSTS));
+    
+    // Add new post to the beginning of the array
+    const updatedPosts = [newPostObj, ...currentPosts];
+    
+    // Update state and local storage
+    setPosts(updatedPosts);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPosts));
+
+    // Reset form
+    setNewPost({
+      title: '',
+      content: '',
+      category: '',
+      lookingFor: [],
+      customRole: ''
+    });
+    setShowPostForm(false);
   };
+
+  // Save posts to local storage whenever they change
+  useEffect(() => {
+    if (posts.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    }
+  }, [posts]);
 
   const handleShowInterest = (post: Post) => {
     if (!isAuthenticated) {
@@ -139,9 +208,9 @@ const Community: React.FC = () => {
     setShowChat(true);
   };
 
-  const handleDeletePost = (postId: string) => {
+  const handleDeletePost = (postId: number) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
     }
   };
 
@@ -160,7 +229,7 @@ const Community: React.FC = () => {
     const matchesSearch = searchQuery === '' || 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some((tag:string) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -266,7 +335,7 @@ const Community: React.FC = () => {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-white">Looking For</label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {ROLES.map((role: string) => (
+                  {ROLES.map((role) => (
                     <button
                       key={role}
                       type="button"
@@ -353,8 +422,8 @@ const Community: React.FC = () => {
 
       {/* Posts Feed */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPosts.map((post: any) => (
-          <div key={post._id} className="group relative">
+        {filteredPosts.map((post) => (
+          <div key={post.id} className="group relative">
             <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
             <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
               {/* Author Info */}
@@ -384,7 +453,7 @@ const Community: React.FC = () => {
                 <div className="mt-2">
                   <p className="text-xs text-gray-400">Looking for:</p>
                   <div className="flex flex-wrap gap-2 mt-1">
-                    {post.lookingFor.map((role: string, index: number) => (
+                    {post.lookingFor.map((role, index) => (
                       <span
                         key={index}
                         className="px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30"
@@ -399,7 +468,7 @@ const Community: React.FC = () => {
               {/* Tags */}
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.map((tag: string, index: number) => (
+                  {post.tags.map((tag, index) => (
                     <span
                       key={index}
                       className="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30"
@@ -431,7 +500,7 @@ const Community: React.FC = () => {
                     <>
                       <button
                         onClick={() => {
-                          setSelectedPostId(post._id);
+                          setSelectedPostId(post.id);
                           setShowMessages(true);
                         }}
                         className="p-2 text-blue-400 hover:text-blue-300 transition-colors"
@@ -440,7 +509,7 @@ const Community: React.FC = () => {
                         <Mail className="h-5 w-5" />
                       </button>
                       <button
-                        onClick={() => handleDeletePost(post._id)}
+                        onClick={() => handleDeletePost(post.id)}
                         className="p-2 text-red-400 hover:text-red-300 transition-colors"
                         title="Delete post"
                       >
