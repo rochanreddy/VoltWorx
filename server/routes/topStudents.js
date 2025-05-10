@@ -183,10 +183,13 @@ router.post(
       await topStudent.save();
       console.log('✅ Top student saved successfully:', topStudent._id);
 
-      // Update task status to indicate top student has been selected
+      // Update the Task's submissions to mark the selected student as top performer
+      task.submissions.forEach((submission) => {
+        submission.isTopPerformer = submission.student.toString() === studentId;
+      });
       task.status = 'completed';
       await task.save();
-      console.log('✅ Task status updated to completed:', task._id);
+      console.log('✅ Task status updated to completed and top performer set:', task._id);
 
       return res.status(201).json({
         success: true,
