@@ -55,10 +55,4 @@ export const fetchStudentProjects = async (studentId: string) => {
   }
 };
 
-// Community API
-export const fetchCommunityPosts = () => api.get('/community');
-export const createCommunityPost = (postData: any) => api.post('/community', postData);
-export const likeCommunityPost = (postId: string) => api.post(`/community/${postId}/like`);
-export const commentOnCommunityPost = (postId: string, content: string) => api.post(`/community/${postId}/comments`, { content });
-
 export default api;

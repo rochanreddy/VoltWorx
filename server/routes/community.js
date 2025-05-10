@@ -19,12 +19,10 @@ router.get('/', async (req, res) => {
 // Create a new post
 router.post('/', auth, async (req, res) => {
   try {
-    const { content, tags, category, lookingFor } = req.body;
+    const { content, tags } = req.body;
     const post = new Post({
       content,
       tags,
-      category,
-      lookingFor,
       author: req.user._id
     });
     await post.save();
