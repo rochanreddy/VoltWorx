@@ -171,7 +171,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Choose the work you love and pay directly to the student.
+              Choose the work you love — we’ll securely transfer the reward to the selected student after confirmation.
               </p>
             </div>
           </div>
@@ -196,7 +196,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Zero Platform Fee</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Keep 100% of your earnings with no hidden charges.
+              Keep 90% of your earnings — we only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
               </p>
             </div>
             
