@@ -5,7 +5,7 @@ import Chat from '../components/Chat';
 import Messages from '../components/Messages';
 
 interface Post {
-  id: number;
+  id: string;
   author: {
     id: string;
     name: string;
@@ -106,7 +106,10 @@ const Community: React.FC = () => {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
+          title: newPost.title,
           content: newPost.content,
+          category: newPost.category,
+          lookingFor: newPost.lookingFor,
           tags: [], // add tags if needed
         })
       });
@@ -132,13 +135,13 @@ const Community: React.FC = () => {
       return;
     }
     setSelectedUser({ id: post.author.id, name: post.author.name });
-    setSelectedPostId(post.id.toString());
+    setSelectedPostId(post.id);
     setShowChat(true);
   };
 
-  const handleDeletePost = (postId: number) => {
+  const handleDeletePost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
+      setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
     }
   };
 
@@ -263,7 +266,7 @@ const Community: React.FC = () => {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-white">Looking For</label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {ROLES.map((role) => (
+                  {ROLES.map((role: string) => (
                     <button
                       key={role}
                       type="button"
@@ -350,8 +353,8 @@ const Community: React.FC = () => {
 
       {/* Posts Feed */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPosts.map((post) => (
-          <div key={post.id} className="group relative">
+        {filteredPosts.map((post: any) => (
+          <div key={post._id} className="group relative">
             <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
             <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
               {/* Author Info */}
@@ -381,7 +384,7 @@ const Community: React.FC = () => {
                 <div className="mt-2">
                   <p className="text-xs text-gray-400">Looking for:</p>
                   <div className="flex flex-wrap gap-2 mt-1">
-                    {post.lookingFor.map((role, index) => (
+                    {post.lookingFor.map((role: string, index: number) => (
                       <span
                         key={index}
                         className="px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30"
@@ -396,7 +399,7 @@ const Community: React.FC = () => {
               {/* Tags */}
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.map((tag, index) => (
+                  {post.tags.map((tag: string, index: number) => (
                     <span
                       key={index}
                       className="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30"
@@ -428,7 +431,7 @@ const Community: React.FC = () => {
                     <>
                       <button
                         onClick={() => {
-                          setSelectedPostId(post.id.toString());
+                          setSelectedPostId(post._id);
                           setShowMessages(true);
                         }}
                         className="p-2 text-blue-400 hover:text-blue-300 transition-colors"
@@ -437,7 +440,7 @@ const Community: React.FC = () => {
                         <Mail className="h-5 w-5" />
                       </button>
                       <button
-                        onClick={() => handleDeletePost(post.id)}
+                        onClick={() => handleDeletePost(post._id)}
                         className="p-2 text-red-400 hover:text-red-300 transition-colors"
                         title="Delete post"
                       >
