@@ -2,150 +2,121 @@ import React from 'react';
 
 function TermsAndConditions() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold mb-8 text-white">Terms and Conditions</h1>
-          <p className="text-gray-300 mb-6">Last Updated: [08/05/2025]</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12 px-4">
+      <div className="max-w-3xl mx-auto bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-bold mb-6 text-white">Terms and Conditions</h1>
+        <div className="prose prose-invert max-w-none text-gray-200">
+<pre style={{whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: 'none', color: 'inherit', fontFamily: 'inherit'}}>
+{`
+Last Updated: [08/05/2025]
 
-          <div className="prose prose-invert max-w-none">
-            <section className="mb-8">
-              <p className="text-gray-300 mb-6">
-                Welcome to VoltWorx! These Terms and Conditions ("Terms") govern your access to and use of the VoltWorx platform ("Platform"), operated by VoltWorx.
-                By using VoltWorx as a Startup, Creator, or Student, you agree to be bound by these Terms.
-              </p>
-            </section>
+Welcome to VoltWorx! These Terms and Conditions (“Terms”) govern your access to and use of the VoltWorx platform (“Platform”), operated by VoltWorx.
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">1. Eligibility</h2>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Users must be 16 years or older to create an account.</li>
-                <li>Students must ensure the skills listed in their profile are accurate and truthful.</li>
-              </ul>
-            </section>
+By using VoltWorx as a Startup, Creator, or Student, you agree to be bound by these Terms.
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">2. Platform Description</h2>
-              <p className="text-gray-300 mb-4">
-                VoltWorx connects startups and creators with skilled students to complete real-world micro-projects. The platform facilitates:
-              </p>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Task posting by startups</li>
-                <li>Student applications & submissions</li>
-                <li>Task selection and reward disbursement</li>
-              </ul>
-              <p className="text-gray-300">VoltWorx does not guarantee outcomes or employment.</p>
-            </section>
+________________________________________
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">3. User Responsibilities</h2>
-              
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">Startups & Creators:</h3>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Must clearly describe tasks, timelines, and reward amounts.</li>
-                <li>Must commit to selecting and rewarding at least one student submission, unless quality is unanimously unacceptable.</li>
-                <li>Cannot contact students outside VoltWorx until a submission is accepted.</li>
-              </ul>
+1. Eligibility
+• Users must be 16 years or older to create an account.
+• Students must ensure the skills listed in their profile are accurate and truthful.
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">Students:</h3>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Must submit only original work.</li>
-                <li>Must follow deadlines and avoid plagiarism.</li>
-                <li>Must accept that only one or limited submissions may be rewarded.</li>
-              </ul>
-            </section>
+________________________________________
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">4. Reward and Payment Terms</h2>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>VoltWorx collects a task posting fee. Rewards, if offered, are managed offline and disbursed manually.</li>
-                <li>If no submission is selected, a full refund is initiated to the startup within 7 days.</li>
-                <li>VoltWorx takes a platform commission (10% from each reward transaction).</li>
-              </ul>
-            </section>
+2. Platform Description
+VoltWorx enables startups and creators to post tasks and receive submissions from students on real-world micro-projects.
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">5. Account Termination</h2>
-              <p className="text-gray-300 mb-4">We reserve the right to suspend or terminate accounts that:</p>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Violate these terms</li>
-                <li>Submit plagiarized or fraudulent content</li>
-                <li>Abuse other users or misuse the platform</li>
-              </ul>
-            </section>
+The platform facilitates:
+• Task posting by startups and creators
+• Student applications & submissions
+• Task review and winner selection
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">6. Intellectual Property</h2>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Startups retain rights to the selected submission(s) upon reward payout.</li>
-                <li>Students retain rights to non-selected submissions unless otherwise agreed.</li>
-              </ul>
-            </section>
+VoltWorx is not a hiring platform and does not guarantee job offers or employment outcomes.
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">7. Limitation of Liability</h2>
-              <p className="text-gray-300 mb-4">VoltWorx is not liable for:</p>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Content submitted by users</li>
-                <li>Disputes between startups and students</li>
-                <li>Delays or technical issues beyond our control</li>
-              </ul>
-            </section>
+________________________________________
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">8. Modifications to Terms</h2>
-              <p className="text-gray-300">
-                We may update these Terms periodically. Continued use of the platform after changes means you accept the revised Terms.
-              </p>
-            </section>
+3. User Responsibilities
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">9. Contact Us</h2>
-              <p className="text-gray-300">
-                For questions, email us at:{' '}
-                <a href="mailto:team.voltworx@gmail.com" className="text-blue-400 hover:text-blue-300">
-                  team.voltworx@gmail.com
-                </a>
-              </p>
-            </section>
+Startups & Creators:
+• Must clearly describe tasks, timelines, and reward amounts.
+• Are encouraged to select and reward at least one student submission. However, task outcomes are discretionary.
+• May only contact students after task completion.
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-white">🧩 Addendum: Startup Collaboration Hub Terms</h2>
-              <p className="text-gray-300 mb-4">
-                The Startup Collaboration Hub is a feature within VoltWorx where users (typically startup founders) can post ideas or requirements to connect with students or individuals from other domains (e.g., tech, marketing, design, hardware, etc.).
-                By using this section, you agree to the following terms:
-              </p>
+Students:
+• Must submit only original work.
+• Must follow deadlines and avoid plagiarism.
+• Understand that only selected work is eligible for rewards.
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">1. Non-Employment Guarantee</h3>
-              <p className="text-gray-300 mb-6">
-                VoltWorx does not validate or enforce co-founder or partnership relationships initiated through the Collab Hub. All collaboration happens at your own discretion and risk.
-              </p>
+________________________________________
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">2. Ownership & IP</h3>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Users are advised to not publicly share confidential or proprietary ideas unless they're comfortable disclosing them.</li>
-                <li>VoltWorx is not responsible for any idea theft, duplication, or misuse.</li>
-                <li>Users should consider NDAs (Non-Disclosure Agreements) between themselves outside the platform.</li>
-              </ul>
+4. Reward and Payment Terms
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">3. Behavior & Safety</h3>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>All messages, postings, and replies must remain respectful and constructive.</li>
-                <li>Spam, aggressive pitching, and repeated unsolicited messages can lead to account suspension.</li>
-              </ul>
+• VoltWorx collects a posting fee that includes the reward amount.
+• VoltWorx deducts a platform service fee (typically 10%) for facilitating the task.
+• Any reward payments to selected students are handled manually by VoltWorx outside the platform.
+• VoltWorx is not a financial intermediary and does not act as a payment facilitator.
+• If no student is selected, startups may request a refund of the posting fee within 7 days of task closure.
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">4. No Mediation</h3>
-              <p className="text-gray-300 mb-6">
-                VoltWorx does not intervene or mediate any agreements, collaborations, disputes, or fallouts that arise from Collab connections.
-              </p>
+________________________________________
 
-              <h3 className="text-xl font-semibold mb-3 text-gray-200">5. Use at Your Own Risk</h3>
-              <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>VoltWorx provides the platform for connection — you are responsible for any follow-up communication, idea-sharing, or contracts.</li>
-                <li>Always exercise judgment and due diligence when connecting with others.</li>
-              </ul>
-            </section>
-          </div>
+5. Account Termination
+We reserve the right to suspend or terminate accounts that:
+• Violate these terms
+• Submit plagiarized or fraudulent content
+• Abuse other users or misuse the platform
+
+________________________________________
+
+6. Intellectual Property
+
+• Startups receive usage rights to the selected student’s submission upon confirmation.
+• Non-selected students retain full ownership of their work unless otherwise agreed.
+
+________________________________________
+
+7. Limitation of Liability
+
+VoltWorx is not responsible for:
+• The quality of content submitted by users
+• Any direct interactions or disputes between clients and students
+• Technical issues outside our control
+
+________________________________________
+
+8. Modifications to Terms
+
+We may update these Terms periodically. Continued use of the platform after changes means you accept the revised Terms.
+
+________________________________________
+
+9. Contact Us
+
+For questions, email us at: team.voltworx@gmail.com
+
+---
+
+🧩 Addendum: Startup Collaboration Hub Terms
+
+The Startup Collaboration Hub is a feature that allows users to post collaboration needs (e.g., looking for co-founders or domain experts). Use of this section implies agreement to the following:
+
+1. Non-Employment Guarantee
+VoltWorx does not validate or enforce any relationship initiated via this feature. Use is at your own discretion.
+
+2. Ownership & IP
+• Users should not publicly post confidential ideas unless they are comfortable sharing them.
+• VoltWorx is not liable for idea misuse.
+• If needed, users may enter NDAs independently.
+
+3. Behavior & Safety
+• Be respectful and professional.
+• No spam or aggressive outreach. Abuse leads to account termination.
+
+4. No Mediation
+VoltWorx will not mediate any discussions, disputes, or claims made via this section.
+
+5. Use at Your Own Risk
+• VoltWorx only facilitates discovery — users are responsible for what happens beyond initial contact.
+`}
+</pre>
         </div>
       </div>
     </div>

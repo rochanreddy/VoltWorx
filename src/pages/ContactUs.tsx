@@ -28,211 +28,107 @@ function ContactUs() {
               <a href="mailto:team.voltworx@gmail.com" className="text-blue-400 hover:text-blue-300">
                 team.voltworx@gmail.com
               </a>
-              <div className="flex flex-col md:flex-row md:space-x-8 w-full mt-4 text-gray-300 text-sm">
-                <div className="break-words md:w-1/2">
-                  <span className="font-semibold">Address:</span> plot no 608, vv nagar, kukatpally, hyderabad, Telangana, 500072
-                </div>
-                <div className="break-words md:w-1/2 mt-2 md:mt-0">
-                  <span className="font-semibold">Phone:</span> +91 9059682992
-                </div>
+            </div>
+            <div className="mt-4 space-y-1 text-gray-300 text-sm">
+              <div className="break-words">
+                <span className="font-semibold">Address:</span> plot no 608, vv nagar, kukatpally, hyderabad, Telangana, 500072
+              </div>
+              <div className="break-words">
+                <span className="font-semibold">Phone:</span> +91 9059682992
               </div>
             </div>
           </section>
 
           {/* FAQs Section */}
-          <div className="space-y-6">
-            {/* For Startups & Creators */}
-            <section className="bg-gray-700/50 rounded-lg border border-gray-600 overflow-hidden">
-              <button
-                onClick={() => toggleSection('startups')}
-                className="w-full p-6 flex items-center justify-between text-left hover:bg-gray-600/50 transition-colors"
-              >
-                <h2 className="text-2xl font-semibold text-white flex items-center">
-                  <span className="mr-2">🚀</span> For Startups & Creators
-                </h2>
-                {openSections['startups'] ? (
-                  <ChevronUp className="h-6 w-6 text-gray-400" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 text-gray-400" />
-                )}
-              </button>
-              
-              {openSections['startups'] && (
-                <div className="px-6 pb-6 space-y-6">
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> What is VoltWorx?
-                    </h3>
-                    <p className="text-gray-400">
-                      VoltWorx is a platform where startups and creators can post real-world tasks (like web design, video editing, pitch decks, etc.) and receive submissions from students with relevant skills. You only reward the best submission — no hiring, no platform fee.
-                    </p>
-                  </div>
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> How do I post a task?
-                    </h3>
-                    <p className="text-gray-400">
-                      Create an account → Click "Post a Task" → Fill in the description, skill tags, deadline, and reward → Submit for review → Go live.
-                    </p>
-                  </div>
+          <section className="mb-12 p-6 bg-gray-700/50 rounded-lg border border-gray-600">
+            <h2 className="text-2xl font-semibold mb-4 text-white">FAQs</h2>
+            <div className="prose prose-invert max-w-none text-gray-200">
+<pre style={{whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: 'none', color: 'inherit', fontFamily: 'inherit'}}>
+{`
+🚀 For Startups & Creators
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Do I have to pay all applicants?
-                    </h3>
-                    <p className="text-gray-400">
-                      No. You only reward the best submission. All others are considered applicants and do not receive payment unless chosen.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> What if I don't like any of the submissions?
-                    </h3>
-                    <p className="text-gray-400">
-                      If none of the student submissions meet your expectations, you can request a full refund within 7 days of the task deadline.
-                    </p>
-                  </div>
+❓ What is VoltWorx?
+VoltWorx is a platform where startups and creators can post real-world micro-tasks (like web design, video editing, pitch decks, etc.) and receive submissions from students. You select the best submission and reward that student. No hiring, and no platform commissions are charged on unselected applicants.
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Can I contact students directly?
-                    </h3>
-                    <p className="text-gray-400">
-                      Only after you select a submission and the reward is transferred. Direct contact with unselected students is not allowed.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Is VoltWorx free to use?
-                    </h3>
-                    <p className="text-gray-400">
-                      VoltWorx is free to browse and register. However, posting a task requires paying the full reward amount upfront. We deduct a small platform fee (typically 10%) for managing submissions, and the remaining reward is disbursed manually to the selected student outside the platform.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </section>
+❓ How do I post a task?
+Create an account → Click "Post a Task" → Fill in the task description, required skills, deadline, and reward → Submit for moderation → Task goes live.
 
-            {/* For Students */}
-            <section className="bg-gray-700/50 rounded-lg border border-gray-600 overflow-hidden">
-              <button
-                onClick={() => toggleSection('students')}
-                className="w-full p-6 flex items-center justify-between text-left hover:bg-gray-600/50 transition-colors"
-              >
-                <h2 className="text-2xl font-semibold text-white flex items-center">
-                  <span className="mr-2">🎓</span> For Students
-                </h2>
-                {openSections['students'] ? (
-                  <ChevronUp className="h-6 w-6 text-gray-400" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 text-gray-400" />
-                )}
-              </button>
-              
-              {openSections['students'] && (
-                <div className="px-6 pb-6 space-y-6">
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> How do I apply for tasks?
-                    </h3>
-                    <p className="text-gray-400">
-                      Browse live tasks → Click "Apply" → Submit your work (e.g., GitHub link, design file, video edit) before the deadline.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Will I get paid for every task I submit?
-                    </h3>
-                    <p className="text-gray-400">
-                      No. You are only paid if your submission is selected by the startup. It's competitive — like a challenge.
-                    </p>
-                  </div>
+❓ Do I have to pay all applicants?
+No. You only reward the student whose work you select. All other applicants do not receive any payment.
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> What skills can I add to my profile?
-                    </h3>
-                    <p className="text-gray-400">
-                      You can add any skill you're confident in — like frontend development, video editing, UI/UX, copywriting, etc. VoltWorx uses your skill tags to match you with relevant tasks.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Is this an internship?
-                    </h3>
-                    <p className="text-gray-400">
-                      No. VoltWorx is not a job or internship board — it's a micro-project platform. However, tasks can build your portfolio, and startups may contact you for future opportunities.
-                    </p>
-                  </div>
+❓ What if I don't like any of the submissions?
+You can request a refund of your task posting payment within 7 days of the deadline, provided no selection is made.
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> Can I use my submissions in my portfolio?
-                    </h3>
-                    <p className="text-gray-400">
-                      Yes — unless a startup requests exclusivity, your work can be showcased in your personal portfolio.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> What if someone steals my work?
-                    </h3>
-                    <p className="text-gray-400">
-                      If your work is copied without reward or credit, report it to us immediately. We take plagiarism and misuse seriously and will act swiftly.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </section>
+❓ Can I contact students directly?
+Direct contact is allowed only after you've selected a submission. You cannot engage with unselected students directly via the platform.
 
-            {/* General */}
-            <section className="bg-gray-700/50 rounded-lg border border-gray-600 overflow-hidden">
-              <button
-                onClick={() => toggleSection('general')}
-                className="w-full p-6 flex items-center justify-between text-left hover:bg-gray-600/50 transition-colors"
-              >
-                <h2 className="text-2xl font-semibold text-white flex items-center">
-                  <span className="mr-2">🔧</span> General
-                </h2>
-                {openSections['general'] ? (
-                  <ChevronUp className="h-6 w-6 text-gray-400" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 text-gray-400" />
-                )}
-              </button>
-              
-              {openSections['general'] && (
-                <div className="px-6 pb-6 space-y-6">
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> How are rewards handled?
-                    </h3>
-                    <p className="text-gray-400">
-                      Startups preload the reward, and VoltWorx releases it only when they select a submission. If no selection is made, the amount is refunded.
-                    </p>
-                  </div>
+---
 
-                  <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
-                      <span className="mr-2">❓</span> What if I find a bug or issue?
-                    </h3>
-                    <p className="text-gray-400">
-                      Please report bugs or issues via our support email:
-                      <br />
-                      <a href="mailto:team.voltworx@gmail.com" className="text-blue-400 hover:text-blue-300">
-                        📧 team.voltworx@gmail.com
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              )}
-            </section>
-          </div>
+❓ Is VoltWorx free to use?
+Registration is free. When posting a task, you are charged a combined listing and reward fee. VoltWorx deducts a small platform fee (usually 10%) and manually delivers the remaining reward to the selected student outside of the platform. VoltWorx does not facilitate payouts through Razorpay or act as a payment intermediary.
+
+---
+
+🎓 For Students
+
+---
+
+❓ How do I apply for tasks?
+Log in → Browse active tasks → Click "Apply" → Submit your work (GitHub repo, design, video, etc.) before the deadline.
+
+---
+
+❓ Will I get paid for every task I submit?
+No. You will only receive a reward if your submission is selected by the startup or creator.
+
+---
+
+❓ What skills can I add to my profile?
+You can list any skill you're confident in — such as frontend development, UI/UX, video editing, content writing, etc. Your listed skills help us match you to relevant tasks.
+
+---
+
+❓ Is this an internship platform?
+No. VoltWorx is not a job or internship portal. It's a task-based platform for portfolio-building and project collaboration. However, startups may approach you later for internships or freelance roles if impressed.
+
+---
+
+❓ Can I use my submissions in my portfolio?
+Yes — unless the startup requests exclusivity for the winning submission, you may include your work in your personal portfolio.
+
+---
+
+❓ What if someone copies or uses my work without credit?
+If you believe your work was used without selection or reward, contact us at team.voltworx@gmail.com. We take intellectual property concerns seriously and investigate reported misuse.
+
+---
+
+🔧 General
+
+---
+
+❓ How are rewards handled?
+VoltWorx collects the full task reward and service fee at the time of posting. Upon task completion, we manually disburse the reward to the selected student via external methods. We do not process rewards via Razorpay or any payment gateway.
+
+---
+
+❓ What if I find a bug or issue?
+Please report issues, bugs, or abuse to:
+📧 team.voltworx@gmail.com
+`}
+</pre>
+            </div>
+          </section>
         </div>
       </div>
     </div>

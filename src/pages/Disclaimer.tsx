@@ -2,75 +2,96 @@ import React from 'react';
 
 function Disclaimer() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold mb-8 text-white">Disclaimer</h1>
-          <p className="text-gray-300 mb-6">Effective Date: [08/05/2025]</p>
-          
-          <div className="prose prose-invert max-w-none">
-            <p className="text-gray-300 mb-6">
-              VoltWorx provides a platform that connects startups and creators with students for task-based project execution. While we aim to facilitate real-world collaboration and learning opportunities, we make the following disclaimers:
-            </p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12 px-4">
+      <div className="max-w-3xl mx-auto bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-bold mb-6 text-white">Disclaimer</h1>
+        <div className="prose prose-invert max-w-none text-gray-200">
+<pre style={{whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: 'none', color: 'inherit', fontFamily: 'inherit'}}>
+{`
+Effective Date: 08/05/2025
 
-            <div className="border-t border-gray-700 my-8"></div>
+VoltWorx is an online platform designed to help startups and creators connect with students for educational, project-based collaborations. While we aim to provide valuable opportunities for skill development and project execution, we make the following disclaimers:
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">1. No Guarantees of Results</h2>
-            <p className="text-gray-300 mb-4">VoltWorx does not guarantee:</p>
-            <ul className="text-gray-300 list-disc pl-6 mb-8 space-y-2">
-              <li>The quality, originality, or timeliness of any student submission</li>
-              <li>That any student will apply or complete a specific task</li>
-              <li>That startups will fairly reward submissions or provide external opportunities</li>
-            </ul>
-            <p className="text-gray-300 mb-8">All interactions and results depend on the individual users involved.</p>
+---
 
-            <div className="border-t border-gray-700 my-8"></div>
+1. No Guarantee of Outcome
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">2. Independent Users</h2>
-            <p className="text-gray-300 mb-4">All startups, creators, and students using the platform are independent users. VoltWorx does not employ, endorse, or represent any user on the platform.</p>
-            <p className="text-gray-300 mb-4">We are not liable for:</p>
-            <ul className="text-gray-300 list-disc pl-6 mb-8 space-y-2">
-              <li>Miscommunication between users</li>
-              <li>Misuse of content or intellectual property</li>
-              <li>Any post-collaboration arrangements outside VoltWorx</li>
-            </ul>
+VoltWorx does not guarantee:
 
-            <div className="border-t border-gray-700 my-8"></div>
+That any specific student will apply to or complete a task
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">3. Intellectual Property</h2>
-            <p className="text-gray-300 mb-4">While VoltWorx encourages transparency, it is the user's responsibility to protect their own ideas and projects when using the Collaboration Hub or public task posts. We recommend using NDAs when necessary.</p>
-            <p className="text-gray-300 mb-4">We are not responsible for:</p>
-            <ul className="text-gray-300 list-disc pl-6 mb-8 space-y-2">
-              <li>IP theft or disputes between users</li>
-              <li>Reuse or replication of ideas shared voluntarily</li>
-            </ul>
+The quality, originality, or accuracy of student submissions
 
-            <div className="border-t border-gray-700 my-8"></div>
+That startups will select a submission or proceed with any further engagement
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">4. Platform Availability</h2>
-            <p className="text-gray-300 mb-8">VoltWorx may occasionally go offline due to maintenance, upgrades, or technical issues. We do not guarantee uninterrupted access or uptime.</p>
+All platform results depend on the participation and judgment of the individual users involved.
 
-            <div className="border-t border-gray-700 my-8"></div>
+---
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">5. External Links</h2>
-            <p className="text-gray-300 mb-8">Some pages may contain links to third-party sites. VoltWorx is not responsible for the content, privacy policies, or practices of external websites.</p>
+2. Independent User Participation
 
-            <div className="border-t border-gray-700 my-8"></div>
+All startups, creators, and students on VoltWorx are independent users.
+VoltWorx is not a recruiter, staffing agency, or intermediary between parties, and does not assume responsibility for:
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">6. Limitation of Liability</h2>
-            <p className="text-gray-300 mb-4">To the fullest extent permitted by law, VoltWorx is not liable for:</p>
-            <ul className="text-gray-300 list-disc pl-6 mb-8 space-y-2">
-              <li>Direct, indirect, or consequential damages from platform use</li>
-              <li>Data loss, account compromise, or financial loss</li>
-              <li>Actions taken by users based on information found on the platform</li>
-            </ul>
+User conduct or communication
 
-            <div className="border-t border-gray-700 my-8"></div>
+Agreements made outside the platform
 
-            <h2 className="text-2xl font-semibold mb-4 text-white">7. Contact Us</h2>
-            <p className="text-gray-300">For concerns or clarification, reach out to:</p>
-            <p className="mt-2 text-gray-300">📧 team.voltworx@gmail.com</p>
-          </div>
+Non-performance or dissatisfaction with submissions
+
+Users are encouraged to evaluate collaborations independently and use discretion in interactions.
+
+---
+
+3. Intellectual Property Disclaimer
+
+VoltWorx does not monitor or mediate the exchange of creative or proprietary content between users.
+We are not liable for:
+
+Misuse or replication of ideas shared voluntarily by users
+
+Disputes involving copyrights, ownership, or originality
+
+Outcomes resulting from shared portfolios or code repositories
+
+We recommend users take necessary precautions, including using NDAs or limiting sensitive disclosure when appropriate.
+
+---
+
+4. Platform Access & Availability
+
+VoltWorx is provided on an "as-is" basis.
+We do not guarantee uninterrupted access and may perform system maintenance, upgrades, or address technical issues without prior notice.
+
+---
+
+5. External Websites & Third-Party Tools
+
+VoltWorx may contain links to external websites or tools (e.g., GitHub, payment processors, analytics platforms).
+We are not responsible for the content, practices, or privacy policies of any third-party site.
+
+---
+
+6. Limitation of Liability
+
+To the maximum extent permitted by law, VoltWorx is not responsible for:
+
+Any direct, indirect, incidental, or consequential losses related to platform usage
+
+Financial losses or reputational harm resulting from task participation
+
+Data loss, downtime, account issues, or unauthorized access
+
+Your use of the platform is at your sole risk.
+
+---
+
+7. Contact Us
+
+For questions, concerns, or clarifications about this disclaimer, please email:
+📧 team.voltworx@gmail.com
+`}
+</pre>
         </div>
       </div>
     </div>
