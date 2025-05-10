@@ -25,18 +25,36 @@ router.get('/test', (req, res) => {
 // Create a Cashfree order
 router.post('/create-order', async (req, res) => {
   try {
+    // Log environment variables (without sensitive data)
+    console.log('[Cashfree Create Order] Environment check:', {
+      hasAppId: !!CASHFREE_APP_ID,
+      hasSecret: !!CASHFREE_SECRET,
+      baseUrl: CASHFREE_BASE_URL
+    });
+
     // Check for required env variables
     if (!CASHFREE_APP_ID || !CASHFREE_SECRET || !CASHFREE_BASE_URL) {
       console.error('[Cashfree Create Order] Missing Cashfree environment variables');
       return res.status(500).json({ message: 'Server misconfiguration: Cashfree credentials missing.' });
     }
+
     const { amount, customer_email, customer_phone, customer_id } = req.body;
+    
+    // Log request data
+    console.log('[Cashfree Create Order] Request data:', {
+      amount,
+      customer_email,
+      customer_phone,
+      customer_id
+    });
+
     if (!amount || amount < 100) {
       return res.status(400).json({ message: 'Amount must be at least ₹100' });
     }
     if (!customer_email || !customer_phone) {
       return res.status(400).json({ message: 'Customer email and phone are required' });
     }
+
     const orderId = 'order_' + Date.now();
     const orderPayload = {
       order_id: orderId,
@@ -48,6 +66,10 @@ router.post('/create-order', async (req, res) => {
         customer_phone
       }
     };
+
+    // Log the payload being sent to Cashfree
+    console.log('[Cashfree Create Order] Sending payload to Cashfree:', orderPayload);
+
     let response;
     try {
       response = await axios.post(
@@ -62,8 +84,21 @@ router.post('/create-order', async (req, res) => {
         }
       );
     } catch (apiError) {
-      console.error('[Cashfree Create Order] API Error:', apiError.response?.data || apiError.message, apiError);
-      return res.status(500).json({ message: 'Cashfree API error', error: apiError.response?.data || apiError.message });
+      console.error('[Cashfree Create Order] API Error Details:', {
+        status: apiError.response?.status,
+        statusText: apiError.response?.statusText,
+        data: apiError.response?.data,
+        message: apiError.message,
+        headers: apiError.response?.headers
+      });
+      return res.status(500).json({ 
+        message: 'Cashfree API error', 
+        error: apiError.response?.data || apiError.message,
+        details: {
+          status: apiError.response?.status,
+          statusText: apiError.response?.statusText
+        }
+      });
     }
     console.log('[Cashfree Create Order] Response:', response.data);
     if (response.data && response.data.order_token && response.data.order_id) {
