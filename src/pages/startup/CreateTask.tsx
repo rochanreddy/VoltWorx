@@ -5,12 +5,19 @@ import { createTask } from '../../utils/api';
 import { SKILLS } from '../../utils/constants';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import axios from 'axios';
-// @ts-ignore: No types for cashfree-dropjs
-import { loadScript } from '@cashfreepayments/cashfree-js';
 
+// Declare Cashfree types
 declare global {
   interface Window {
-    Cashfree: any;
+    Cashfree: {
+      new (config: {
+        orderToken: string;
+        onSuccess: (data: any) => void;
+        onFailure: (data: any) => void;
+      }): {
+        mount: (elementId: string) => void;
+      };
+    };
   }
 }
 
@@ -62,7 +69,19 @@ function CreateTask() {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const minDate = tomorrow.toISOString().split('T')[0];
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}'); // Adjust as needed for your auth context
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  // Load Cashfree script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://sdk.cashfree.com/js/ui/2.0.0/cashfree.sandbox.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -109,12 +128,14 @@ function CreateTask() {
     try {
       setIsSubmitting(true);
       setError(null);
+      
       // Test payments API
       try {
         await api.get('/payments/test');
       } catch (err: any) {
         throw new Error('Payment service is not available. Please check if the server is running.');
       }
+
       // Create Cashfree order
       const orderResponse = await api.post('/payments/create-order', {
         amount: formData.payment.amount,
@@ -122,16 +143,18 @@ function CreateTask() {
         customer_phone: user.phone || '9999999999',
         customer_id: user._id || undefined
       });
+      
       const order = orderResponse.data;
       if (!order || !order.payment_session_id) {
         throw new Error('Invalid order response from server');
       }
 
-      // Load Cashfree SDK
-      const cashfree = await loadScript();
-      
-      // Create drop-in instance
-      const dropin = cashfree.createDropin({
+      // Initialize Cashfree
+      if (typeof window.Cashfree === 'undefined') {
+        throw new Error('Cashfree SDK not loaded');
+      }
+
+      const cashfree = new window.Cashfree({
         orderToken: order.payment_session_id,
         onSuccess: async function(data: any) {
           try {
@@ -158,8 +181,8 @@ function CreateTask() {
         }
       });
 
-      // Mount the drop-in
-      dropin.mount("#payment-form");
+      // Mount the payment form
+      cashfree.mount('#payment-form');
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
