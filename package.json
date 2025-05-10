@@ -12,6 +12,7 @@
     "dev:full": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.5",
     "@mui/icons-material": "^7.0.2",
     "@react-oauth/google": "^0.12.1",
     "@react-three/drei": "^9.80.1",
