@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Plus, Archive, Clock, CheckCircle2 } from 'lucide-react';
 import TaskCard from '../../components/TaskCard';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
@@ -32,19 +32,63 @@ function StartupDashboard() {
   const [activeTab, setActiveTab] = useState<'active' | 'completed' | 'all'>('active');
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const loadTasks = async () => {
     try {
       setIsLoading(true);
-      const response = await fetchTasks();
-      // Filter to only include tasks created by the current startup
-      const filteredTasks = response.data.filter((task: any) => 
-        task.startup && task.startup._id === user?._id
-      );
-      setTasks(filteredTasks);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to load tasks');
-      console.error('Error fetching tasks:', err);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/tasks/startup`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch tasks');
+      }
+
+      const data = await response.json();
+      
+      // Fetch top students and no top students for all tasks
+      const [topStudentsResponse, noTopStudentsResponse] = await Promise.all([
+        fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/top-students`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }),
+        fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/no-top-students`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+      ]);
+
+      const [topStudentsData, noTopStudentsData] = await Promise.all([
+        topStudentsResponse.json(),
+        noTopStudentsResponse.json()
+      ]);
+
+      // Create maps for quick lookup
+      const topStudentMap = new Map(topStudentsData.data.map((ts: any) => [ts.projectId, ts]));
+      const noTopStudentMap = new Map(noTopStudentsData.data.map((nts: any) => [nts.projectId, nts]));
+
+      // Update tasks with selection information
+      const tasksWithSelection = data.data.map((task: any) => ({
+        ...task,
+        topStudentSelected: topStudentMap.has(task._id),
+        noTopStudentSelected: noTopStudentMap.has(task._id)
+      }));
+
+      setTasks(tasksWithSelection);
+    } catch (error) {
+      console.error('Error loading tasks:', error);
+      alert('Failed to load tasks. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -125,25 +169,11 @@ function StartupDashboard() {
         body: JSON.stringify(topStudentData),
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
-      let data;
-      try {
-        const text = await response.text();
-        console.log('Raw response:', text);
-        data = text ? JSON.parse(text) : {};
-      } catch (parseError) {
-        console.error('Error parsing response:', parseError);
-        throw new Error('Invalid server response');
-      }
-
-      console.log('Parsed response data:', data);
+      const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
-        const errorMessage = data.message || 'Failed to select top student';
-        const validationErrors = data.errors ? `\nValidation errors:\n${data.errors.map((err: any) => `- ${err.msg}`).join('\n')}` : '';
-        throw new Error(`${errorMessage}${validationErrors}`);
+        throw new Error(data.message || 'Failed to select top student');
       }
 
       if (data.success) {
@@ -187,6 +217,12 @@ function StartupDashboard() {
         body: JSON.stringify(noTopStudentData),
       });
       const data = await response.json();
+      console.log('Response data:', data);
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to record No Top Student');
+      }
+
       if (data.success) {
         alert('No Top Student recorded successfully!');
         await loadTasks();
@@ -194,6 +230,7 @@ function StartupDashboard() {
         throw new Error(data.message || 'Failed to record No Top Student');
       }
     } catch (error) {
+      console.error('Error recording no top student:', error);
       alert(error instanceof Error ? error.message : 'Failed to record No Top Student');
     }
   };
