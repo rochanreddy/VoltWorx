@@ -6,11 +6,11 @@ import { SKILLS } from '../../utils/constants';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import axios from 'axios';
 // @ts-ignore: No types for cashfree-dropjs
-import { Cashfree } from 'cashfree-dropjs';
+import { loadScript } from '@cashfreepayments/cashfree-js';
 
 declare global {
   interface Window {
-    Razorpay: any;
+    Cashfree: any;
   }
 }
 
@@ -126,9 +126,17 @@ function CreateTask() {
       if (!order || !order.payment_session_id) {
         throw new Error('Invalid order response from server');
       }
+
+      // Load Cashfree SDK
+      const cashfree = await loadScript();
+      
+      // Initialize Cashfree
+      const cashfreeInstance = new cashfree.Cashfree({
+        mode: "sandbox" // or "production" based on your environment
+      });
+
       // Launch Cashfree DropJS
-      const cashfree = new Cashfree();
-      cashfree.initialiseDropin({
+      cashfreeInstance.dropin({
         orderToken: order.payment_session_id,
         onSuccess: async function(data: any) {
           try {
