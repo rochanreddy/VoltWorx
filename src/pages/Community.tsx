@@ -62,7 +62,7 @@ const Community: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="flex flex-col items-center justify-center p-8 rounded-2xl bg-gray-900/80 shadow-xl border border-white/10">
+      <div className="flex flex-col items-center justify-center py-12 px-8 rounded-2xl bg-gray-900/80 shadow-xl border border-white/10 overflow-visible">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6">
           <circle cx="40" cy="40" r="36" stroke="#a78bfa" strokeWidth="4" fill="#18181b" />
           {/* Hour hand */}
@@ -72,7 +72,9 @@ const Community: React.FC = () => {
           {/* Center dot */}
           <circle cx="40" cy="40" r="3" fill="#f472b6" />
         </svg>
-        <h1 className="text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 mb-4 text-center">Community Coming Soon</h1>
+        <h1 className="text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 mb-6 text-center" style={{ lineHeight: 1.1 }}>
+          Community Coming Soon
+        </h1>
         <p className="text-lg sm:text-xl text-gray-300 mb-2 text-center max-w-xl">We're working hard to bring you an amazing community experience. Stay tuned for updates and exciting features!</p>
         <span className="inline-block mt-4 px-4 py-2 rounded-full bg-purple-600/20 text-purple-300 font-semibold text-sm">Launching Summer 2024 🚀</span>
       </div>
