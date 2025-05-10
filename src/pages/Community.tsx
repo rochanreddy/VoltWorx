@@ -24,47 +24,6 @@ interface Post {
   interestedUsers: number;
 }
 
-const STORAGE_KEY = 'community_posts';
-
-const INITIAL_POSTS: Post[] = [
-  {
-    id: 1,
-    author: {
-      id: '1',
-      name: 'mithresh',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      role: 'Student'
-    },
-    title: 'AI-Powered Learning Platform',
-    content: 'Looking for collaborators for a React Native project. Anyone interested in mobile app development?',
-    timestamp: '2 hours ago',
-    likes: 15,
-    comments: 5,
-    tags: ['React Native', 'Mobile Development', 'Collaboration'],
-    category: 'EdTech',
-    lookingFor: ['Developer', 'Designer', 'Marketer'],
-    interestedUsers: 3
-  },
-  {
-    id: 2,
-    author: {
-      id: '2',
-      name: 'akhil',
-      avatar: 'https://i.pravatar.cc/150?img=2',
-      role: 'Intern'
-    },
-    title: 'HealthTech Startup',
-    content: 'Just completed my internship at Google! Happy to share my experience and tips for anyone interested.',
-    timestamp: '5 hours ago',
-    likes: 25,
-    comments: 8,
-    tags: ['Internship', 'Career', 'Experience'],
-    category: 'HealthTech',
-    lookingFor: ['Developer', 'Data Scientist'],
-    interestedUsers: 5
-  }
-];
-
 const ROLES = [
   'Developer',
   'Designer',
@@ -95,9 +54,9 @@ const Community: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChat, setShowChat] = useState(false);
   const [selectedUser, setSelectedUser] = useState<{ id: string; name: string } | null>(null);
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const { user, isAuthenticated } = useAuth();
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<any[]>([]);
   const [showMessages, setShowMessages] = useState(false);
 
   // Categories for filtering
@@ -119,84 +78,53 @@ const Community: React.FC = () => {
     'AR/VR'
   ];
 
-  // Load posts from local storage on component mount
+  // Fetch posts from backend on mount
   useEffect(() => {
-    const loadPosts = () => {
-      const savedPosts = localStorage.getItem(STORAGE_KEY);
-      if (savedPosts) {
-        try {
-          const parsedPosts = JSON.parse(savedPosts);
-          if (Array.isArray(parsedPosts) && parsedPosts.length > 0) {
-            setPosts(parsedPosts);
-          } else {
-            setPosts(INITIAL_POSTS);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
-          }
-        } catch (error) {
-          console.error('Error parsing saved posts:', error);
-          setPosts(INITIAL_POSTS);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
-        }
-      } else {
-        setPosts(INITIAL_POSTS);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/community`);
+        const data = await response.json();
+        setPosts(data.success ? data.data : []);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
       }
     };
-
-    loadPosts();
+    fetchPosts();
   }, []);
 
-  const handlePostSubmit = () => {
+  // Create post via backend
+  const handlePostSubmit = async () => {
     if (!user || !newPost.title.trim() || !newPost.content.trim() || !newPost.category) {
       return;
     }
-
-    const newPostObj: Post = {
-      id: Date.now(),
-      author: {
-        id: user._id,
-        name: user.name,
-        avatar: 'https://i.pravatar.cc/150?img=3',
-        role: user.role || 'Student'
-      },
-      title: newPost.title,
-      content: newPost.content,
-      timestamp: 'Just now',
-      likes: 0,
-      comments: 0,
-      tags: [],
-      category: newPost.category,
-      lookingFor: newPost.lookingFor,
-      interestedUsers: 0
-    };
-
-    // Get current posts from local storage
-    const currentPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(INITIAL_POSTS));
-    
-    // Add new post to the beginning of the array
-    const updatedPosts = [newPostObj, ...currentPosts];
-    
-    // Update state and local storage
-    setPosts(updatedPosts);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPosts));
-
-    // Reset form
-    setNewPost({
-      title: '',
-      content: '',
-      category: '',
-      lookingFor: [],
-      customRole: ''
-    });
-    setShowPostForm(false);
-  };
-
-  // Save posts to local storage whenever they change
-  useEffect(() => {
-    if (posts.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/community`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          content: newPost.content,
+          tags: [], // add tags if needed
+        })
+      });
+      if (!response.ok) throw new Error('Failed to create post');
+      const createdPost = await response.json();
+      setPosts(prev => [createdPost, ...prev]);
+      setNewPost({
+        title: '',
+        content: '',
+        category: '',
+        lookingFor: [],
+        customRole: ''
+      });
+      setShowPostForm(false);
+    } catch (error) {
+      console.error('Error creating post:', error);
     }
-  }, [posts]);
+  };
 
   const handleShowInterest = (post: Post) => {
     if (!isAuthenticated) {
@@ -204,7 +132,7 @@ const Community: React.FC = () => {
       return;
     }
     setSelectedUser({ id: post.author.id, name: post.author.name });
-    setSelectedPostId(post.id);
+    setSelectedPostId(post.id.toString());
     setShowChat(true);
   };
 
@@ -500,7 +428,7 @@ const Community: React.FC = () => {
                     <>
                       <button
                         onClick={() => {
-                          setSelectedPostId(post.id);
+                          setSelectedPostId(post.id.toString());
                           setShowMessages(true);
                         }}
                         className="p-2 text-blue-400 hover:text-blue-300 transition-colors"
