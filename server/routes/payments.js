@@ -80,6 +80,7 @@ router.post('/create-order', async (req, res) => {
             'x-client-id': CASHFREE_APP_ID,
             'x-client-secret': CASHFREE_SECRET,
             'Content-Type': 'application/json',
+            'x-api-version': '2022-09-01'
           },
         }
       );
