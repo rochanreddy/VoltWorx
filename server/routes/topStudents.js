@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import Task from '../models/Task.js';
 import Student from '../models/Student.js';
 import Startup from '../models/Startup.js';
+import NoTopStudent from '../models/NoTopStudent.js';
 
 const router = express.Router();
 
@@ -125,6 +126,16 @@ router.post(
         return res.status(400).json({
           success: false,
           message: 'A top student has already been selected for this project'
+        });
+      }
+
+      // Check if a no top student is already selected for this project
+      const existingNoTopStudent = await NoTopStudent.findOne({ projectId });
+      if (existingNoTopStudent) {
+        console.error('❌ No top student already selected for project:', projectId);
+        return res.status(400).json({
+          success: false,
+          message: 'No top student has already been selected for this project'
         });
       }
 
