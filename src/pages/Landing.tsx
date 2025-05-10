@@ -63,11 +63,6 @@ function Landing() {
         <div className="container mx-auto px-4 py-32 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <div className="inline-block">
-                <span className="inline-flex items-center rounded-full border border-purple-400/30 bg-purple-400/10 px-3 py-1 text-sm font-medium text-purple-200 tracking-wide">
-                  <span className="mr-2">✨</span> No Platform Fee
-                </span>
-              </div>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400 font-display tracking-tight">
                 Real Work. Real Skills. Real Impact.
               </h1>
