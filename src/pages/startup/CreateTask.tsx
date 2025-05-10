@@ -15,7 +15,7 @@ declare global {
         onSuccess: (data: any) => void;
         onFailure: (data: any) => void;
       }): {
-        mount: (elementId: string) => void;
+        dropin: () => void;
       };
     };
   }
@@ -74,7 +74,7 @@ function CreateTask() {
   // Load Cashfree script
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://sdk.cashfree.com/js/ui/2.0.0/cashfree.sandbox.js';
+    script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js';
     script.async = true;
     document.body.appendChild(script);
 
@@ -181,8 +181,8 @@ function CreateTask() {
         }
       });
 
-      // Mount the payment form
-      cashfree.mount('#payment-form');
+      // Launch the payment form
+      cashfree.dropin();
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
