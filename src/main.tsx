@@ -6,9 +6,15 @@ import { AuthProvider } from './context/AuthContext';
 import './index.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+if (!GOOGLE_CLIENT_ID) {
+  console.error('Google Client ID is not set in environment variables');
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <GoogleOAuthProvider clientId="284325115673-qvfv9g6p37gfh5v9bii0gqklem42llav.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ''}>
       <BrowserRouter>
         <AuthProvider>
           <App />

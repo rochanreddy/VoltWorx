@@ -124,29 +124,48 @@ router.get('/me', auth, (req, res) => {
 // Google OAuth login
 router.post('/google', async (req, res) => {
   try {
-    const { credential } = req.body;
+    const { credential, role } = req.body;
+    
     if (!credential) {
+      console.error('Missing Google credential in request');
       return res.status(400).json({ message: 'Missing Google credential' });
     }
+
+    if (!process.env.GOOGLE_CLIENT_ID) {
+      console.error('Google Client ID not configured in environment variables');
+      return res.status(500).json({ message: 'Server configuration error' });
+    }
+
     // Verify Google token
-    const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
+    let payload;
+    try {
+      const ticket = await googleClient.verifyIdToken({
+        idToken: credential,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+      payload = ticket.getPayload();
+    } catch (error) {
+      console.error('Google token verification failed:', error);
+      return res.status(401).json({ message: 'Invalid Google token' });
+    }
+
     if (!payload?.email) {
+      console.error('Google account has no email:', payload);
       return res.status(400).json({ message: 'Google account has no email' });
     }
 
+    console.log('Google login attempt for email:', payload.email);
+
     // Check both Student and Startup models for existing user
     let user = await Student.findOne({ email: payload.email });
-    let role = 'student';
+    let userRole = 'student';
     
     if (!user) {
       user = await Startup.findOne({ email: payload.email });
       if (user) {
-        role = 'startup';
+        userRole = 'startup';
       } else {
+        console.log('No account found for email:', payload.email);
         // If user doesn't exist in either model, return error
         return res.status(404).json({ 
           message: 'No account found with this email. Please register first.',
@@ -156,12 +175,22 @@ router.post('/google', async (req, res) => {
       }
     }
 
+    // Verify role matches
+    if (role && role !== userRole) {
+      console.error('Role mismatch:', { provided: role, actual: userRole });
+      return res.status(400).json({ 
+        message: `This email is registered as a ${userRole}. Please select the correct role.`
+      });
+    }
+
     // Generate JWT with the correct role
     const token = jwt.sign(
-      { id: user._id, role: user.role || role },
+      { id: user._id, role: user.role || userRole },
       process.env.JWT_SECRET || 'your-secret-key',
       { expiresIn: '7d' }
     );
+
+    console.log('Google login successful for:', payload.email);
 
     res.json({ 
       token, 
@@ -169,13 +198,17 @@ router.post('/google', async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role || role,
-        ...(user.role === 'student' || role === 'student' ? { skills: user.skills } : { company: user.company })
+        role: user.role || userRole,
+        ...(user.role === 'student' || userRole === 'student' ? { skills: user.skills } : { company: user.company })
       }
     });
   } catch (error) {
     console.error('Google OAuth error:', error);
-    res.status(500).json({ message: 'Google login failed', error: error.message });
+    res.status(500).json({ 
+      message: 'Google login failed', 
+      error: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 

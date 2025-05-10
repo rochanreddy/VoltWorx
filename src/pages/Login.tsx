@@ -38,31 +38,41 @@ function Login() {
     setGoogleLoading(true);
     try {
       if (!credentialResponse.credential) {
-        setGoogleError('No credential received from Google.');
+        setGoogleError('No credential received from Google. Please try again.');
         setGoogleLoading(false);
         return;
       }
+
       // Log for debugging
       console.log('Google credential received:', credentialResponse.credential);
+      
       // Send credential to backend
       const payload = { 
         credential: credentialResponse.credential,
         role: role // Send the selected role to the backend
       };
+      
       console.log('Sending payload to backend:', payload);
+      
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/auth/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      });
+      });
+
       let data: any = {};
       let rawText = '';
+      
       try {
         rawText = await response.clone().text();
         data = JSON.parse(rawText);
       } catch (e) {
-        data = {};
+        console.error('Error parsing response:', e);
+        setGoogleError('Invalid response from server. Please try again.');
+        setGoogleLoading(false);
+        return;
       }
+
       console.log('Backend response status:', response.status);
       console.log('Backend response body:', data);
       
@@ -84,11 +94,18 @@ function Login() {
         // Log the full error object and raw text
         console.error('Google login error (full object):', data);
         console.error('Google login error (raw text):', rawText);
-        setGoogleError(
-          data.message ||
-          rawText ||
-          `Google login failed (status ${response.status})`
-        );
+        
+        let errorMessage = 'Google login failed. Please try again.';
+        
+        if (data.message) {
+          errorMessage = data.message;
+        } else if (data.error) {
+          errorMessage = data.error;
+        } else if (rawText) {
+          errorMessage = rawText;
+        }
+        
+        setGoogleError(errorMessage);
         setGoogleLoading(false);
         return;
       }
@@ -100,38 +117,40 @@ function Login() {
         return;
       }
 
-      // Store token/session as needed (example: JWT)
+      // Store token/session as needed
       if (data.token) {
         localStorage.setItem('token', data.token);
-        console.log('Token stored in localStorage:', data.token);
+        console.log('Token stored in localStorage');
       } else {
-        setGoogleError('No token received from backend.');
+        setGoogleError('No authentication token received. Please try again.');
         console.error('No token in backend response:', data);
         setGoogleLoading(false);
         return;
       }
+
       if (data.user) {
         localStorage.setItem('user', JSON.stringify(data.user));
-        console.log('User stored in localStorage:', data.user);
+        console.log('User stored in localStorage');
         // Update auth context
         setUser(data.user);
       } else {
-        setGoogleError('No user info received from backend.');
+        setGoogleError('No user information received. Please try again.');
         console.error('No user in backend response:', data);
         setGoogleLoading(false);
         return;
       }
-      // Redirect to dashboard (role-based if available)
+
+      // Redirect to dashboard
       if (data.user?.role === 'startup') {
-        console.log('Redirecting to /startup/dashboard');
+        console.log('Redirecting to startup dashboard');
         navigate('/startup/dashboard');
       } else {
-        console.log('Redirecting to /student/dashboard');
+        console.log('Redirecting to student dashboard');
         navigate('/student/dashboard');
       }
     } catch (err) {
-      setGoogleError('Google login failed. Please try again.');
       console.error('Google login error:', err);
+      setGoogleError('An unexpected error occurred. Please try again.');
     } finally {
       setGoogleLoading(false);
     }
