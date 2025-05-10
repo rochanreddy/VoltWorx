@@ -3,67 +3,34 @@ import { Send, ThumbsUp, MessageCircle, Share2, User, Plus, Filter, Search, Tras
 import { useAuth } from '../context/AuthContext';
 import Chat from '../components/Chat';
 import Messages from '../components/Messages';
+import { fetchCommunityPosts, createCommunityPost, likeCommunityPost, commentOnCommunityPost } from '../utils/api';
 
 interface Post {
-  id: number;
+  _id: string;
   author: {
-    id: string;
+    _id: string;
     name: string;
-    avatar: string;
+    avatar?: string;
     role: string;
   };
-  title: string;
   content: string;
-  timestamp: string;
-  likes: number;
-  comments: number;
   tags: string[];
-  category: string;
-  lookingFor: string[];
-  mediaUrl?: string;
-  interestedUsers: number;
+  category?: string;
+  lookingFor?: string[];
+  createdAt: string;
+  likes: string[];
+  comments: Array<{
+    _id: string;
+    content: string;
+    author: {
+      _id: string;
+      name: string;
+      avatar?: string;
+      role: string;
+    };
+    createdAt: string;
+  }>;
 }
-
-const STORAGE_KEY = 'community_posts';
-
-const INITIAL_POSTS: Post[] = [
-  {
-    id: 1,
-    author: {
-      id: '1',
-      name: 'mithresh',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      role: 'Student'
-    },
-    title: 'AI-Powered Learning Platform',
-    content: 'Looking for collaborators for a React Native project. Anyone interested in mobile app development?',
-    timestamp: '2 hours ago',
-    likes: 15,
-    comments: 5,
-    tags: ['React Native', 'Mobile Development', 'Collaboration'],
-    category: 'EdTech',
-    lookingFor: ['Developer', 'Designer', 'Marketer'],
-    interestedUsers: 3
-  },
-  {
-    id: 2,
-    author: {
-      id: '2',
-      name: 'akhil',
-      avatar: 'https://i.pravatar.cc/150?img=2',
-      role: 'Intern'
-    },
-    title: 'HealthTech Startup',
-    content: 'Just completed my internship at Google! Happy to share my experience and tips for anyone interested.',
-    timestamp: '5 hours ago',
-    likes: 25,
-    comments: 8,
-    tags: ['Internship', 'Career', 'Experience'],
-    category: 'HealthTech',
-    lookingFor: ['Developer', 'Data Scientist'],
-    interestedUsers: 5
-  }
-];
 
 const ROLES = [
   'Developer',
@@ -84,8 +51,8 @@ const ROLES = [
 
 const Community: React.FC = () => {
   const [newPost, setNewPost] = useState({
-    title: '',
     content: '',
+    tags: [],
     category: '',
     lookingFor: [] as string[],
     customRole: ''
@@ -95,10 +62,12 @@ const Community: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChat, setShowChat] = useState(false);
   const [selectedUser, setSelectedUser] = useState<{ id: string; name: string } | null>(null);
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const { user, isAuthenticated } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [showMessages, setShowMessages] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Categories for filtering
   const categories = [
@@ -119,98 +88,64 @@ const Community: React.FC = () => {
     'AR/VR'
   ];
 
-  // Load posts from local storage on component mount
+  // Fetch posts from backend on mount
   useEffect(() => {
-    const loadPosts = () => {
-      const savedPosts = localStorage.getItem(STORAGE_KEY);
-      if (savedPosts) {
-        try {
-          const parsedPosts = JSON.parse(savedPosts);
-          if (Array.isArray(parsedPosts) && parsedPosts.length > 0) {
-            setPosts(parsedPosts);
-          } else {
-            setPosts(INITIAL_POSTS);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
-          }
-        } catch (error) {
-          console.error('Error parsing saved posts:', error);
-          setPosts(INITIAL_POSTS);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
-        }
-      } else {
-        setPosts(INITIAL_POSTS);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_POSTS));
+    const loadPosts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetchCommunityPosts();
+        setPosts(res.data.reverse());
+      } catch (err: any) {
+        setError('Failed to load posts');
+      } finally {
+        setLoading(false);
       }
     };
-
     loadPosts();
   }, []);
 
-  const handlePostSubmit = () => {
-    if (!user || !newPost.title.trim() || !newPost.content.trim() || !newPost.category) {
-      return;
+  const handlePostSubmit = async () => {
+    if (!user || !newPost.content.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await createCommunityPost({
+        content: newPost.content,
+        tags: newPost.tags,
+      });
+      setPosts([res.data, ...posts]);
+      setShowPostForm(false);
+      setNewPost({ content: '', tags: [], category: '', lookingFor: [], customRole: '' });
+    } catch (err: any) {
+      setError('Failed to create post');
+    } finally {
+      setLoading(false);
     }
-
-    const newPostObj: Post = {
-      id: Date.now(),
-      author: {
-        id: user._id,
-        name: user.name,
-        avatar: 'https://i.pravatar.cc/150?img=3',
-        role: user.role || 'Student'
-      },
-      title: newPost.title,
-      content: newPost.content,
-      timestamp: 'Just now',
-      likes: 0,
-      comments: 0,
-      tags: [],
-      category: newPost.category,
-      lookingFor: newPost.lookingFor,
-      interestedUsers: 0
-    };
-
-    // Get current posts from local storage
-    const currentPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(INITIAL_POSTS));
-    
-    // Add new post to the beginning of the array
-    const updatedPosts = [newPostObj, ...currentPosts];
-    
-    // Update state and local storage
-    setPosts(updatedPosts);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPosts));
-
-    // Reset form
-    setNewPost({
-      title: '',
-      content: '',
-      category: '',
-      lookingFor: [],
-      customRole: ''
-    });
-    setShowPostForm(false);
   };
 
-  // Save posts to local storage whenever they change
-  useEffect(() => {
-    if (posts.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  const handleLike = async (postId: string) => {
+    try {
+      const res = await likeCommunityPost(postId);
+      setPosts(posts.map(post => post._id === postId ? res.data : post));
+    } catch (err) {
+      setError('Failed to like post');
     }
-  }, [posts]);
+  };
 
   const handleShowInterest = (post: Post) => {
     if (!isAuthenticated) {
       // TODO: Show login prompt
       return;
     }
-    setSelectedUser({ id: post.author.id, name: post.author.name });
-    setSelectedPostId(post.id);
+    setSelectedUser({ id: post.author._id, name: post.author.name });
+    setSelectedPostId(post._id);
     setShowChat(true);
   };
 
-  const handleDeletePost = (postId: number) => {
+  const handleDeletePost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
+      setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
     }
   };
 
@@ -227,9 +162,8 @@ const Community: React.FC = () => {
   const filteredPosts = posts.filter(post => {
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     const matchesSearch = searchQuery === '' || 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
     return matchesCategory && matchesSearch;
   });
 
@@ -289,8 +223,8 @@ const Community: React.FC = () => {
               onClick={() => {
                 setShowPostForm(false);
                 setNewPost({
-                  title: '',
                   content: '',
+                  tags: [],
                   category: '',
                   lookingFor: [],
                   customRole: ''
@@ -304,13 +238,6 @@ const Community: React.FC = () => {
             </button>
             <h2 className="text-2xl font-bold text-white mb-4">Post Your Startup Idea</h2>
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Title"
-                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                value={newPost.title}
-                onChange={(e) => setNewPost(prev => ({ ...prev, title: e.target.value }))}
-              />
               <textarea
                 className="w-full h-32 p-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                 placeholder="Describe your startup idea..."
@@ -397,8 +324,8 @@ const Community: React.FC = () => {
                   onClick={() => {
                     setShowPostForm(false);
                     setNewPost({
-                      title: '',
                       content: '',
+                      tags: [],
                       category: '',
                       lookingFor: [],
                       customRole: ''
@@ -423,7 +350,7 @@ const Community: React.FC = () => {
       {/* Posts Feed */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPosts.map((post) => (
-          <div key={post.id} className="group relative">
+          <div key={post._id} className="group relative">
             <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
             <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
               {/* Author Info */}
@@ -434,16 +361,13 @@ const Community: React.FC = () => {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-white">{post.author.name}</h3>
                   <p className="text-xs text-gray-400">
-                    {post.author.role} • {post.timestamp}
+                    {post.author.role} • {new Date(post.createdAt).toLocaleString()}
                   </p>
                 </div>
               </div>
               
               {/* Title and Content */}
-              <h2 className="text-lg font-semibold text-white mb-2">{post.title}</h2>
-              <p className="text-sm mb-4 text-gray-300">
-                {post.content}
-              </p>
+              <h2 className="text-lg font-semibold text-white mb-2">{post.content}</h2>
 
               {/* Category and Looking For */}
               <div className="mb-4">
@@ -453,7 +377,7 @@ const Community: React.FC = () => {
                 <div className="mt-2">
                   <p className="text-xs text-gray-400">Looking for:</p>
                   <div className="flex flex-wrap gap-2 mt-1">
-                    {post.lookingFor.map((role, index) => (
+                    {post.lookingFor?.map((role, index) => (
                       <span
                         key={index}
                         className="px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30"
@@ -484,11 +408,11 @@ const Community: React.FC = () => {
                 <div className="flex items-center space-x-6">
                   <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
                     <ThumbsUp className="h-5 w-5 mr-1" />
-                    <span>{post.likes}</span>
+                    <span>{post.likes.length}</span>
                   </button>
                   <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
                     <MessageCircle className="h-5 w-5 mr-1" />
-                    <span>{post.comments}</span>
+                    <span>{post.comments.length}</span>
                   </button>
                   <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
                     <Share2 className="h-5 w-5 mr-1" />
@@ -496,11 +420,11 @@ const Community: React.FC = () => {
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
-                  {post.author.id === user?._id && (
+                  {post.author._id === user?._id && (
                     <>
                       <button
                         onClick={() => {
-                          setSelectedPostId(post.id);
+                          setSelectedPostId(post._id);
                           setShowMessages(true);
                         }}
                         className="p-2 text-blue-400 hover:text-blue-300 transition-colors"
@@ -509,7 +433,7 @@ const Community: React.FC = () => {
                         <Mail className="h-5 w-5" />
                       </button>
                       <button
-                        onClick={() => handleDeletePost(post.id)}
+                        onClick={() => handleDeletePost(post._id)}
                         className="p-2 text-red-400 hover:text-red-300 transition-colors"
                         title="Delete post"
                       >

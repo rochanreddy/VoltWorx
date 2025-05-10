@@ -29,6 +29,13 @@ const postSchema = new mongoose.Schema({
   tags: [{
     type: String
   }],
+  category: {
+    type: String,
+    default: ''
+  },
+  lookingFor: [{
+    type: String
+  }],
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
