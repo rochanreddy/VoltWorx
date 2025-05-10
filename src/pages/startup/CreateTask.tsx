@@ -172,12 +172,6 @@ function CreateTask() {
           </div>
         )}
         
-        {/* UPI QR Section */}
-        <div className="mb-8 flex flex-col items-center">
-          <img src="/images/upi-qr-meghanad-reddy.png" alt="UPI QR" className="w-64 h-64 object-contain rounded-lg border border-gray-700" />
-          <p className="mt-2 text-gray-300 text-center">Scan to pay with any UPI app<br/>UPI ID: <span className="font-mono">meghanadreddy006-1@okhdfcbank</span></p>
-        </div>
-        
         {/* Form */}
         <div className="group relative">
           <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
@@ -349,6 +343,11 @@ function CreateTask() {
                   placeholder="Enter your UPI transaction reference number"
                   required
                 />
+              </div>
+
+              <div className="mb-8 flex flex-col items-center">
+                <img src="/images/upi-qr-meghanad-reddy.png" alt="UPI QR" className="w-64 h-64 object-contain rounded-lg border border-gray-700" />
+                <p className="mt-2 text-gray-300 text-center">Scan to pay with any UPI app<br/>UPI ID: <span className="font-mono">meghanadreddy006-1@okhdfcbank</span></p>
               </div>
 
               <div className="flex justify-end space-x-4 pt-4">
