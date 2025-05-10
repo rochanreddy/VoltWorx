@@ -12,7 +12,7 @@ Last Updated: [08/05/2025]
 
 Welcome to VoltWorx! These Terms and Conditions (“Terms”) govern your access to and use of the VoltWorx platform (“Platform”), operated by VoltWorx.
 
-By using VoltWorx as a Startup, Creator, or Student, you agree to be bound by these Terms.
+                By using VoltWorx as a Startup, Creator, or Student, you agree to be bound by these Terms.
 
 ________________________________________
 
@@ -84,7 +84,7 @@ ________________________________________
 
 8. Modifications to Terms
 
-We may update these Terms periodically. Continued use of the platform after changes means you accept the revised Terms.
+                We may update these Terms periodically. Continued use of the platform after changes means you accept the revised Terms.
 
 ________________________________________
 

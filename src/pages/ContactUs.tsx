@@ -124,11 +124,11 @@ VoltWorx collects the full task reward and service fee at the time of posting. U
 
 ❓ What if I find a bug or issue?
 Please report issues, bugs, or abuse to:
-📧 team.voltworx@gmail.com
+                        📧 team.voltworx@gmail.com
 `}
 </pre>
-            </div>
-          </section>
+                </div>
+            </section>
         </div>
       </div>
     </div>

@@ -194,9 +194,9 @@ function Landing() {
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Zero Platform Fee</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Keep 90% of your earnings</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Keep 90% of your earnings — we only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
+               we only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
               </p>
             </div>
             
