@@ -123,13 +123,13 @@ function CreateTask() {
         customer_id: user._id || undefined
       });
       const order = orderResponse.data;
-      if (!order || !order.order_token) {
+      if (!order || !order.payment_session_id) {
         throw new Error('Invalid order response from server');
       }
       // Launch Cashfree DropJS
       const cashfree = new Cashfree();
       cashfree.initialiseDropin({
-        orderToken: order.order_token,
+        orderToken: order.payment_session_id,
         onSuccess: async function(data: any) {
           try {
             // Verify payment and create task
