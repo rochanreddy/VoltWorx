@@ -14,7 +14,7 @@ const coFounders: CoFounder[] = [
     name: "Meghanadha Reddy",
     role: "CEO & Co-Founder",
     bio: "Passionate about connecting students with real-world opportunities and building the future of work.",
-    image: "src/images/WhatsApp Image 2025-05-08 at 16.02.23_40080523.jpg",
+    image: "public/images/WhatsApp Image 2025-05-08 at 16.02.23_40080523.jpg",
     linkedin: "https://www.linkedin.com/in/meghanadha-reddy/",
     github: "https://github.com/MEGHANADHA-REDDY/MEGHANADHA-REDDY",
   },
@@ -22,7 +22,7 @@ const coFounders: CoFounder[] = [
     name: "Rochan Reddy Ayireddy",
     role: "CTO & Co-Founder",
     bio: "Tech enthusiast focused on creating innovative solutions for education and career development.",
-    image: "src/images/WhatsApp Image 2025-05-08 at 16.09.05_0e5a55b7.jpg",
+    image: "public/images/WhatsApp Image 2025-05-08 at 16.09.05_0e5a55b7.jpg",
     linkedin: "https://www.linkedin.com/in/rochan-reddy-a46876309/",
     github: "https://github.com/rochanreddy?tab=repositories"
   }

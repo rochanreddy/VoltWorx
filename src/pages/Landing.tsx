@@ -204,9 +204,9 @@ function Landing() {
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <Award className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Built for Early-Stage Startups</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">100% Refund</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Perfect for startups looking for quality work at affordable rates.
+              Including platform Fee will be refunded if no work is selected
               </p>
             </div>
             
