@@ -11,7 +11,7 @@ interface Message {
 }
 
 interface MessagesProps {
-  postId: number;
+  postId: string;
   onClose: () => void;
 }
 

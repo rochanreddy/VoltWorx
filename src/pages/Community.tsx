@@ -6,23 +6,16 @@ import Messages from '../components/Messages';
 import api from '../utils/api';
 
 interface Post {
-  id: number;
+  _id: string;
   author: {
-    id: string;
+    _id: string;
     name: string;
-    avatar: string;
-    role: string;
+    avatar?: string;
+    role?: string;
   };
-  title: string;
   content: string;
-  timestamp: string;
-  likes: number;
-  comments: number;
   tags: string[];
-  category: string;
-  lookingFor: string[];
-  mediaUrl?: string;
-  interestedUsers: number;
+  createdAt?: string;
 }
 
 const ROLES = [
@@ -55,7 +48,7 @@ const Community: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChat, setShowChat] = useState(false);
   const [selectedUser, setSelectedUser] = useState<{ id: string; name: string } | null>(null);
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const { user, isAuthenticated } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [showMessages, setShowMessages] = useState(false);
@@ -106,11 +99,11 @@ const Community: React.FC = () => {
     setError(null);
     try {
       const payload = {
-        content: newPost.content,
+        content: `${newPost.title}\n${newPost.content}`,
         tags: [newPost.title, newPost.category, ...newPost.lookingFor]
       };
       const res = await api.post('/community', payload);
-      // Prepend new post to posts list
+      console.log('Post response:', res);
       setPosts([res.data, ...posts]);
       setNewPost({
         title: '',
@@ -122,6 +115,7 @@ const Community: React.FC = () => {
       setShowPostForm(false);
     } catch (err: any) {
       setError('Failed to create post');
+      console.error('Post error:', err, err?.response);
     } finally {
       setLoading(false);
     }
@@ -132,14 +126,14 @@ const Community: React.FC = () => {
       // TODO: Show login prompt
       return;
     }
-    setSelectedUser({ id: post.author.id, name: post.author.name });
-    setSelectedPostId(post.id);
+    setSelectedUser({ id: post.author._id, name: post.author.name });
+    setSelectedPostId(post._id);
     setShowChat(true);
   };
 
-  const handleDeletePost = (postId: number) => {
+  const handleDeletePost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
+      setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
     }
   };
 
@@ -154,12 +148,10 @@ const Community: React.FC = () => {
 
   // Filter posts based on category and search query
   const filteredPosts = posts.filter(post => {
-    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     const matchesSearch = searchQuery === '' || 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
+    return matchesSearch;
   });
 
   // Add console logs for debugging
@@ -352,7 +344,7 @@ const Community: React.FC = () => {
       {/* Posts Feed */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPosts.map((post) => (
-          <div key={post.id} className="group relative">
+          <div key={post._id} className="group relative">
             <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
             <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
               {/* Author Info */}
@@ -363,39 +355,16 @@ const Community: React.FC = () => {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-white">{post.author.name}</h3>
                   <p className="text-xs text-gray-400">
-                    {post.author.role} • {post.timestamp}
+                    {post.author.role} • {post.createdAt ? new Date(post.createdAt).toLocaleString() : ''}
                   </p>
                 </div>
               </div>
-              
-              {/* Title and Content */}
-              <h2 className="text-lg font-semibold text-white mb-2">{post.title}</h2>
-              <p className="text-sm mb-4 text-gray-300">
+              {/* Content */}
+              <p className="text-sm mb-4 text-gray-300" style={{ whiteSpace: 'pre-line' }}>
                 {post.content}
               </p>
-
-              {/* Category and Looking For */}
-              <div className="mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                  {post.category}
-                </span>
-                <div className="mt-2">
-                  <p className="text-xs text-gray-400">Looking for:</p>
-                  <div className="flex flex-wrap gap-2 mt-1">
-                    {post.lookingFor.map((role, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30"
-                      >
-                        {role}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
               {/* Tags */}
-              {post.tags.length > 0 && (
+              {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.map((tag, index) => (
                     <span
@@ -407,44 +376,20 @@ const Community: React.FC = () => {
                   ))}
                 </div>
               )}
-
               {/* Actions */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-6">
-                  <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
-                    <ThumbsUp className="h-5 w-5 mr-1" />
-                    <span>{post.likes}</span>
-                  </button>
-                  <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
-                    <MessageCircle className="h-5 w-5 mr-1" />
-                    <span>{post.comments}</span>
-                  </button>
-                  <button className="inline-flex items-center text-gray-400 hover:text-purple-300 transition-colors">
-                    <Share2 className="h-5 w-5 mr-1" />
-                    <span>Share</span>
-                  </button>
+                  {/* Like, Comment, Share buttons can be implemented with backend integration */}
                 </div>
                 <div className="flex items-center gap-2">
-                  {post.author.id === user?._id && (
-                    <>
-                      <button
-                        onClick={() => {
-                          setSelectedPostId(post.id);
-                          setShowMessages(true);
-                        }}
-                        className="p-2 text-blue-400 hover:text-blue-300 transition-colors"
-                        title="View Messages"
-                      >
-                        <Mail className="h-5 w-5" />
-                      </button>
-                      <button
-                        onClick={() => handleDeletePost(post.id)}
-                        className="p-2 text-red-400 hover:text-red-300 transition-colors"
-                        title="Delete post"
-                      >
-                        <Trash2 className="h-5 w-5" />
-                      </button>
-                    </>
+                  {post.author._id === user?._id && (
+                    <button
+                      onClick={() => handleDeletePost(post._id)}
+                      className="p-2 text-red-400 hover:text-red-300 transition-colors"
+                      title="Delete post"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
                   )}
                   <button
                     onClick={() => handleShowInterest(post)}

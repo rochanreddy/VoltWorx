@@ -13,7 +13,7 @@ interface Message {
 interface ChatProps {
   receiverId: string;
   receiverName: string;
-  postId: number;
+  postId: string;
   onClose: () => void;
 }
 
