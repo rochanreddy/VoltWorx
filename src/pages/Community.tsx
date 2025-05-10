@@ -84,7 +84,7 @@ const Community: React.FC = () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/community`);
         const data = await response.json();
-        setPosts(data.success ? data.data : []);
+        setPosts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
