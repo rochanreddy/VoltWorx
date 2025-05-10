@@ -37,6 +37,17 @@ app.use(cors({
 app.use(cookieParser());
 app.use(morgan('dev'));
 
+// Global CORS preflight handler for all routes
+app.options('*', cors({
+  origin: [
+    'https://www.volt-worx.com',
+    'https://volt-worx.com'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Explicit CORS preflight handler for /api/community
 app.options('/api/community', cors({
   origin: [
