@@ -18,7 +18,7 @@ function RefundPolicy() {
             <h2 className="text-2xl font-semibold mb-4 text-white">1. Reward Payment Structure</h2>
             <ul className="text-gray-300 list-disc pl-6 mb-8 space-y-2">
               <li>When a startup/creator posts a task, they pre-load the reward amount to VoltWorx (e.g., ₹800).</li>
-              <li>VoltWorx holds the reward until the task is completed and a submission is selected.</li>
+              <li>Only the posting fee is collected through the platform. No reward money is held</li>
               <li>VoltWorx charges a platform fee (10%), and the remaining reward is transferred to the selected student (90%).</li>
             </ul>
 

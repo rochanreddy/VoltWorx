@@ -67,7 +67,6 @@ function ContactUs() {
                       VoltWorx is a platform where startups and creators can post real-world tasks (like web design, video editing, pitch decks, etc.) and receive submissions from students with relevant skills. You only reward the best submission — no hiring, no platform fee.
                     </p>
                   </div>
-
                   <div className="border-b border-gray-600 pb-6 last:border-b-0 last:pb-0">
                     <h3 className="text-lg font-semibold mb-2 text-gray-200 flex items-center">
                       <span className="mr-2">❓</span> How do I post a task?
@@ -109,7 +108,7 @@ function ContactUs() {
                       <span className="mr-2">❓</span> Is VoltWorx free to use?
                     </h3>
                     <p className="text-gray-400">
-                      Yes. We charge no platform fees for posting a task. We only take a small commission from the reward when a student is paid.
+                      VoltWorx is free to browse and register. However, posting a task requires paying the full reward amount upfront. We deduct a small platform fee (typically 10%) for managing submissions, and the remaining reward is disbursed manually to the selected student outside the platform.
                     </p>
                   </div>
                 </div>

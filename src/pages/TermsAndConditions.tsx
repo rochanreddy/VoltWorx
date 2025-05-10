@@ -58,7 +58,7 @@ function TermsAndConditions() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4 text-white">4. Reward and Payment Terms</h2>
               <ul className="text-gray-300 list-disc pl-6 mb-6">
-                <li>Rewards are held by VoltWorx until the startup selects a submission.</li>
+                <li>VoltWorx collects a task posting fee. Rewards, if offered, are managed offline and disbursed manually.</li>
                 <li>If no submission is selected, a full refund is initiated to the startup within 7 days.</li>
                 <li>VoltWorx takes a platform commission (10% from each reward transaction).</li>
               </ul>
