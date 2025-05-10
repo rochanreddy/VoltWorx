@@ -130,13 +130,8 @@ function CreateTask() {
       // Load Cashfree SDK
       const cashfree = await loadScript();
       
-      // Initialize Cashfree
-      const cashfreeInstance = new cashfree.Cashfree({
-        mode: "sandbox" // or "production" based on your environment
-      });
-
-      // Launch Cashfree DropJS
-      cashfreeInstance.dropin({
+      // Create drop-in instance
+      const dropin = cashfree.createDropin({
         orderToken: order.payment_session_id,
         onSuccess: async function(data: any) {
           try {
@@ -162,6 +157,9 @@ function CreateTask() {
           setIsSubmitting(false);
         }
       });
+
+      // Mount the drop-in
+      dropin.mount("#payment-form");
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
@@ -345,6 +343,9 @@ function CreateTask() {
                 />
                 <p className="mt-1 text-sm text-gray-400">Minimum amount: ₹100</p>
               </div>
+
+              {/* Add payment form container */}
+              <div id="payment-form" className="mt-4"></div>
 
               <div className="flex justify-end space-x-4 pt-4">
                 <button
