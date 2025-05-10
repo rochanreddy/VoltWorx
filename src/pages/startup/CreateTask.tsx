@@ -175,7 +175,7 @@ function CreateTask() {
         {/* UPI QR Section */}
         <div className="mb-8 flex flex-col items-center">
           <img src="/images/upi-qr-meghanad-reddy.png" alt="UPI QR" className="w-64 h-64 object-contain rounded-lg border border-gray-700" />
-          <p className="mt-2 text-gray-300 text-center">Scan to pay with any UPI app<br/>UPI ID: <span className="font-mono">meghanareddy006-1@okhdfcbank</span></p>
+          <p className="mt-2 text-gray-300 text-center">Scan to pay with any UPI app<br/>UPI ID: <span className="font-mono">meghanadreddy006-1@okhdfcbank</span></p>
         </div>
         
         {/* Form */}
