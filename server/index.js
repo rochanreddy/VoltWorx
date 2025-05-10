@@ -27,7 +27,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cors({
   origin: [
-    'https://www.volt-worx.com', // your frontend domain
+    'https://www.volt-worx.com', // production frontend
     'https://volt-worx.com'      // (optional) non-www version
   ],
   credentials: true,
