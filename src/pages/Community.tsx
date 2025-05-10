@@ -40,17 +40,24 @@ const Community: React.FC = () => {
   const [hourAngle, setHourAngle] = useState(0);
 
   useEffect(() => {
+    let animationFrameId: number;
     const updateClock = () => {
       const now = new Date();
       const hours = now.getHours() % 12;
       const minutes = now.getMinutes();
-      // Each hour is 30deg, each minute is 0.5deg
-      const angle = hours * 30 + minutes * 0.5;
+      const seconds = now.getSeconds();
+      const ms = now.getMilliseconds();
+      // Each hour is 30deg, each minute is 0.5deg, each second is 0.5/60 deg, each ms is 0.5/60/1000 deg
+      const angle =
+        hours * 30 +
+        minutes * 0.5 +
+        seconds * (0.5 / 60) +
+        ms * (0.5 / 60 / 1000);
       setHourAngle(angle);
+      animationFrameId = requestAnimationFrame(updateClock);
     };
     updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
