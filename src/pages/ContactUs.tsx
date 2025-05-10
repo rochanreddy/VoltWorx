@@ -28,14 +28,14 @@ function ContactUs() {
               <a href="mailto:team.voltworx@gmail.com" className="text-blue-400 hover:text-blue-300">
                 team.voltworx@gmail.com
               </a>
-              <br />
-              <p>
-              address: plot no 608,vv nagar,kukatpally,hyderabad, Telangana,500072
-              </p>
-              <br />
-              <p>
-                phone number: +91 9059682992
-              </p>
+              <div className="flex flex-col md:flex-row md:space-x-8 w-full mt-4 text-gray-300 text-sm">
+                <div className="break-words md:w-1/2">
+                  <span className="font-semibold">Address:</span> plot no 608, vv nagar, kukatpally, hyderabad, Telangana, 500072
+                </div>
+                <div className="break-words md:w-1/2 mt-2 md:mt-0">
+                  <span className="font-semibold">Phone:</span> +91 9059682992
+                </div>
+              </div>
             </div>
           </section>
 
@@ -108,7 +108,7 @@ function ContactUs() {
                       <span className="mr-2">❓</span> Is VoltWorx free to use?
                     </h3>
                     <p className="text-gray-400">
-                      VoltWorx is free to browse and register. However, posting a task requires paying the full reward amount upfront. We deduct a small platform fee (typically 10%) for managing submissions, and the remaining reward is disbursed manually to the selected student outside the platform.
+                      VoltWorx is free to browse and register. However, posting a task requires paying the full reward amount upfront. We deduct a small platform fee (typically 10%) for managing submissions, and the remaining reward is disbursed manually to the selected student outside the platform.
                     </p>
                   </div>
                 </div>
