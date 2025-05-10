@@ -120,17 +120,24 @@ function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center md:text-left md:flex md:items-center md:justify-between">
-          <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} VoltWorx. All rights reserved.
-          </p>
-          <div className="mt-4 md:mt-0 flex justify-center md:justify-end space-x-6">
-            <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms-and-conditions" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Terms and Conditions
-            </Link>
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <div className="text-center md:text-left mb-6">
+            <p className="text-sm text-gray-400 max-w-4xl mx-auto md:mx-0">
+                VoltWorx is not a marketplace or intermediary. We do not hold or route third-party funds. Razorpay is only used to collect posting fees from task creators.
+            </p>
+          </div>
+          <div className="text-center md:text-left md:flex md:items-center md:justify-between">
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} VoltWorx. All rights reserved.
+            </p>
+            <div className="mt-4 md:mt-0 flex justify-center md:justify-end space-x-6">
+              <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-and-conditions" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Terms and Conditions
+              </Link>
+            </div>
           </div>
         </div>
       </div>
