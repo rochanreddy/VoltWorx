@@ -5,6 +5,8 @@ import { createTask } from '../../utils/api';
 import { SKILLS } from '../../utils/constants';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import axios from 'axios';
+// @ts-ignore: No types for cashfree-dropjs
+import { Cashfree } from 'cashfree-dropjs';
 
 declare global {
   interface Window {
@@ -55,14 +57,6 @@ function CreateTask() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Check if Razorpay is loaded
-  useEffect(() => {
-    if (!window.Razorpay) {
-      console.error('Razorpay script not loaded');
-      setError('Payment system not available. Please refresh the page.');
-    }
-  }, []);
-
   // Get tomorrow's date formatted as YYYY-MM-DD for the min attribute of the date input
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -102,120 +96,60 @@ function CreateTask() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
     if (formData.skillTags.length === 0) {
       setError('Please add at least one skill tag');
       return;
     }
-
     if (formData.payment.amount < 100) {
       setError('Amount must be at least ₹100');
       return;
     }
-
-    if (!window.Razorpay) {
-      setError('Payment system not available. Please refresh the page.');
-      return;
-    }
-    
     try {
       setIsSubmitting(true);
       setError(null);
-
-      // First, test if the payments API is accessible
+      // Test payments API
       try {
-        console.log('Testing payments API...');
-        const testResponse = await api.get('/payments/test');
-        console.log('Payments API test response:', testResponse.data);
+        await api.get('/payments/test');
       } catch (err: any) {
-        console.error('Payments API test failed:', {
-          status: err.response?.status,
-          data: err.response?.data,
-          message: err.message
-        });
         throw new Error('Payment service is not available. Please check if the server is running.');
       }
-
-      console.log('Creating Razorpay order with amount:', formData.payment.amount);
-      // Create Razorpay order
+      // Create Cashfree order
       const orderResponse = await api.post('/payments/create-order', {
         amount: formData.payment.amount
       });
-
-      console.log('Order created:', orderResponse.data);
       const order = orderResponse.data;
-
-      if (!order || !order.id) {
+      if (!order || !order.order_token) {
         throw new Error('Invalid order response from server');
       }
-
-      // Initialize Razorpay
-      const options = {
-        key: 'rzp_test_pIRURBknTtWJ3p',
-        amount: order.amount,
-        currency: order.currency,
-        name: 'VoltWorx',
-        description: 'Task Creation Payment',
-        order_id: order.id,
-        handler: async function (response: any) {
-          console.log('Payment successful:', response);
+      // Launch Cashfree DropJS
+      const cashfree = new Cashfree();
+      cashfree.initialiseDropin({
+        orderToken: order.order_token,
+        onSuccess: async function(data: any) {
           try {
-            if (!response.razorpay_payment_id || !response.razorpay_order_id || !response.razorpay_signature) {
-              throw new Error('Invalid payment response');
-            }
-
             // Verify payment and create task
-            console.log('Verifying payment and creating task...');
             const token = localStorage.getItem('token');
             const taskResponse = await api.post('/payments/verify', {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
+              order_id: order.order_id,
+              payment_session_id: data.payment_session_id,
               taskData: formData
             }, token ? {
               headers: {
                 Authorization: `Bearer ${token}`
               }
             } : undefined);
-
-            console.log('Task created successfully:', taskResponse.data);
             navigate(`/tasks/${taskResponse.data._id}`);
           } catch (err: any) {
-            console.error('Error in payment handler:', err);
             setError(err.response?.data?.message || err.message || 'Error creating task');
             setIsSubmitting(false);
           }
         },
-        prefill: {
-          name: 'Startup Name',
-          email: 'startup@example.com',
-          contact: '9999999999'
-        },
-        theme: {
-          color: '#6366f1'
-        },
-        modal: {
-          ondismiss: function() {
-            console.log('Payment modal dismissed');
-            setError('Payment cancelled. Please try again.');
-            setIsSubmitting(false);
-          }
+        onFailure: function(data: any) {
+          setError('Payment failed or cancelled. Please try again.');
+          setIsSubmitting(false);
         }
-      };
-
-      console.log('Initializing Razorpay with options:', options);
-      const razorpay = new window.Razorpay(options);
-      
-      razorpay.on('payment.failed', function (response: any) {
-        console.error('Payment failed:', response.error);
-        setError(`Payment failed: ${response.error.description || 'Please try again'}`);
-        setIsSubmitting(false);
       });
-      
-      console.log('Opening Razorpay modal...');
-      razorpay.open();
     } catch (err: any) {
-      console.error('Error in handleSubmit:', err);
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
     }
