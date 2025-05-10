@@ -10,12 +10,14 @@ import axios from 'axios';
 declare global {
   interface Window {
     Cashfree: {
-      new (config: {
-        orderToken: string;
-        onSuccess: (data: any) => void;
-        onFailure: (data: any) => void;
-      }): {
-        dropin: () => void;
+      new (config: { mode: string }): {
+        createDropin: (config: {
+          orderToken: string;
+          onSuccess: (data: any) => void;
+          onFailure: (data: any) => void;
+        }) => {
+          mount: (elementId: string) => void;
+        };
       };
     };
   }
@@ -154,7 +156,13 @@ function CreateTask() {
         throw new Error('Cashfree SDK not loaded');
       }
 
+      // Create Cashfree instance
       const cashfree = new window.Cashfree({
+        mode: "sandbox" // or "production" based on your environment
+      });
+
+      // Create drop-in instance
+      const dropin = cashfree.createDropin({
         orderToken: order.payment_session_id,
         onSuccess: async function(data: any) {
           try {
@@ -181,8 +189,8 @@ function CreateTask() {
         }
       });
 
-      // Launch the payment form
-      cashfree.dropin();
+      // Mount the drop-in
+      dropin.mount("#payment-form");
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
