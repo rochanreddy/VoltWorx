@@ -36,11 +36,34 @@ const ROLES = [
 ];
 
 const Community: React.FC = () => {
+  // Clock state for hour hand rotation
+  const [hourAngle, setHourAngle] = useState(0);
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const hours = now.getHours() % 12;
+      const minutes = now.getMinutes();
+      // Each hour is 30deg, each minute is 0.5deg
+      const angle = hours * 30 + minutes * 0.5;
+      setHourAngle(angle);
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <div className="flex flex-col items-center justify-center p-8 rounded-2xl bg-gray-900/80 shadow-xl border border-white/10">
-        <svg width="80" height="80" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-purple-400 mb-6 animate-bounce">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6">
+          <circle cx="40" cy="40" r="36" stroke="#a78bfa" strokeWidth="4" fill="#18181b" />
+          {/* Hour hand */}
+          <rect x="38.5" y="18" width="3" height="24" rx="1.5" fill="#a78bfa" transform={`rotate(${hourAngle} 40 40)`} />
+          {/* Minute hand (static for style) */}
+          <rect x="39.25" y="10" width="1.5" height="30" rx="0.75" fill="#f472b6" />
+          {/* Center dot */}
+          <circle cx="40" cy="40" r="3" fill="#f472b6" />
         </svg>
         <h1 className="text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 mb-4 text-center">Community Coming Soon</h1>
         <p className="text-lg sm:text-xl text-gray-300 mb-2 text-center max-w-xl">We're working hard to bring you an amazing community experience. Stay tuned for updates and exciting features!</p>
