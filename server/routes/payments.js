@@ -119,10 +119,14 @@ router.post('/create-order', async (req, res) => {
       headers: response.headers
     });
 
-    if (response.data && response.data.order_token && response.data.order_id) {
+    if (response.data && response.data.order_id && response.data.payment_session_id) {
       res.json({
-        order_token: response.data.order_token,
-        order_id: response.data.order_id
+        order_id: response.data.order_id,
+        payment_session_id: response.data.payment_session_id,
+        order_amount: response.data.order_amount,
+        order_currency: response.data.order_currency,
+        order_status: response.data.order_status,
+        customer_details: response.data.customer_details
       });
     } else {
       console.error('❌ [CASHFREE_DEBUG] Invalid response from Cashfree:', {
