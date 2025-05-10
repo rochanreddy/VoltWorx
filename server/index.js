@@ -37,6 +37,17 @@ app.use(cors({
 app.use(cookieParser());
 app.use(morgan('dev'));
 
+// Explicit CORS preflight handler for /api/community
+app.options('/api/community', cors({
+  origin: [
+    'https://www.volt-worx.com',
+    'https://volt-worx.com'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // MongoDB connection options
 const mongoOptions = {
   useNewUrlParser: true,
