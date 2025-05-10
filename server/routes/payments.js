@@ -9,7 +9,7 @@ const router = express.Router();
 // Cashfree credentials (use environment variables in production!)
 const CASHFREE_APP_ID = process.env.CASHFREE_APP_ID;
 const CASHFREE_SECRET = process.env.CASHFREE_SECRET;
-const CASHFREE_BASE_URL = process.env.CASHFREE_BASE_URL || 'https://sandbox.cashfree.com/pg';
+const CASHFREE_BASE_URL = process.env.CASHFREE_BASE_URL || 'https://api.cashfree.com/pg';
 
 // Debug middleware for payments routes
 router.use((req, res, next) => {
@@ -72,6 +72,13 @@ router.post('/create-order', async (req, res) => {
 
     let response;
     try {
+      console.log('🔍 [CASHFREE_DEBUG] Making request to Cashfree with headers:', {
+        'x-client-id': CASHFREE_APP_ID ? 'present' : 'missing',
+        'x-client-secret': CASHFREE_SECRET ? 'present' : 'missing',
+        'x-api-version': '2022-09-01',
+        'Content-Type': 'application/json'
+      });
+
       response = await axios.post(
         `${CASHFREE_BASE_URL}/orders`,
         orderPayload,
@@ -85,31 +92,52 @@ router.post('/create-order', async (req, res) => {
         }
       );
     } catch (apiError) {
-      console.error('[Cashfree Create Order] API Error Details:', {
+      console.error('❌ [CASHFREE_DEBUG] API Error Details:', {
         status: apiError.response?.status,
         statusText: apiError.response?.statusText,
         data: apiError.response?.data,
         message: apiError.message,
-        headers: apiError.response?.headers
+        headers: apiError.response?.headers,
+        requestUrl: `${CASHFREE_BASE_URL}/orders`,
+        requestPayload: orderPayload
       });
       return res.status(500).json({ 
         message: 'Cashfree API error', 
         error: apiError.response?.data || apiError.message,
         details: {
           status: apiError.response?.status,
-          statusText: apiError.response?.statusText
+          statusText: apiError.response?.statusText,
+          data: apiError.response?.data
         }
       });
     }
-    console.log('[Cashfree Create Order] Response:', response.data);
+
+    console.log('✅ [CASHFREE_DEBUG] Cashfree Response:', {
+      status: response.status,
+      statusText: response.statusText,
+      data: response.data,
+      headers: response.headers
+    });
+
     if (response.data && response.data.order_token && response.data.order_id) {
       res.json({
         order_token: response.data.order_token,
         order_id: response.data.order_id
       });
     } else {
-      console.error('[Cashfree Create Order] Invalid response:', response.data);
-      res.status(500).json({ message: 'Invalid order response from Cashfree', error: response.data });
+      console.error('❌ [CASHFREE_DEBUG] Invalid response from Cashfree:', {
+        data: response.data,
+        status: response.status,
+        statusText: response.statusText
+      });
+      res.status(500).json({ 
+        message: 'Invalid order response from Cashfree', 
+        error: response.data,
+        details: {
+          status: response.status,
+          statusText: response.statusText
+        }
+      });
     }
   } catch (error) {
     console.error('[Cashfree Create Order] Error:', error.response?.data || error.message, error);
