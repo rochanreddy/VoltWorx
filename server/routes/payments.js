@@ -25,6 +25,11 @@ router.get('/test', (req, res) => {
 // Create a Cashfree order
 router.post('/create-order', async (req, res) => {
   try {
+    // Check for required env variables
+    if (!CASHFREE_APP_ID || !CASHFREE_SECRET || !CASHFREE_BASE_URL) {
+      console.error('[Cashfree Create Order] Missing Cashfree environment variables');
+      return res.status(500).json({ message: 'Server misconfiguration: Cashfree credentials missing.' });
+    }
     const { amount, customer_email, customer_phone, customer_id } = req.body;
     if (!amount || amount < 100) {
       return res.status(400).json({ message: 'Amount must be at least ₹100' });
@@ -43,19 +48,24 @@ router.post('/create-order', async (req, res) => {
         customer_phone
       }
     };
-    const response = await axios.post(
-      `${CASHFREE_BASE_URL}/orders`,
-      orderPayload,
-      {
-        headers: {
-          'x-client-id': CASHFREE_APP_ID,
-          'x-client-secret': CASHFREE_SECRET,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    let response;
+    try {
+      response = await axios.post(
+        `${CASHFREE_BASE_URL}/orders`,
+        orderPayload,
+        {
+          headers: {
+            'x-client-id': CASHFREE_APP_ID,
+            'x-client-secret': CASHFREE_SECRET,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (apiError) {
+      console.error('[Cashfree Create Order] API Error:', apiError.response?.data || apiError.message, apiError);
+      return res.status(500).json({ message: 'Cashfree API error', error: apiError.response?.data || apiError.message });
+    }
     console.log('[Cashfree Create Order] Response:', response.data);
-    // Ensure the response contains order_token and order_id
     if (response.data && response.data.order_token && response.data.order_id) {
       res.json({
         order_token: response.data.order_token,
