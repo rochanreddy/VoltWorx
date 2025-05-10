@@ -54,9 +54,19 @@ router.post('/create-order', async (req, res) => {
         },
       }
     );
-    res.json(response.data);
+    console.log('[Cashfree Create Order] Response:', response.data);
+    // Ensure the response contains order_token and order_id
+    if (response.data && response.data.order_token && response.data.order_id) {
+      res.json({
+        order_token: response.data.order_token,
+        order_id: response.data.order_id
+      });
+    } else {
+      console.error('[Cashfree Create Order] Invalid response:', response.data);
+      res.status(500).json({ message: 'Invalid order response from Cashfree', error: response.data });
+    }
   } catch (error) {
-    console.error('[Cashfree Create Order] Error:', error.response?.data || error.message);
+    console.error('[Cashfree Create Order] Error:', error.response?.data || error.message, error);
     res.status(500).json({ message: 'Error creating Cashfree order', error: error.response?.data || error.message });
   }
 });
