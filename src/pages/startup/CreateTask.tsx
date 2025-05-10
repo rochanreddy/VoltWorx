@@ -65,6 +65,7 @@ function CreateTask() {
   const [showSkillSuggestions, setShowSkillSuggestions] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [upiReference, setUpiReference] = useState('');
 
   // Get tomorrow's date formatted as YYYY-MM-DD for the min attribute of the date input
   const tomorrow = new Date();
@@ -127,70 +128,23 @@ function CreateTask() {
       setError('Amount must be at least ₹100');
       return;
     }
+    if (!upiReference.trim()) {
+      setError('Please enter your UPI transaction reference number');
+      return;
+    }
     try {
       setIsSubmitting(true);
       setError(null);
-      
-      // Test payments API
-      try {
-        await api.get('/payments/test');
-      } catch (err: any) {
-        throw new Error('Payment service is not available. Please check if the server is running.');
-      }
-
-      // Create Cashfree order
-      const orderResponse = await api.post('/payments/create-order', {
-        amount: formData.payment.amount,
-        customer_email: user.email,
-        customer_phone: user.phone || '9999999999',
-        customer_id: user._id || undefined
-      });
-      
-      const order = orderResponse.data;
-      if (!order || !order.payment_session_id) {
-        throw new Error('Invalid order response from server');
-      }
-
-      // Initialize Cashfree
-      if (typeof window.Cashfree === 'undefined') {
-        throw new Error('Cashfree SDK not loaded');
-      }
-
-      // Create Cashfree instance
-      const cashfree = new window.Cashfree({
-        mode: "sandbox" // or "production" based on your environment
-      });
-
-      // Create drop-in instance
-      const dropin = cashfree.createDropin({
-        orderToken: order.payment_session_id,
-        onSuccess: async function(data: any) {
-          try {
-            // Verify payment and create task
-            const token = localStorage.getItem('token');
-            const taskResponse = await api.post('/payments/verify', {
-              order_id: order.order_id,
-              payment_session_id: data.payment_session_id,
-              taskData: formData
-            }, token ? {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            } : undefined);
-            navigate(`/tasks/${taskResponse.data._id}`);
-          } catch (err: any) {
-            setError(err.response?.data?.message || err.message || 'Error creating task');
-            setIsSubmitting(false);
-          }
-        },
-        onFailure: function(data: any) {
-          setError('Payment failed or cancelled. Please try again.');
-          setIsSubmitting(false);
-        }
-      });
-
-      // Mount the drop-in
-      dropin.mount("#payment-form");
+      // Submit task with UPI reference
+      const token = localStorage.getItem('token');
+      const response = await api.post('/tasks', {
+        ...formData,
+        upiReference,
+        payment: { amount: formData.payment.amount }
+      }, token ? {
+        headers: { Authorization: `Bearer ${token}` }
+      } : undefined);
+      navigate(`/tasks/${response.data._id}`);
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to create task');
       setIsSubmitting(false);
@@ -217,6 +171,12 @@ function CreateTask() {
             </div>
           </div>
         )}
+        
+        {/* UPI QR Section */}
+        <div className="mb-8 flex flex-col items-center">
+          <img src="/images/upi-qr-meghanad-reddy.png" alt="UPI QR" className="w-64 h-64 object-contain rounded-lg border border-gray-700" />
+          <p className="mt-2 text-gray-300 text-center">Scan to pay with any UPI app<br/>UPI ID: <span className="font-mono">meghanareddy006-1@okhdfcbank</span></p>
+        </div>
         
         {/* Form */}
         <div className="group relative">
@@ -375,8 +335,21 @@ function CreateTask() {
                 <p className="mt-1 text-sm text-gray-400">Minimum amount: ₹100</p>
               </div>
 
-              {/* Add payment form container */}
-              <div id="payment-form" className="mt-4"></div>
+              <div>
+                <label htmlFor="upiReference" className="block text-sm font-medium text-gray-200 mb-1">
+                  UPI Transaction Reference Number
+                </label>
+                <input
+                  type="text"
+                  id="upiReference"
+                  name="upiReference"
+                  value={upiReference}
+                  onChange={e => setUpiReference(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  placeholder="Enter your UPI transaction reference number"
+                  required
+                />
+              </div>
 
               <div className="flex justify-end space-x-4 pt-4">
                 <button

@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Task from '../models/Task.js';
 import { auth, studentOnly, startupOnly } from '../middleware/auth.js';
+import Payment from '../models/Payment.js';
 
 const router = express.Router();
 
@@ -43,25 +44,34 @@ router.get('/:id', async (req, res) => {
 // Create a new task
 router.post('/', auth, startupOnly, async (req, res) => {
   try {
-    const { title, description, skillTags, deadline, totalSlots } = req.body;
-    
+    const { title, description, skillTags, deadline, totalSlots, upiReference, payment } = req.body;
+    if (!upiReference || !payment || !payment.amount) {
+      return res.status(400).json({ message: 'UPI reference and payment amount are required' });
+    }
     const task = new Task({
       title,
       description,
       skillTags,
       deadline,
       totalSlots,
-      startup: req.user._id
+      startup: req.user._id,
+      payment: { amount: payment.amount, status: 'pending' }
     });
-    
     await task.save();
-    
+    // Save payment details
+    const paymentDoc = new Payment({
+      startupName: req.user.name,
+      startupEmail: req.user.email,
+      upiReference,
+      taskId: task._id,
+      amount: payment.amount
+    });
+    await paymentDoc.save();
     // Add task reference to startup
     await mongoose.model('Startup').findByIdAndUpdate(
       req.user._id,
       { $push: { tasks: task._id } }
     );
-    
     res.status(201).json(task);
   } catch (error) {
     console.error('Error creating task:', error);
