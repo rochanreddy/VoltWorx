@@ -8,7 +8,7 @@ const router = express.Router();
 // Get student profile
 router.get('/profile', auth, studentOnly, async (req, res) => {
   try {
-    const student = await Student.findById(req.user._id).select('-password');
+    const student = await Student.findById(req.user._id).select('-password').populate('submittedTasks');
     
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
