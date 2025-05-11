@@ -514,13 +514,13 @@ function Register() {
                       value={formData.educationLevel}
                       onChange={handleChange}
                       className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                      placeholder="Enter your current educational level"
+                      placeholder="example: B.Tech, M.Tech, BCA, MCA, etc."
                     />
                   </div>
 
                   <div>
                     <label htmlFor="year" className="block text-sm font-medium text-gray-300 mb-1">
-                      Year
+                      Year of Graduation
                     </label>
                     <input
                       id="year"
@@ -530,7 +530,7 @@ function Register() {
                       value={formData.year}
                       onChange={handleChange}
                       className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                      placeholder="Enter your year"
+                      placeholder="Enter your year of graduation"
                     />
                   </div>
 
