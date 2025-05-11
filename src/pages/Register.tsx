@@ -95,24 +95,6 @@ function Register() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Validate required fields for student
-    if (role === 'student') {
-      if (!formData.name || !formData.email || !formData.phone || !formData.educationLevel || !formData.year || !formData.collegeName || !formData.linkedIn || !formData.rollNumber || !formData.password || !formData.confirmPassword) {
-        setPasswordError('Please fill all required fields.');
-        return;
-      }
-      if (formData.skills.length === 0) {
-        setPasswordError('Please add at least one skill.');
-        return;
-      }
-    }
-    // Validate required fields for startup
-    if (role === 'startup') {
-      if (!formData.name || !formData.company || !formData.companyEmail || !formData.phone || !formData.description || !formData.startupStage || !formData.startupAge || !formData.linkedIn || !formData.password || !formData.confirmPassword) {
-        setPasswordError('Please fill all required fields.');
-        return;
-      }
-    }
     
     if (formData.password !== formData.confirmPassword) {
       setPasswordError('Passwords do not match');
