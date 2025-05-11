@@ -433,7 +433,7 @@ function Register() {
                     <label htmlFor="skills" className="block text-sm font-medium text-gray-300 mb-1">
                       Skills
                     </label>
-                    <div className="relative">
+                    <div className="relative flex gap-2">
                       <input
                         type="text"
                         value={skillInput}
@@ -441,21 +441,32 @@ function Register() {
                         className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                         placeholder="Add your skills"
                       />
-                      {showSkillSuggestions && filteredSkills.length > 0 && (
-                        <div className="absolute z-10 w-full mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-48 overflow-y-auto">
-                          {filteredSkills.map((skill) => (
-                            <button
-                              key={skill}
-                              type="button"
-                              onClick={() => addSkill(skill)}
-                              className="w-full px-4 py-2 text-left text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                            >
-                              {skill}
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (skillInput.trim() !== '') {
+                            addSkill(skillInput.trim());
+                          }
+                        }}
+                        className="px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-300 hover:bg-purple-500/30 transition-colors flex items-center justify-center"
+                      >
+                        <Plus className="h-5 w-5" />
+                      </button>
                     </div>
+                    {showSkillSuggestions && filteredSkills.length > 0 && (
+                      <div className="absolute z-10 w-full mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                        {filteredSkills.map((skill) => (
+                          <button
+                            key={skill}
+                            type="button"
+                            onClick={() => addSkill(skill)}
+                            className="w-full px-4 py-2 text-left text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                          >
+                            {skill}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                     <div className="mt-2 flex flex-wrap gap-2">
                       {formData.skills.map((skill) => (
                         <span

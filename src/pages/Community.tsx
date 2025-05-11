@@ -76,7 +76,7 @@ const Community: React.FC = () => {
           Community Coming Soon
         </h1>
         <p className="text-lg sm:text-xl text-gray-300 mb-2 text-center max-w-xl">We're working hard to bring you an amazing community experience. Stay tuned for updates and exciting features!</p>
-        <span className="inline-block mt-4 px-4 py-2 rounded-full bg-purple-600/20 text-purple-300 font-semibold text-sm">Launching Summer 2024 🚀</span>
+        <span className="inline-block mt-4 px-4 py-2 rounded-full bg-purple-600/20 text-purple-300 font-semibold text-sm">Launching Summer 2025 🚀</span>
       </div>
     </div>
   );
