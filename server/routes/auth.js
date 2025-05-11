@@ -29,7 +29,8 @@ router.post('/register', async (req, res) => {
         name,
         email,
         password,
-        skills: skills || []
+        skills: skills || [],
+        phone: req.body.phone || ''
       });
     } else if (role === 'startup') {
       user = new Startup({
