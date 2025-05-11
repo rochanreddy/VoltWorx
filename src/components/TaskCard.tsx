@@ -109,7 +109,7 @@ function TaskCard({ task, showJoinButton = true, onJoin, isJoined = false, isSta
             </span>
           </div>
           <div className="flex items-center">
-            <span className="font-semibold text-green-400">₹{task.payment?.amount || 0}</span>
+            <span className="font-semibold text-green-400">Reward: ₹{task.payment?.amount || 0}</span>
           </div>
         </div>
         
