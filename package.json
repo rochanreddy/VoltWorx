@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "nodemon server/index.js",
-    "dev:full": "concurrently \"npm run dev\" \"npm run server\""
+    "dev:full": "concurrently \"npm run dev\" \"npm run server\"",
+    "generate-sitemap": "node sitemap-generator.cjs"
   },
   "dependencies": {
     "@cashfreepayments/cashfree-js": "^1.0.5",
