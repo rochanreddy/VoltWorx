@@ -239,7 +239,7 @@ function Landing() {
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Rochan Reddy</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Mithresh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
                 "VoltWorx opened doors to real-world projects and boosted my confidence."
               </p>
@@ -251,7 +251,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "The community and projects at VoltWorx have been invaluable to my growth."
+                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I’m proud to post."
               </p>
             </div>
             
@@ -261,7 +261,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Dhanush</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "I found my co-founder through VoltWorx's community hub."
+                "Unlike college assignments, these projects actually matter. I got shortlisted for an internship because of my VoltWorx project!"
               </p>
             </div>
           </div>
