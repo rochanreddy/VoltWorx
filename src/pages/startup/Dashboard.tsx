@@ -213,16 +213,16 @@ function StartupDashboard() {
   const isSelectionMade = (task: any) => task.topStudentSelected || task.noTopStudentSelected;
 
   return (
-    <div className="container px-2 py-4 sm:px-4 sm:py-8">
+    <div className="container max-w-full px-2 py-8">
       {/* Header Section */}
-      <div className="group relative mb-6 sm:mb-8">
+      <div className="group relative mb-8">
         <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
-        <div className="relative p-3 sm:p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-            <h1 className="text-lg sm:text-2xl font-bold text-white">Startup Dashboard</h1>
+        <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-white">Startup Dashboard</h1>
             <Link 
               to="/startup/create-task" 
-              className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
             >
               <Plus className="h-5 w-5 mr-2" />
               Create New Project
@@ -232,14 +232,14 @@ function StartupDashboard() {
       </div>
 
       {/* Tabs */}
-      <div className="group relative mb-6 sm:mb-8">
+      <div className="group relative mb-8">
         <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
-        <div className="relative p-3 sm:p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-          <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-8" aria-label="Tabs">
+        <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+          <nav className="flex space-x-8" aria-label="Tabs">
             <button
               onClick={() => setActiveTab('active')}
               className={cn(
-                "py-2 sm:py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'active'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
@@ -256,7 +256,7 @@ function StartupDashboard() {
             <button
               onClick={() => setActiveTab('completed')}
               className={cn(
-                "py-2 sm:py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'completed'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
@@ -273,7 +273,7 @@ function StartupDashboard() {
             <button
               onClick={() => setActiveTab('all')}
               className={cn(
-                "py-2 sm:py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
+                "py-4 px-1 inline-flex items-center border-b-2 font-medium text-sm",
                 activeTab === 'all'
                   ? "border-purple-500 text-purple-300"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300"
@@ -293,41 +293,42 @@ function StartupDashboard() {
 
       {/* Error message */}
       {error && (
-        <div className="group relative mb-6 sm:mb-8">
+        <div className="group relative mb-8">
           <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-red-600/30 via-red-600/30 to-red-600/30 opacity-40 group-hover:opacity-60"></div>
-          <div className="relative p-3 sm:p-6 rounded-2xl border border-red-500/20 hover:border-red-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-            <p className="text-red-300 text-sm sm:text-base">{error}</p>
+          <div className="relative p-6 rounded-2xl border border-red-500/20 hover:border-red-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+            <p className="text-red-300">{error}</p>
           </div>
         </div>
       )}
 
       {/* Tasks grid */}
       {isLoading ? (
-        <div className="flex justify-center py-16 sm:py-20">
+        <div className="flex justify-center py-20">
           <LoadingSpinner size="large" />
         </div>
       ) : displayedTasks.length > 0 ? (
         <div className="w-full max-w-screen-lg mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {displayedTasks.map((task: any) => (
               <div key={task._id} className="group relative min-w-0">
                 <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
-                <div className="relative p-3 sm:p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+                <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
                   <TaskCard
                     task={task}
                     showJoinButton={false}
                     isStartup={true}
                     onDelete={() => handleDeleteTask(task._id)}
                   />
+                  
                   {/* Submissions Section */}
                   {task.submissions && task.submissions.length > 0 && (
-                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">
-                      <h3 className="text-xs sm:text-sm font-medium text-gray-300 mb-2">Submissions</h3>
+                    <div className="mt-4 pt-4 border-t border-white/10">
+                      <h3 className="text-sm font-medium text-gray-300 mb-2">Submissions</h3>
                       <div className="space-y-2">
                         {task.submissions.map((submission: Task['submissions'][0]) => (
-                          <div key={submission._id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-2 bg-gray-800/50 rounded-lg gap-2 sm:gap-0">
+                          <div key={submission._id} className="flex items-center justify-between p-2 bg-gray-800/50 rounded-lg">
                             <div className="flex items-center space-x-2">
-                              <span className="text-xs sm:text-sm text-gray-300">
+                              <span className="text-sm text-gray-300">
                                 {submission.student.name}
                               </span>
                             </div>
@@ -335,7 +336,7 @@ function StartupDashboard() {
                               href={submission.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs sm:text-sm text-purple-300 hover:text-purple-200 transition-colors"
+                              className="text-sm text-purple-300 hover:text-purple-200 transition-colors"
                             >
                               View Submission
                             </a>
@@ -343,7 +344,7 @@ function StartupDashboard() {
                             {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
                               <button
                                 onClick={() => handleSelectTopStudent(submission, task)}
-                                className="ml-0 sm:ml-4 mt-2 sm:mt-0 px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                                className="ml-4 px-3 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
                               >
                                 Select Top Student
                               </button>
@@ -355,7 +356,7 @@ function StartupDashboard() {
                       {isPastDeadline(task.deadline) && !isSelectionMade(task) && (
                         <button
                           onClick={() => handleNoTopStudent(task)}
-                          className="mt-3 sm:mt-4 px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                          className="mt-4 px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                         >
                           No Top Student
                         </button>
@@ -370,21 +371,21 @@ function StartupDashboard() {
       ) : (
         <div className="group relative">
           <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
-          <div className="relative p-3 sm:p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
-            <div className="text-center py-10 sm:py-16">
-              <h3 className="text-base sm:text-lg font-medium text-white mb-2">
+          <div className="relative p-6 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+            <div className="text-center py-16">
+              <h3 className="text-lg font-medium text-white mb-2">
                 {activeTab === 'active' ? 'No active projects found' :
                  activeTab === 'completed' ? 'You don\'t have any completed projects yet' :
                  'You haven\'t created any projects yet'}
               </h3>
-              <p className="text-gray-400 mb-6 text-sm sm:text-base">
+              <p className="text-gray-400 mb-6">
                 {activeTab === 'active' || activeTab === 'all' 
                   ? 'Create your first project to start finding student talent'
                   : 'Projects with passed deadlines will appear here'}
               </p>
               <Link 
                 to="/startup/create-task" 
-                className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
               >
                 <Plus className="h-5 w-5 mr-2" />
                 Create New Project
