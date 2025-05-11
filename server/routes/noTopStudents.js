@@ -107,6 +107,10 @@ router.post(
       }
 
       // Create new no top student entry
+      let finalMoney = money;
+      if (typeof finalMoney !== 'number' || finalMoney === 0) {
+        finalMoney = task.payment?.amount || 0;
+      }
       const noTopStudent = new NoTopStudent({
         startupId,
         startupName,
@@ -115,7 +119,7 @@ router.post(
         projectId,
         reason: reason || '',
         paymentId: paymentId || '',
-        money: money || 0
+        money: finalMoney
       });
 
       await noTopStudent.save();

@@ -25,6 +25,9 @@ interface Task {
     link: string;
   }>;
   money?: number;
+  payment?: {
+    amount: number;
+  };
 }
 
 function StartupDashboard() {
@@ -178,7 +181,7 @@ function StartupDashboard() {
         startupEmail: user.email,
         projectId: task._id,
         reason: '', // Optionally, prompt for a reason
-        money: task.money || 0 // Add the money field from the task
+        money: task.payment?.amount || 0 // Use the correct path for money
       };
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://api.volt-worx.com/api'}/no-top-students/select`, {
         method: 'POST',
