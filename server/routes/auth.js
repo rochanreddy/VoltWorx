@@ -12,7 +12,23 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 // Register
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, role, skills, company } = req.body;
+    const { name, email, password, role, skills, company, phone, educationLevel, year, collegeName, linkedIn, rollNumber, description, startupStage, startupAge, companyEmail, startupIndiaRegistered, confirmPassword } = req.body;
+    
+    // Validate required fields for student
+    if (role === 'student') {
+      if (!name || !email || !phone || !educationLevel || !year || !collegeName || !linkedIn || !rollNumber || !password || !confirmPassword) {
+        return res.status(400).json({ message: 'Please fill all required fields.' });
+      }
+      if (!skills || !Array.isArray(skills) || skills.length === 0) {
+        return res.status(400).json({ message: 'Please add at least one skill.' });
+      }
+    }
+    // Validate required fields for startup
+    if (role === 'startup') {
+      if (!name || !company || !companyEmail || !phone || !description || !startupStage || !startupAge || !linkedIn || !password || !confirmPassword) {
+        return res.status(400).json({ message: 'Please fill all required fields.' });
+      }
+    }
     
     // Check if email already exists
     const existingStudent = await Student.findOne({ email });
