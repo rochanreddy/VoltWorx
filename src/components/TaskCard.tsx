@@ -62,7 +62,7 @@ function TaskCard({ task, showJoinButton = true, onJoin, isJoined = false, isSta
             )}>
               {status}
             </span>
-            {isStartup && onDelete && (
+            {/* {isStartup && onDelete && (
               <button
                 onClick={onDelete}
                 className="p-1 text-red-400 hover:text-red-300 transition-colors"
@@ -70,7 +70,7 @@ function TaskCard({ task, showJoinButton = true, onJoin, isJoined = false, isSta
               >
                 <Trash2 className="h-4 w-4" />
               </button>
-            )}
+            )} */}
           </div>
         </div>
         
