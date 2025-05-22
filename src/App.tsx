@@ -14,7 +14,6 @@ const StudentDashboard = lazy(() => import('./pages/student/Dashboard'));
 const StartupDashboard = lazy(() => import('./pages/startup/Dashboard'));
 const TaskDetails = lazy(() => import('./pages/TaskDetails'));
 const CreateTask = lazy(() => import('./pages/startup/CreateTask'));
-const Community = lazy(() => import('./pages/Community'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const StudentProfile = lazy(() => import('./pages/student/Profile'));
 const About = lazy(() => import('./pages/About'));
