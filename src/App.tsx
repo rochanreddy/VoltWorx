@@ -4,7 +4,6 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
-import CommunityPage from './pages/CommunityPage.tsx';
 
 // Lazy-loaded components
 const Landing = lazy(() => import('./pages/Landing'));
@@ -14,6 +13,7 @@ const StudentDashboard = lazy(() => import('./pages/student/Dashboard'));
 const StartupDashboard = lazy(() => import('./pages/startup/Dashboard'));
 const TaskDetails = lazy(() => import('./pages/TaskDetails'));
 const CreateTask = lazy(() => import('./pages/startup/CreateTask'));
+const Community = lazy(() => import('./pages/Community'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const StudentProfile = lazy(() => import('./pages/student/Profile'));
 const About = lazy(() => import('./pages/About'));
@@ -96,7 +96,7 @@ function App() {
           
           {/* Shared routes */}
           <Route path="tasks/:taskId" element={<TaskDetails />} />
-          <Route path="community" element={<CommunityPage />} />
+          <Route path="community" element={<Community />} />
           
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
