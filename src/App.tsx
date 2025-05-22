@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
-import CommunityPage from './pages/CommunityPage';
+import CommunityPage from './pages/CommunityPage.tsx';
 
 // Lazy-loaded components
 const Landing = lazy(() => import('./pages/Landing'));
