@@ -47,7 +47,7 @@ function Navbar() {
           {/* Logo and primary nav */}
           <div className="flex">
             <Link to="/" className="flex items-center">
-              <Zap className="h-8 w-8 text-purple-400" />
+              <img src="/sample_2-removebg-preview.png" alt="VoltWorx Logo" className="h-8 w-8" />
               <span className="ml-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400">
                 VoltWorx
               </span>
