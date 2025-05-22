@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import CommunityFeed from '../components/CommunityFeed';
 import CreatePost from '../components/CreatePost';

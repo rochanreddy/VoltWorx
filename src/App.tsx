@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
+import CommunityPage from './pages/CommunityPage';
 
 // Lazy-loaded components
 const Landing = lazy(() => import('./pages/Landing'));
@@ -96,7 +97,7 @@ function App() {
           
           {/* Shared routes */}
           <Route path="tasks/:taskId" element={<TaskDetails />} />
-          <Route path="community" element={<Community />} />
+          <Route path="community" element={<CommunityPage />} />
           
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
