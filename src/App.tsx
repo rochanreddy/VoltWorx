@@ -1,9 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
+import { useEffect } from 'react';
 
 // Lazy-loaded components
 const Landing = lazy(() => import('./pages/Landing'));
@@ -25,8 +26,24 @@ const Disclaimer = lazy(() => import('./pages/Disclaimer'));
 const StudentCodeOfConduct = lazy(() => import('./pages/StudentCodeOfConduct'));
 const StartupGuidelines = lazy(() => import('./pages/StartupGuidelines'));
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 function App() {
   const { isLoading } = useAuth();
+  const location = useLocation();
+
+  // Google Analytics SPA pageview tracking
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('config', 'G-DWXC3KBX8P', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
 
   if (isLoading) {
     return (
