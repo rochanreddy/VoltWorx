@@ -58,7 +58,7 @@ function CreateTask() {
     deadline: '',
     totalSlots: 5,
     payment: {
-      amount: 100
+      amount: 500
     }
   });
   const [skillInput, setSkillInput] = useState('');
