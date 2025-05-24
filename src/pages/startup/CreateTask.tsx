@@ -124,8 +124,8 @@ function CreateTask() {
       setError('Please add at least one skill tag');
       return;
     }
-    if (formData.payment.amount < 100) {
-      setError('Amount must be at least ₹100');
+    if (formData.payment.amount < 500) {
+      setError('Amount must be at least ₹500');
       return;
     }
     if (!upiReference.trim()) {
@@ -348,11 +348,11 @@ function CreateTask() {
                       amount: parseInt(e.target.value)
                     }
                   })}
-                  min="100"
+                  min="500"
                   className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   required
                 />
-                <p className="mt-1 text-sm text-gray-400">Minimum amount: ₹100</p>
+                <p className="mt-1 text-sm text-gray-400">Minimum amount: ₹500</p>
               </div>
 
               <div>
