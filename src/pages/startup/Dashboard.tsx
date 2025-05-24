@@ -236,6 +236,32 @@ function StartupDashboard() {
         </div>
       </div>
 
+      {/* Guidelines Section */}
+      <div className="group relative mb-6 sm:mb-8">
+        <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
+        <div className="relative p-4 sm:p-6 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all duration-300 bg-gray-900/80 backdrop-blur-xl">
+          <h2 className="text-lg font-semibold text-white mb-3">Important Guidelines</h2>
+          <div className="space-y-3 text-sm text-gray-300">
+            <div className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              <p>Startups are not permitted to initiate contact with any student applicants until the task deadline has passed.</p>
+            </div>
+            <div className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              <p>Once you have selected the top-performing student, their contact details will be shared with you via your registered email address for further communication.</p>
+            </div>
+            <div className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              <p>To make any changes to the task details — including description, deadline, or reward — please contact the VoltWorx team directly. We'll assist you with the required updates.</p>
+            </div>
+            <div className="flex items-start">
+              <span className="text-blue-400 mr-2">•</span>
+              <p>If none of the submitted work meets your expectations, you may select the "No Top Student" option after the deadline. A full refund will then be processed in accordance with our refund policy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Tabs */}
       <div className="group relative mb-6 sm:mb-8">
         <div className="absolute -inset-0.5 rounded-2xl blur-sm transition duration-200 bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-pink-600/30 opacity-40 group-hover:opacity-60"></div>
