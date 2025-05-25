@@ -284,10 +284,7 @@ function StudentDashboard() {
                 {activeTab === 'joined' &&
                   hasUserJoinedTask(task, user?._id || '') &&
                   !isPastDeadline(task.deadline) &&
-                  !(task.submissions && task.submissions.some((submission: any) =>
-                    submission.user === user._id ||
-                    (submission.user && submission.user._id === user._id)
-                  )) && (
+                  !(task.submissions && task.submissions.some((submission: any) => submission.user === user._id)) && (
                   <div className="mt-4 pt-4 border-t border-white/10 flex-grow">
                     <div className="flex items-center space-x-2 mb-2">
                       <span className="text-sm font-medium text-gray-300">Submit Link</span>
