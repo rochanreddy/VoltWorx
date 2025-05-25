@@ -160,6 +160,13 @@ function StudentDashboard() {
             </div>
           </div>
 
+          {/* Note about checking email */}
+          <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+            <p className="text-sm text-blue-300">
+              After the deadline of a task, check your email (including spam folder) within 24 hours to know if you've been selected.
+            </p>
+          </div>
+
           {/* Category Filter and Show All/Matched Toggle */}
           <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full">
             <div className="flex items-center gap-2 flex-shrink-0">

@@ -100,6 +100,12 @@ function Register() {
       setPasswordError('Passwords do not match');
       return;
     }
+
+    // Add validation for skills when role is student
+    if (role === 'student' && formData.skills.length === 0) {
+      setPasswordError('Please add at least one skill');
+      return;
+    }
     
     try {
       setIsSubmitting(true);
