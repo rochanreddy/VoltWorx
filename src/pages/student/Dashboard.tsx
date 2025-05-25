@@ -280,8 +280,8 @@ function StudentDashboard() {
                   onJoin={() => handleJoinTask(task._id)}
                 />
                 
-                {/* Submission Form for Completed Tasks */}
-                {activeTab === 'completed' && hasUserJoinedTask(task, user?._id || '') && (
+                {/* Submission Form for Joined Tasks (before deadline) */}
+                {activeTab === 'joined' && hasUserJoinedTask(task, user?._id || '') && !isPastDeadline(task.deadline) && (
                   <div className="mt-4 pt-4 border-t border-white/10 flex-grow">
                     <div className="flex items-center space-x-2 mb-2">
                       <span className="text-sm font-medium text-gray-300">Submit Link</span>
