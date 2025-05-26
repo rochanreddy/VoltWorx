@@ -33,6 +33,7 @@ function Register() {
   const [skillInput, setSkillInput] = useState('');
   const [showSkillSuggestions, setShowSkillSuggestions] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [skillsError, setSkillsError] = useState('');
   const { register, error } = useAuth();
   const navigate = useNavigate();
   const [googleUser, setGoogleUser] = useState<any>(null);
@@ -99,12 +100,16 @@ function Register() {
     if (formData.password !== formData.confirmPassword) {
       setPasswordError('Passwords do not match');
       return;
+    } else {
+      setPasswordError('');
     }
 
     // Add validation for skills when role is student
     if (role === 'student' && formData.skills.length === 0) {
-      setPasswordError('Please add at least one skill');
+      setSkillsError('Please add at least one skill');
       return;
+    } else {
+      setSkillsError('');
     }
     
     try {
@@ -490,6 +495,9 @@ function Register() {
                         </span>
                       ))}
                     </div>
+                    {skillsError && (
+                      <p className="mt-1 text-sm text-red-400">{skillsError}</p>
+                    )}
                   </div>
 
                   <div>
@@ -646,7 +654,7 @@ function Register() {
                 <button
                   type="submit"
                   className="w-full flex justify-center items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={isSubmitting || !!passwordError}
+                  disabled={isSubmitting || !!passwordError || !!skillsError}
                 >
                   {isSubmitting ? (
                     <LoadingSpinner size="small" className="mr-2" />
