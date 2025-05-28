@@ -124,15 +124,15 @@ const badges: Badge[] = [
 
 const Badges: React.FC<BadgesProps> = ({ stats }) => {
   return (
-    <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-      <h2 className="text-xl font-semibold text-white mb-4">Achievements</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+      <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">Achievements</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
         {badges.map((badge) => {
           const isEarned = badge.condition(stats);
           return (
             <div
               key={badge.id}
-              className={`p-4 rounded-lg border relative ${
+              className={`p-3 sm:p-4 rounded-lg border relative ${
                 isEarned
                   ? 'bg-purple-500/20 border-purple-500/30'
                   : 'bg-gray-800/50 border-gray-700/50'
@@ -142,9 +142,9 @@ const Badges: React.FC<BadgesProps> = ({ stats }) => {
                 <div className="absolute inset-0 rounded-lg animate-pulse bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20"></div>
               )}
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
                   <div
-                    className={`p-2 rounded-full ${
+                    className={`p-1.5 sm:p-2 rounded-full ${
                       isEarned 
                         ? 'bg-purple-500/30 animate-glow' 
                         : 'bg-gray-700/50'
@@ -153,7 +153,7 @@ const Badges: React.FC<BadgesProps> = ({ stats }) => {
                     {badge.icon}
                   </div>
                   <h3
-                    className={`font-medium ${
+                    className={`font-medium text-sm sm:text-base ${
                       isEarned ? 'text-white' : 'text-gray-400'
                     }`}
                   >
@@ -161,14 +161,14 @@ const Badges: React.FC<BadgesProps> = ({ stats }) => {
                   </h3>
                 </div>
                 <p
-                  className={`text-sm ${
+                  className={`text-xs sm:text-sm ${
                     isEarned ? 'text-purple-200' : 'text-gray-500'
                   }`}
                 >
                   {badge.description}
                 </p>
                 {!isEarned && (
-                  <div className="mt-2 text-xs text-gray-500">
+                  <div className="mt-1 sm:mt-2 text-xs text-gray-500">
                     {badge.id === 'frontend-wizard' && (
                       <span>{stats.frontendTasks}/5 frontend tasks completed</span>
                     )}

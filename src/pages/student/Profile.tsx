@@ -219,22 +219,21 @@ Average Rating: ${averageRating.toFixed(1)}/5
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 py-12">
       <div className="container mx-auto px-4">
         {/* Profile Header */}
-        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 mb-8">
-          <div className="flex justify-between items-start mb-6">
-            <div className="flex items-center space-x-6">
-              <div className="w-32 h-32 rounded-full bg-purple-500/20 flex items-center justify-center">
-                <span className="text-4xl text-purple-300">
+        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-4 sm:p-8 border border-white/10 mb-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6 gap-4 sm:gap-0">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-purple-500/20 flex items-center justify-center">
+                <span className="text-3xl sm:text-4xl text-purple-300">
                   {user?.name?.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-white mb-2">{user?.name}</h1>
-                <p className="text-purple-200/80 mb-4 break-all max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl truncate">{user?.email}</p>
-                
-                <div className="flex flex-wrap gap-4 mb-4">
+              <div className="text-center sm:text-left">
+                <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 break-words">{user?.name}</h1>
+                <p className="text-purple-200/80 mb-4 break-all max-w-full sm:max-w-xs md:max-w-md lg:max-w-xl xl:max-w-2xl truncate text-sm sm:text-base">{user?.email}</p>
+                <div className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-4 mb-4">
                   {profile?.location && (
-                    <div className="flex items-center text-purple-200/80">
-                      <MapPin className="h-4 w-4 mr-2" />
+                    <div className="flex items-center text-purple-200/80 text-xs sm:text-base">
+                      <MapPin className="h-4 w-4 mr-1 sm:mr-2" />
                       <span>{profile.location}</span>
                     </div>
                   )}
@@ -243,9 +242,9 @@ Average Rating: ${averageRating.toFixed(1)}/5
                       href={profile.github} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center text-purple-200/80 hover:text-purple-300"
+                      className="flex items-center text-purple-200/80 hover:text-purple-300 text-xs sm:text-base"
                     >
-                      <Github className="h-4 w-4 mr-2" />
+                      <Github className="h-4 w-4 mr-1 sm:mr-2" />
                       <span>GitHub</span>
                     </a>
                   )}
@@ -254,9 +253,9 @@ Average Rating: ${averageRating.toFixed(1)}/5
                       href={profile.linkedin} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center text-purple-200/80 hover:text-purple-300"
+                      className="flex items-center text-purple-200/80 hover:text-purple-300 text-xs sm:text-base"
                     >
-                      <Linkedin className="h-4 w-4 mr-2" />
+                      <Linkedin className="h-4 w-4 mr-1 sm:mr-2" />
                       <span>LinkedIn</span>
                     </a>
                   )}
@@ -268,21 +267,21 @@ Average Rating: ${averageRating.toFixed(1)}/5
 
         {/* About Section */}
         {profile && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 mb-8">
             {/* Bio and Skills */}
-            <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">About Me</h2>
-                <p className="text-purple-100/80">{profile.bio}</p>
+            <div className="lg:col-span-2 space-y-4 sm:space-y-8">
+              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">About Me</h2>
+                <p className="text-purple-100/80 text-sm sm:text-base">{profile.bio}</p>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">Skills & Expertise</h2>
+              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">Skills & Expertise</h2>
                 <div className="flex flex-wrap gap-2">
                   {profile.skills.map((skill, index) => (
                     <span 
                       key={index}
-                      className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm"
+                      className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs sm:text-sm"
                     >
                       {skill}
                     </span>
@@ -290,13 +289,13 @@ Average Rating: ${averageRating.toFixed(1)}/5
                 </div>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">Areas of Interest</h2>
+              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">Areas of Interest</h2>
                 <div className="flex flex-wrap gap-2">
                   {profile.interests.map((interest, index) => (
                     <span 
                       key={index}
-                      className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm"
+                      className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs sm:text-sm"
                     >
                       {interest}
                     </span>
@@ -306,36 +305,36 @@ Average Rating: ${averageRating.toFixed(1)}/5
             </div>
 
             {/* Education and Stats */}
-            <div className="space-y-8">
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">Education</h2>
-                <div className="space-y-4">
+            <div className="space-y-4 sm:space-y-8">
+              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">Education</h2>
+                <div className="space-y-2 sm:space-y-4">
                   {profile.education.map((edu, index) => (
-                    <div key={index} className="border-l-2 border-purple-500/30 pl-4">
-                      <h3 className="text-white font-medium">{edu.degree}</h3>
-                      <p className="text-purple-200/80">{edu.institution}</p>
-                      <p className="text-purple-200/60 text-sm">{edu.year}</p>
+                    <div key={index} className="border-l-2 border-purple-500/30 pl-2 sm:pl-4">
+                      <h3 className="text-white font-medium text-sm sm:text-base">{edu.degree}</h3>
+                      <p className="text-purple-200/80 text-xs sm:text-base">{edu.institution}</p>
+                      <p className="text-purple-200/60 text-xs sm:text-sm">{edu.year}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">Quick Stats</h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-4">Quick Stats</h2>
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="flex justify-between items-center text-xs sm:text-base">
                     <span className="text-purple-200/80">Projects Completed</span>
                     <span className="text-white font-semibold">
                       {projects.filter(p => p.status === 'completed').length}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-xs sm:text-base">
                     <span className="text-purple-200/80">Active Projects</span>
                     <span className="text-white font-semibold">
                       {projects.filter(p => p.status === 'in-progress').length}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-xs sm:text-base">
                     <span className="text-purple-200/80">Average Rating</span>
                     <span className="text-white font-semibold">
                       {projects
