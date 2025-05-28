@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Archive, Clock, CheckCircle2 } from 'lucide-react';
 import TaskCard from '../../components/TaskCard';
-import LoaderOne from '../../components/ui/loader-one';
+import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { fetchTasks, deleteTask } from '../../utils/api';
 import { isPastDeadline } from '../../utils/helpers';
 import { cn } from '../../utils/helpers';
@@ -335,7 +335,7 @@ function StartupDashboard() {
       {/* Tasks grid */}
       {isLoading ? (
         <div className="flex justify-center py-16 sm:py-20">
-          <LoaderOne />
+          <LoadingSpinner size="large" />
         </div>
       ) : displayedTasks.length > 0 ? (
         <div className="w-full max-w-screen-lg mx-auto">

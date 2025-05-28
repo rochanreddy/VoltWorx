@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import LoaderOne from './ui/loader-one';
+import LoadingSpinner from './ui/LoadingSpinner';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ function ProtectedRoute({ children, userType }: ProtectedRouteProps) {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <LoaderOne />
+        <LoadingSpinner size="large" />
       </div>
     );
   }

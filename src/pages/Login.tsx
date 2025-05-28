@@ -2,7 +2,7 @@ import { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Briefcase as BriefcaseBusiness } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import LoaderOne from '../components/ui/loader-one';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { cn } from '../utils/helpers';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
@@ -294,7 +294,7 @@ function Login() {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    <LoaderOne />
+                    <LoadingSpinner size="small" className="mr-2" />
                   ) : null}
                   Sign in
                 </button>

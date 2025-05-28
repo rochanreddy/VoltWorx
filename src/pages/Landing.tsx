@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, Target, Award, Users, Sparkles, CheckCircle, User } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
-import LoaderOne from '../components/ui/loader-one';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -171,7 +171,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
+              Choose the work you love — we’ll securely transfer the reward to the selected student after confirmation.
               </p>
             </div>
           </div>
@@ -251,7 +251,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
+                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I’m proud to post."
               </p>
             </div>
             
@@ -284,7 +284,7 @@ function Landing() {
           
           {isLoading ? (
             <div className="flex justify-center py-20">
-              <LoaderOne />
+              <LoadingSpinner size="large" />
             </div>
           ) : featuredTasks.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2">

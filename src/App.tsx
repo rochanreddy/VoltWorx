@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
-import LoaderOne from './components/ui/loader-one';
+import LoadingSpinner from './components/ui/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
 import { useEffect } from 'react';
 
@@ -48,7 +48,7 @@ function App() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <LoaderOne />
+        <LoadingSpinner size="large" />
       </div>
     );
   }
@@ -57,7 +57,7 @@ function App() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <LoaderOne />
+          <LoadingSpinner size="large" />
         </div>
       }
     >
