@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import GlowingEffect from '../components/GlowingEffect';
+import { GlowingEffect } from '../components/ui/glowing-effect';
 
 function Landing() {
   const [featuredTasks, setFeaturedTasks] = useState([]);
@@ -148,12 +148,14 @@ function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -174,12 +176,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -200,12 +204,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -241,12 +247,14 @@ function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -267,12 +275,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -293,12 +303,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -334,12 +346,14 @@ function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -360,12 +374,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
@@ -386,12 +402,14 @@ function Landing() {
 
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
               <GlowingEffect
-                spread={40}
+                spread={120}
+                blur={60}
                 glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
+                proximity={256}
+                inactiveZone={0.2}
                 borderWidth={3}
+                className="!shadow-[0_0_80px_30px_rgba(168,85,247,0.7)]"
+                disabled={false}
               />
               <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
                 <div className="relative flex flex-1 flex-col justify-between gap-3">
