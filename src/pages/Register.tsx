@@ -2,7 +2,7 @@ import { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Briefcase as BriefcaseBusiness, Plus, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
+import LoaderOne from '../components/ui/loader-one';
 import { SKILLS } from '../utils/constants';
 import { cn } from '../utils/helpers';
 import { GoogleLogin } from '@react-oauth/google';
@@ -657,7 +657,7 @@ function Register() {
                   disabled={isSubmitting || !!passwordError || !!skillsError}
                 >
                   {isSubmitting ? (
-                    <LoadingSpinner size="small" className="mr-2" />
+                    <LoaderOne />
                   ) : null}
                   Create Account
                 </button>

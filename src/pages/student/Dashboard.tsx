@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Archive, Clock, CheckCircle2, User, Settings, Filter, Github } from 'lucide-react';
 import TaskCard from '../../components/TaskCard';
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import LoaderOne from '../../components/ui/loader-one';
 import { fetchTasks, joinTask, submitTask } from '../../utils/api';
 import { useAuth } from '../../context/AuthContext';
 import { hasUserJoinedTask, isPastDeadline } from '../../utils/helpers';
@@ -265,7 +265,7 @@ function StudentDashboard() {
       {/* Tasks grid */}
       {isLoading ? (
         <div className="flex justify-center py-20">
-          <LoadingSpinner size="large" />
+          <LoaderOne />
         </div>
       ) : displayedTasks.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">

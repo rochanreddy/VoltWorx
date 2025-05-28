@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Calendar, Users, Clock, Link as LinkIcon, ExternalLink, Award } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { fetchTaskById, joinTask, submitProject, markTopPerformer } from '../utils/api';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
+import LoaderOne from '../components/ui/loader-one';
 import { formatDate, getRemainingSlots, hasUserJoinedTask, hasUserSubmitted } from '../utils/helpers';
 import { cn } from '../utils/helpers';
 
@@ -98,7 +98,7 @@ function TaskDetails() {
   if (isLoading) {
     return (
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center">
-        <LoadingSpinner size="large" />
+        <LoaderOne />
       </div>
     );
   }
@@ -214,7 +214,7 @@ function TaskDetails() {
                     )}
                   >
                     {isJoining ? (
-                      <LoadingSpinner size="small" className="mr-2" />
+                      <LoaderOne />
                     ) : null}
                     {remainingSlots > 0 ? "Join This Project" : "No Spots Available"}
                   </button>
@@ -252,7 +252,7 @@ function TaskDetails() {
                             className="ml-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors"
                           >
                             {isSubmitting ? (
-                              <LoadingSpinner size="small" className="mr-2" />
+                              <LoaderOne />
                             ) : null}
                             {userHasSubmitted ? 'Update Submission' : 'Submit'}
                           </button>
@@ -322,7 +322,7 @@ function TaskDetails() {
                           className="px-4 py-2 bg-purple-600/20 text-purple-300 rounded-lg hover:bg-purple-600/30 border border-purple-500/30 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                         >
                           {isMarkingTop ? (
-                            <LoadingSpinner size="small" className="mr-2" />
+                            <LoaderOne />
                           ) : (
                             <Award className="h-4 w-4 mr-1" />
                           )}

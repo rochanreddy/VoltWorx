@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Plus, X, Calendar } from 'lucide-react';
 import { createTask } from '../../utils/api';
 import { SKILLS } from '../../utils/constants';
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import LoaderOne from '../../components/ui/LoaderOne';
 import axios from 'axios';
 
 // Declare Cashfree types
@@ -391,7 +391,7 @@ function CreateTask() {
                 >
                   {isSubmitting ? (
                     <div className="flex items-center">
-                      <LoadingSpinner className="w-5 h-5 mr-2" />
+                      <LoaderOne />
                       Processing...
                     </div>
                   ) : (
