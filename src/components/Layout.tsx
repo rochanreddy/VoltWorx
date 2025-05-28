@@ -3,14 +3,27 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useAuth } from '../context/AuthContext';
 import { Toaster } from 'react-hot-toast';
+import { BackgroundGradientAnimation } from './ui/background-gradient-animation';
 
 function Layout() {
   useAuth(); // Ensure the hook is called if needed for side effects
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      <div className="relative">
+    <BackgroundGradientAnimation
+      gradientBackgroundStart="rgb(17, 24, 39)"
+      gradientBackgroundEnd="rgb(88, 28, 135)"
+      firstColor="18, 113, 255"
+      secondColor="221, 74, 255"
+      thirdColor="100, 220, 255"
+      fourthColor="200, 50, 50"
+      fifthColor="180, 180, 50"
+      pointerColor="140, 100, 255"
+      size="80%"
+      blendingValue="hard-light"
+      interactive={true}
+      containerClassName="fixed inset-0 -z-10"
+    >
+      <div className="relative min-h-screen">
         <Navbar />
         <main className="flex-grow">
           <Outlet />
@@ -28,7 +41,7 @@ function Layout() {
           }}
         />
       </div>
-    </div>
+    </BackgroundGradientAnimation>
   );
 }
 
