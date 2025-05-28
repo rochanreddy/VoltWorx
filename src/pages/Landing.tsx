@@ -6,6 +6,8 @@ import LoadingSpinner from '../components/ui/LoadingSpinner';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { TextRotate } from '../components/ui/text-rotate';
+import { LayoutGroup, motion } from 'motion/react';
 
 function Landing() {
   const [featuredTasks, setFeaturedTasks] = useState([]);
@@ -64,7 +66,22 @@ function Landing() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400 font-display tracking-tight">
-                Real Work. Real Skills. Real Impact.
+                <LayoutGroup>
+                  <motion.span layout>Real </motion.span>
+                  <TextRotate
+                    texts={["Work.", "Skills.", "Impact."]}
+                    mainClassName="inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400"
+                    staggerFrom="last"
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: "-120%", opacity: 0 }}
+                    staggerDuration={0.025}
+                    splitLevelClassName="overflow-hidden"
+                    elementLevelClassName="bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400"
+                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                    rotationInterval={2000}
+                  />
+                </LayoutGroup>
               </h1>
               <p className="text-xl text-purple-200/90 font-medium tracking-wide leading-relaxed">
                 VoltWorx connects startups with top student talent — pay only for what impresses you.
@@ -171,7 +188,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Choose the work you love — we’ll securely transfer the reward to the selected student after confirmation.
+              Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
               </p>
             </div>
           </div>
@@ -251,7 +268,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I’m proud to post."
+                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
               </p>
             </div>
             
