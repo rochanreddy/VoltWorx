@@ -17,10 +17,7 @@
 
 @layer base {
   body {
-    @apply min-h-screen text-gray-100;
-    background:
-      radial-gradient(ellipse 60% 50% at 60% 40%, rgba(168,85,247,0.45) 0%, rgba(10,14,35,0.0) 80%),
-      #0a0e23;
+    @apply bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 min-h-screen text-gray-100;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold text-gray-900;

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Zap, Target, Award, Users, Sparkles, CheckCircle, User } from 'lucide-react';
+import { ArrowRight, Zap, Target, Award, Users, Sparkles, CheckCircle, User, Shield } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import InteractiveBackground from '../components/InteractiveBackground';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import GlowingEffect from '../components/GlowingEffect';
 
 function Landing() {
   const [featuredTasks, setFeaturedTasks] = useState([]);
@@ -55,7 +56,7 @@ function Landing() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <InteractiveBackground />
       {/* Hero Section */}
       <section className="relative overflow-hidden">
@@ -145,34 +146,82 @@ function Landing() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Zap className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Zap className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      1. Post Your Task
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      Startups post tasks like logos, landing pages, and more.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">1. Post Your Task</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Startups post tasks like logos, landing pages, and more.
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Users className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      2. Students Apply
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      Talented students submit their work before the deadline.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">2. Students Submit Work</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Talented students submit their work for your review.
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Award className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Award className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      3. Pick & Pay
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
-              </p>
             </div>
           </div>
         </div>
@@ -190,40 +239,88 @@ function Landing() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Users className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Keep 90% of your earnings
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      We only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Keep 90% of your earnings</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-               we only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Award className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Shield className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Secure & Protected
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      Your work and payments are protected by our secure platform and clear guidelines.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">100% Refund</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Including platform Fee will be refunded if no work is selected
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Sparkles className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <Sparkles className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Build Your Portfolio
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
+                      Showcase your work to potential employers and build a strong portfolio.
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Students Get Paid + Build Portfolio</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Earn money while building your professional portfolio.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Student Success Stories Section */}
       <section className="py-32 relative">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
@@ -235,34 +332,82 @@ function Landing() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <User className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Mithresh
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground italic">
+                      "VoltWorx opened doors to real-world projects and boosted my confidence."
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Mithresh</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx opened doors to real-world projects and boosted my confidence."
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <User className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Dhanush
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground italic">
+                      "Unlike college assignments, these projects actually matter. I got shortlisted for an internship because of my VoltWorx project!"
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
-              </p>
             </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
+
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6">
+                <div className="relative flex flex-1 flex-col justify-between gap-3">
+                  <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
+                    <User className="h-8 w-8 text-purple-300" />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
+                      Sarah
+                    </h3>
+                    <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground italic">
+                      "The real-world experience I gained through VoltWorx helped me land my dream job in tech!"
+                    </h2>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">Dhanush</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "Unlike college assignments, these projects actually matter. I got shortlisted for an internship because of my VoltWorx project!"
-              </p>
             </div>
           </div>
         </div>
