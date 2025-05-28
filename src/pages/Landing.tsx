@@ -55,7 +55,7 @@ function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div className="min-h-screen">
       <InteractiveBackground />
       {/* Hero Section */}
       <section className="relative overflow-hidden">
@@ -171,7 +171,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Choose the work you love — we’ll securely transfer the reward to the selected student after confirmation.
+              Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
               </p>
             </div>
           </div>
@@ -251,7 +251,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I’m proud to post."
+                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
               </p>
             </div>
             
