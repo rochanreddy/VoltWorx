@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const rotatingWords = ['Work', 'Skills', 'Impact'];
 
@@ -14,6 +15,8 @@ const features = [
 
 const HeroSection = () => {
   const [index, setIndex] = useState(0);
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +24,18 @@ const HeroSection = () => {
     }, 2200); // 2.2 seconds
     return () => clearInterval(interval);
   }, []);
+
+  const handleExploreClick = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    } else if (user?.role === 'startup') {
+      navigate('/startup/dashboard');
+    } else if (user?.role === 'student') {
+      navigate('/student/dashboard');
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <section className="relative py-24 overflow-hidden bg-transparent">
@@ -102,12 +117,12 @@ const HeroSection = () => {
                   </li>
                 ))}
               </ul>
-              <Link
-                to="#how-it-works"
+              <button
+                onClick={handleExploreClick}
                 className="mt-4 w-full inline-block text-center px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 transition-colors text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
               >
                 Explore How It Works
-              </Link>
+              </button>
             </div>
           </div>
         </div>
