@@ -66,7 +66,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none select-none" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8">
           {/* Left: Animated headline, subtext, buttons */}
           <div className="flex-1 w-full max-w-3xl text-center lg:text-left flex flex-col items-center lg:items-start justify-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 font-display tracking-tight flex flex-wrap items-center justify-center lg:justify-start h-20 md:h-24">
