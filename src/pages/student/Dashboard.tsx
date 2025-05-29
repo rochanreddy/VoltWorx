@@ -165,6 +165,9 @@ function StudentDashboard() {
             <p className="text-sm text-blue-300">
               After the deadline of a task, check your email (including spam folder) within 24 hours to know if you've been selected.
             </p>
+            <p className="text-sm text-blue-300">
+            Contacting startups before the project deadline is strictly prohibited and may lead to disqualification or a permanent ban.
+            </p>
           </div>
 
           {/* Category Filter and Show All/Matched Toggle */}
