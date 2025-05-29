@@ -181,7 +181,7 @@ function Landing() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl font-bold mb-6 font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400">Key Features</h2>
+            <h2 className="text-4xl font-bold mb-6 font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-pink-500 to-pink-400">Key Features</h2>
             <p className="text-xl text-purple-200/90 font-medium tracking-wide leading-relaxed">
               Discover the unique features that make VoltWorx the perfect platform for students and startups.
             </p>
@@ -232,7 +232,7 @@ function Landing() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl font-bold mb-6 font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400">Student Success Stories</h2>
+            <h2 className="text-4xl font-bold mb-6 font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-pink-500 to-pink-400">Student Success Stories</h2>
             <p className="text-xl text-purple-200/90 font-medium tracking-wide leading-relaxed">
               Hear from our students about their transformative experiences with VoltWorx.
             </p>
