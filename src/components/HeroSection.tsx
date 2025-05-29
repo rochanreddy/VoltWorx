@@ -88,7 +88,7 @@ const HeroSection = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-10 font-medium max-w-xl mx-auto lg:mx-0">
-              VoltWorx bridges startups and students through merit-based micro-projects—outcomes over resumes, always.
+            VoltWorx bridges startups and students through real-world projects—where results speak louder than resumes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
