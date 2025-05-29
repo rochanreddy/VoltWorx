@@ -43,41 +43,8 @@ function Landing() {
   }, [ctaInView, ctaControls]);
 
   const sectionVariants = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.1,
-        type: 'spring',
-        bounce: 0.22,
-        damping: 18,
-        stiffness: 120,
-      },
-    },
-  };
-
-  // Staggered card animation for cards inside sections
-  const cardContainerVariants = {
-    visible: {
-      transition: {
-        staggerChildren: 0.22,
-      },
-    },
-  };
-  const cardVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.9,
-        type: 'spring',
-        bounce: 0.18,
-        damping: 16,
-        stiffness: 110,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
   };
 
   useEffect(() => {
@@ -220,13 +187,8 @@ function Landing() {
             </p>
           </div>
           
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={cardContainerVariants}
-            initial="hidden"
-            animate={featuresControls}
-          >
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -234,8 +196,9 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
                we only charge a small 10% platform fee to keep VoltWorx running and improving, with no hidden charges.
               </p>
-            </motion.div>
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <Award className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -243,8 +206,9 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
               Including platform Fee will be refunded if no work is selected
               </p>
-            </motion.div>
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <Sparkles className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -252,8 +216,8 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
                 Earn money while building your professional portfolio.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -274,13 +238,8 @@ function Landing() {
             </p>
           </div>
           
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={cardContainerVariants}
-            initial="hidden"
-            animate={testimonialsControls}
-          >
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -288,8 +247,9 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
                 "VoltWorx opened doors to real-world projects and boosted my confidence."
               </p>
-            </motion.div>
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -297,8 +257,9 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
                 "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
               </p>
-            </motion.div>
-            <motion.div variants={cardVariants} className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
               <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
                 <User className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
               </div>
@@ -306,8 +267,8 @@ function Landing() {
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
                 "Unlike college assignments, these projects actually matter. I got shortlisted for an internship because of my VoltWorx project!"
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -336,21 +297,16 @@ function Landing() {
               <LoadingSpinner size="large" />
             </div>
           ) : featuredTasks.length > 0 ? (
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2"
-              variants={cardContainerVariants}
-              initial="hidden"
-              animate={projectsControls}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
               {featuredTasks.map((task: any) => (
-                <motion.div key={task._id} variants={cardVariants} className="flex">
+                <div key={task._id} className="flex">
                   <TaskCard
                     task={task}
                     showJoinButton={isAuthenticated && user?.role === 'student'}
                   />
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           ) : (
             <div className="text-center py-20">
               <p className="text-purple-100/80 mb-6">No projects available at the moment.</p>
