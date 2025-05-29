@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, Target, Award, Users, Sparkles, CheckCircle, User } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
@@ -7,12 +7,45 @@ import InteractiveBackground from '../components/InteractiveBackground';
 import HowItWorks from '../components/HowItWorks';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 function Landing() {
   const [featuredTasks, setFeaturedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
+
+  // Animation refs and controls for each section
+  const featuresRef = useRef(null);
+  const testimonialsRef = useRef(null);
+  const projectsRef = useRef(null);
+  const ctaRef = useRef(null);
+  const featuresInView = useInView(featuresRef, { once: true, margin: '-100px' });
+  const testimonialsInView = useInView(testimonialsRef, { once: true, margin: '-100px' });
+  const projectsInView = useInView(projectsRef, { once: true, margin: '-100px' });
+  const ctaInView = useInView(ctaRef, { once: true, margin: '-100px' });
+  const featuresControls = useAnimation();
+  const testimonialsControls = useAnimation();
+  const projectsControls = useAnimation();
+  const ctaControls = useAnimation();
+
+  useEffect(() => {
+    if (featuresInView) featuresControls.start('visible');
+  }, [featuresInView, featuresControls]);
+  useEffect(() => {
+    if (testimonialsInView) testimonialsControls.start('visible');
+  }, [testimonialsInView, testimonialsControls]);
+  useEffect(() => {
+    if (projectsInView) projectsControls.start('visible');
+  }, [projectsInView, projectsControls]);
+  useEffect(() => {
+    if (ctaInView) ctaControls.start('visible');
+  }, [ctaInView, ctaControls]);
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
+  };
 
   useEffect(() => {
     const loadFeaturedTasks = async () => {
@@ -138,7 +171,13 @@ function Landing() {
       <HowItWorks />
 
       {/* Key Features Section */}
-      <section className="py-32 relative">
+      <motion.section
+        ref={featuresRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={featuresControls}
+        className="py-32 relative"
+      >
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -180,10 +219,16 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonials Section */}
-      <section className="py-32 relative">
+      <motion.section
+        ref={testimonialsRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={testimonialsControls}
+        className="py-32 relative"
+      >
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -225,10 +270,16 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Featured projects section */}
-      <section className="py-32 relative">
+      <motion.section
+        ref={projectsRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={projectsControls}
+        className="py-32 relative"
+      >
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="flex justify-between items-center mb-12">
@@ -272,10 +323,16 @@ function Landing() {
             </div>
           )}
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA section */}
-      <section className="py-32 relative">
+      <motion.section
+        ref={ctaRef}
+        variants={sectionVariants}
+        initial="hidden"
+        animate={ctaControls}
+        className="py-32 relative"
+      >
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
@@ -308,7 +365,7 @@ function Landing() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
