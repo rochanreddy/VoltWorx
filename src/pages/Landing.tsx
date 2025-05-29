@@ -4,6 +4,7 @@ import { ArrowRight, Zap, Target, Award, Users, Sparkles, CheckCircle, User } fr
 import TaskCard from '../components/TaskCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import InteractiveBackground from '../components/InteractiveBackground';
+import HowItWorks from '../components/HowItWorks';
 import { fetchTasks } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -134,49 +135,7 @@ function Landing() {
       </section>
 
       {/* How it works section */}
-      <section id="how-it-works" className="py-32 relative">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-        <div className="container mx-auto px-4 relative">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl font-bold mb-6 font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-100 via-purple-300 to-purple-400">How VoltWorx Works</h2>
-            <p className="text-xl text-purple-200/90 font-medium tracking-wide leading-relaxed">
-              Our platform connects startups and students in a simple, effective process that benefits both parties.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Zap className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">1. Post Your Task</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Startups post tasks like logos, landing pages, and more.
-              </p>
-            </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">2. Students Submit Work</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-                Talented students submit their work for your review.
-              </p>
-            </div>
-            
-            <div className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:scale-[1.02] hover:bg-white/10 group">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                <Award className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors duration-300" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">3. Pick & Pay</h3>
-              <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed">
-              Choose the work you love — we’ll securely transfer the reward to the selected student after confirmation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorks />
 
       {/* Key Features Section */}
       <section className="py-32 relative">
@@ -251,7 +210,7 @@ function Landing() {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-purple-100 text-center group-hover:text-purple-200 transition-colors duration-300 font-display tracking-tight">hareesh</h3>
               <p className="text-purple-200/90 text-center group-hover:text-purple-100 transition-colors duration-300 font-medium tracking-wide leading-relaxed italic">
-                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I’m proud to post."
+                "VoltWorx helped me build my GitHub with real-world projects. My LinkedIn finally has something I'm proud to post."
               </p>
             </div>
             
