@@ -24,8 +24,6 @@ const HeroSection = () => {
 
   return (
     <section className="relative py-24 overflow-hidden bg-transparent">
-      {/* Background overlays and blobs for seamless blending, copied from HowItWorks */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-purple-900/10 to-gray-900/50" />
       <motion.div 
         className="absolute w-96 h-96 -top-48 -left-48 bg-purple-400/10 rounded-full blur-3xl pointer-events-none select-none"
         animate={{
