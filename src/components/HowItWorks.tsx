@@ -50,16 +50,16 @@ const HowItWorks = () => {
 
   return (
     <section id="how-it-works" className="relative py-24 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900" />
+      {/* Background gradient - adjusted to be lighter */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-purple-900/10 to-gray-900/50" />
       
-      {/* Animated background elements */}
+      {/* Animated background elements - adjusted colors and opacity */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute w-96 h-96 -top-48 -left-48 bg-purple-500/20 rounded-full blur-3xl"
+          className="absolute w-96 h-96 -top-48 -left-48 bg-purple-400/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.4, 0.3],
+            opacity: [0.2, 0.3, 0.2],
           }}
           transition={{
             duration: 8,
@@ -68,10 +68,10 @@ const HowItWorks = () => {
           }}
         />
         <motion.div 
-          className="absolute w-96 h-96 -bottom-48 -right-48 bg-blue-500/20 rounded-full blur-3xl"
+          className="absolute w-96 h-96 -bottom-48 -right-48 bg-blue-400/10 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.3, 0.4],
+            opacity: [0.3, 0.2, 0.3],
           }}
           transition={{
             duration: 8,
@@ -92,7 +92,7 @@ const HowItWorks = () => {
           <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 mb-6">
             How VoltWorx Works
           </h2>
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto">
             A simple three-step process to connect talented students with innovative startups
           </p>
         </motion.div>
@@ -104,8 +104,8 @@ const HowItWorks = () => {
           animate={controls}
           className="relative"
         >
-          {/* Vertical timeline line - hidden on mobile */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-500/50 via-pink-500/50 to-purple-500/50" />
+          {/* Vertical timeline line - adjusted color */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-400/30 via-pink-400/30 to-purple-400/30" />
 
           {/* Step 1 */}
           <motion.div
@@ -115,19 +115,19 @@ const HowItWorks = () => {
             <div className="w-full md:w-1/2 md:pr-12 text-center md:text-right mb-8 md:mb-0">
               <motion.div 
                 variants={iconVariants}
-                className="bg-gray-900/80 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-xl hover:border-purple-500/50 transition-all duration-300 group"
+                className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-xl hover:border-purple-400/30 transition-all duration-300 group"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                  <Zap className="h-8 w-8 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-400/10 mb-6 group-hover:bg-purple-400/20 transition-all duration-300">
+                  <Zap className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors" />
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-purple-300 transition-colors">Post Your Task</h3>
-                <p className="text-gray-300 text-lg">Startups post tasks like logos, landing pages, and more.</p>
+                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-purple-200 transition-colors">Post Your Task</h3>
+                <p className="text-gray-200 text-lg">Startups post tasks like logos, landing pages, and more.</p>
                 <div className="mt-4 flex justify-center md:justify-end">
-                  <ArrowRight className="h-5 w-5 text-purple-400 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
+                  <ArrowRight className="h-5 w-5 text-purple-300 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
                 </div>
               </motion.div>
             </div>
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-purple-500 border-4 border-gray-900" />
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-purple-400 border-4 border-gray-900/50" />
             <div className="w-full md:w-1/2 md:pl-12" />
           </motion.div>
 
@@ -137,19 +137,19 @@ const HowItWorks = () => {
             className="relative mb-24 md:mb-32 flex flex-col md:flex-row items-center"
           >
             <div className="w-full md:w-1/2 md:pr-12" />
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-purple-500 border-4 border-gray-900" />
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-purple-400 border-4 border-gray-900/50" />
             <div className="w-full md:w-1/2 md:pl-12 text-center md:text-left">
               <motion.div 
                 variants={iconVariants}
-                className="bg-gray-900/80 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-xl hover:border-purple-500/50 transition-all duration-300 group"
+                className="bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-xl hover:border-purple-400/30 transition-all duration-300 group"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 mb-6 group-hover:bg-purple-500/30 transition-all duration-300">
-                  <Users className="h-8 w-8 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-400/10 mb-6 group-hover:bg-purple-400/20 transition-all duration-300">
+                  <Users className="h-8 w-8 text-purple-300 group-hover:text-purple-200 transition-colors" />
                 </div>
-                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-purple-300 transition-colors">Students Submit Work</h3>
-                <p className="text-gray-300 text-lg">Talented students submit their work for your review.</p>
+                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-purple-200 transition-colors">Students Submit Work</h3>
+                <p className="text-gray-200 text-lg">Talented students submit their work for your review.</p>
                 <div className="mt-4 flex justify-center md:justify-start">
-                  <ArrowRight className="h-5 w-5 text-purple-400 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
+                  <ArrowRight className="h-5 w-5 text-purple-300 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
                 </div>
               </motion.div>
             </div>
@@ -163,17 +163,17 @@ const HowItWorks = () => {
             <div className="w-full max-w-2xl">
               <motion.div 
                 variants={iconVariants}
-                className="bg-gray-900/80 backdrop-blur-xl p-8 md:p-10 rounded-2xl border border-white/10 shadow-xl hover:border-purple-500/50 transition-all duration-300 text-center group"
+                className="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-2xl border border-white/10 shadow-xl hover:border-purple-400/30 transition-all duration-300 text-center group"
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-purple-500/20 mb-8 group-hover:bg-purple-500/30 transition-all duration-300">
-                  <Award className="h-10 w-10 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-purple-400/10 mb-8 group-hover:bg-purple-400/20 transition-all duration-300">
+                  <Award className="h-10 w-10 text-purple-300 group-hover:text-purple-200 transition-colors" />
                 </div>
-                <h3 className="text-3xl font-semibold text-white mb-4 group-hover:text-purple-300 transition-colors">Pick & Pay</h3>
-                <p className="text-gray-300 text-lg md:text-xl">
+                <h3 className="text-3xl font-semibold text-white mb-4 group-hover:text-purple-200 transition-colors">Pick & Pay</h3>
+                <p className="text-gray-200 text-lg md:text-xl">
                   Choose the work you love — we'll securely transfer the reward to the selected student after confirmation.
                 </p>
                 <div className="mt-6 flex justify-center">
-                  <ArrowRight className="h-6 w-6 text-purple-400 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
+                  <ArrowRight className="h-6 w-6 text-purple-300 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300" />
                 </div>
               </motion.div>
             </div>
