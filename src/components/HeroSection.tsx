@@ -16,7 +16,35 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 overflow-hidden px-4">
-      <div className="w-full max-w-3xl mx-auto text-center flex flex-col items-center justify-center py-24">
+      {/* Grid SVG overlay for consistency */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none select-none" />
+      {/* Blurred blobs for depth, matching other sections */}
+      <motion.div 
+        className="absolute w-96 h-96 -top-48 -left-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none select-none"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute w-96 h-96 -bottom-48 -right-48 bg-blue-500/20 rounded-full blur-3xl pointer-events-none select-none"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.3, 0.2, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      <div className="w-full max-w-3xl mx-auto text-center flex flex-col items-center justify-center py-24 relative z-10">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 font-display tracking-tight flex flex-wrap items-center justify-center h-20 md:h-24">
           <span className="mr-4">Real</span>
           <span className="relative inline-block w-[110px] md:w-[140px] h-[1em] align-middle">
