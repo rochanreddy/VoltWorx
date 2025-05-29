@@ -15,7 +15,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-[#2D004D] to-[#4B0082] overflow-hidden px-4">
+    <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 overflow-hidden px-4">
       <div className="w-full max-w-3xl mx-auto text-center flex flex-col items-center justify-center py-24">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 font-display tracking-tight flex flex-wrap items-center justify-center h-20 md:h-24">
           <span className="mr-4">Real</span>
