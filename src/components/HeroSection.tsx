@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Lottie from 'lottie-react';
 
 const rotatingWords = ['Work', 'Skills', 'Impact'];
-
-const lottieUrl = 'https://lottie.host/fb27725d-824b-4ee3-8a24-b8731b339945/Ynxc2yx3N1.lottie';
 
 const HeroSection = () => {
   const [index, setIndex] = useState(0);
@@ -47,48 +44,41 @@ const HeroSection = () => {
         }}
       />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none select-none" />
-      <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between py-24 relative z-10 px-4 sm:px-8 gap-8">
-        {/* Left: Text content */}
-        <div className="flex-1 text-center sm:text-left flex flex-col items-center sm:items-start justify-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 font-display tracking-tight flex flex-wrap items-center justify-center sm:justify-start h-20 md:h-24">
-            <span className="mr-2 sm:mr-4">Real</span>
-            <span className="relative inline-block w-[110px] md:w-[140px] h-[1em] align-middle">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={rotatingWords[index]}
-                  initial={{ rotateX: 90, opacity: 0 }}
-                  animate={{ rotateX: 0, opacity: 1 }}
-                  exit={{ rotateX: -90, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute left-0 right-0 top-0 text-purple-300"
-                  style={{ willChange: 'transform' }}
-                >
-                  {rotatingWords[index]}
-                </motion.span>
-              </AnimatePresence>
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 mb-10 font-medium max-w-xl">
-            VoltWorx connects startups with top student talent — pay only for what impresses you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
-            <Link
-              to="/register"
-              className="px-8 py-4 rounded-lg font-bold text-white bg-gradient-to-r from-purple-600 to-purple-500 shadow-lg hover:from-purple-700 hover:to-purple-600 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-            >
-              I'm a Startup
-            </Link>
-            <Link
-              to="/register"
-              className="px-8 py-4 rounded-lg font-bold text-white border-2 border-white bg-transparent hover:bg-white/10 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-            >
-              I'm a Student
-            </Link>
-          </div>
-        </div>
-        {/* Right: Lottie animation (hidden on mobile) */}
-        <div className="hidden sm:flex flex-1 items-center justify-center">
-          <Lottie animationData={lottieUrl} loop={true} style={{ width: 320, height: 320 }} />
+      <div className="w-full max-w-3xl mx-auto text-center flex flex-col items-center justify-center py-24 relative z-10">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 font-display tracking-tight flex flex-wrap items-center justify-center h-20 md:h-24">
+          <span className="mr-2 sm:mr-4">Real</span>
+          <span className="relative inline-block w-[110px] md:w-[140px] h-[1em] align-middle">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={rotatingWords[index]}
+                initial={{ rotateX: 90, opacity: 0 }}
+                animate={{ rotateX: 0, opacity: 1 }}
+                exit={{ rotateX: -90, opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute left-0 right-0 top-0 text-purple-300"
+                style={{ willChange: 'transform' }}
+              >
+                {rotatingWords[index]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </h1>
+        <p className="text-lg md:text-xl text-white/80 mb-10 font-medium max-w-xl mx-auto">
+          VoltWorx connects startups with top student talent — pay only for what impresses you.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            to="/register"
+            className="px-8 py-4 rounded-lg font-bold text-white bg-gradient-to-r from-purple-600 to-purple-500 shadow-lg hover:from-purple-700 hover:to-purple-600 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            I'm a Startup
+          </Link>
+          <Link
+            to="/register"
+            className="px-8 py-4 rounded-lg font-bold text-white border-2 border-white bg-transparent hover:bg-white/10 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            I'm a Student
+          </Link>
         </div>
       </div>
     </section>
