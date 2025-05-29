@@ -49,39 +49,8 @@ const HowItWorks = () => {
   };
 
   return (
-    <section id="how-it-works" className="relative py-24 overflow-hidden">
-      {/* Background gradient - adjusted to be lighter */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-purple-900/10 to-gray-900/50" />
-      
-      {/* Animated background elements - adjusted colors and opacity */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute w-96 h-96 -top-48 -left-48 bg-purple-400/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute w-96 h-96 -bottom-48 -right-48 bg-blue-400/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.2, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
-      </div>
-
+    <section id="how-it-works" className="relative py-24 overflow-hidden bg-transparent">
+      {/* Removed custom background and blobs for seamless blending */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -104,8 +73,8 @@ const HowItWorks = () => {
           animate={controls}
           className="relative"
         >
-          {/* Vertical timeline line - adjusted color */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-400/30 via-pink-400/30 to-purple-400/30" />
+          {/* Timeline line - keep subtle and only on desktop */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-400/20 via-pink-400/20 to-purple-400/20" />
 
           {/* Step 1 */}
           <motion.div
