@@ -163,10 +163,10 @@ function StudentDashboard() {
           {/* Note about checking email */}
           <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
             <p className="text-sm text-blue-300">
-              After the deadline of a task, check your email (including spam folder) within 24 hours to know if you've been selected.
+             1. After the deadline of a task, check your email (including spam folder) within 24 hours to know if you've been selected.
             </p>
             <p className="text-sm text-blue-300">
-            Contacting startups before the project deadline is strictly prohibited and may lead to disqualification or a permanent ban.
+             2. Contacting startups before the project deadline is strictly prohibited and may lead to disqualification or a permanent ban.
             </p>
           </div>
 
