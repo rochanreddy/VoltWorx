@@ -112,6 +112,14 @@ router.post('/:taskId/join', auth, studentOnly, async (req, res) => {
 // Submit a task
 router.post('/:taskId/submit', auth, studentOnly, async (req, res) => {
   try {
+    console.log('--- SUBMIT ENDPOINT HIT ---');
+    console.log('User:', req.user);
+    console.log('Body:', req.body);
+
+    if (!req.body || Object.keys(req.body).length === 0) {
+      console.error('Request body is empty!');
+    }
+
     const { link } = req.body;
     if (!link) {
       return res.status(400).json({ message: 'A link is required' });
@@ -122,7 +130,8 @@ router.post('/:taskId/submit', auth, studentOnly, async (req, res) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    if (!task.applicants.includes(req.user._id)) {
+    // Fix ObjectId comparison for applicants
+    if (!task.applicants.some(applicant => applicant.toString() === req.user._id.toString())) {
       return res.status(400).json({ message: 'You have not joined this task' });
     }
 
@@ -150,7 +159,7 @@ router.post('/:taskId/submit', auth, studentOnly, async (req, res) => {
     res.json(task);
   } catch (error) {
     console.error('Error submitting task:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: error.message, stack: error.stack });
   }
 });
 

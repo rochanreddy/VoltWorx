@@ -63,6 +63,7 @@ function TaskDetails() {
     e.preventDefault();
     if (!projectLink) return;
 
+    console.log('Submitting project with:', { link: projectLink });
     try {
       setIsSubmitting(true);
       await submitProject(taskId!, { link: projectLink });
