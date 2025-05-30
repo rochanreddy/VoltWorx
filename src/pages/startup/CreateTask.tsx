@@ -323,7 +323,7 @@ function CreateTask() {
                     className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => (
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 , 25 ,30 ,35 , 40 , 45 , 50 ].map((num) => (
                       <option key={num} value={num} className="bg-gray-800">
                         {num} {num === 1 ? 'student' : 'students'}
                       </option>
