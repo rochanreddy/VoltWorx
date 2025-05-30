@@ -21,7 +21,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % rotatingWords.length);
-    }, 2200); // 2.2 seconds
+    }, 1800); // 1.8 seconds
     return () => clearInterval(interval);
   }, []);
 
