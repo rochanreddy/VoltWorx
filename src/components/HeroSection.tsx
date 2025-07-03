@@ -66,18 +66,34 @@ const HeroSection = () => {
             VoltWorx bridges startups and students through real-world projects—where results speak louder than resumes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link
-                to="/register"
+              <button
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate('/register');
+                  } else if (user?.role === 'startup') {
+                    navigate('/startup/dashboard');
+                  } else {
+                    navigate('/login');
+                  }
+                }}
                 className="px-8 py-4 rounded-lg font-bold text-white bg-gradient-to-r from-purple-600 to-purple-500 shadow-lg hover:from-purple-700 hover:to-purple-600 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
               >
                 I'm a Startup
-              </Link>
-              <Link
-                to="/register"
+              </button>
+              <button
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate('/register');
+                  } else if (user?.role === 'student') {
+                    navigate('/student/dashboard');
+                  } else {
+                    navigate('/login');
+                  }
+                }}
                 className="px-8 py-4 rounded-lg font-bold text-white border-2 border-white bg-transparent hover:bg-white/10 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
               >
                 I'm a Student
-              </Link>
+              </button>
             </div>
           </div>
           {/* Right: Why VoltWorx Stands Out Card */}
