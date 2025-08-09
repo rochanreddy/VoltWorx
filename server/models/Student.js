@@ -43,6 +43,31 @@ const studentSchema = new mongoose.Schema({
     type: String,
     trim: true,
     default: ''
+  },
+  educationLevel: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  year: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  collegeName: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  linkedIn: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  rollNumber: {
+    type: String,
+    trim: true,
+    default: ''
   }
 }, {
   timestamps: true,

@@ -30,14 +30,25 @@ router.post('/register', async (req, res) => {
         email,
         password,
         skills: skills || [],
-        phone: req.body.phone || ''
+        phone: req.body.phone || '',
+        educationLevel: req.body.educationLevel || '',
+        year: req.body.year || '',
+        collegeName: req.body.collegeName || '',
+        linkedIn: req.body.linkedIn || '',
+        rollNumber: req.body.rollNumber || ''
       });
     } else if (role === 'startup') {
       user = new Startup({
         name,
         email,
         password,
-        company: company || ''
+        company: company || '',
+        phone: req.body.phone || '',
+        description: req.body.description || '',
+        startupStage: req.body.startupStage || '',
+        startupAge: req.body.startupAge || '',
+        startupIndiaRegistered: req.body.startupIndiaRegistered || '',
+        linkedIn: req.body.linkedIn || ''
       });
     } else {
       return res.status(400).json({ message: 'Invalid role' });

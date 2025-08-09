@@ -388,13 +388,12 @@ function Register() {
 
                   <div>
                     <label htmlFor="linkedIn" className="block text-sm font-medium text-gray-300 mb-1">
-                      LinkedIn Profile
+                      LinkedIn Profile <span className="text-gray-400 text-xs">(optional)</span>
                     </label>
                     <input
                       id="linkedIn"
                       name="linkedIn"
                       type="url"
-                      required
                       value={formData.linkedIn}
                       onChange={handleChange}
                       className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
@@ -566,7 +565,7 @@ function Register() {
 
                   <div>
                     <label htmlFor="linkedIn" className="block text-sm font-medium text-gray-300 mb-1">
-                      LinkedIn Profile
+                      LinkedIn Profile <span className="text-gray-400 text-xs">(optional)</span>
                     </label>
                     <input
                       id="linkedIn"

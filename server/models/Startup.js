@@ -23,6 +23,36 @@ const startupSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  phone: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  description: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  startupStage: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  startupAge: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  startupIndiaRegistered: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  linkedIn: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   role: {
     type: String,
     default: 'startup'
