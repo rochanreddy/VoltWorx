@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const rotatingWords = ['Work', 'Skills', 'Impact'];
 
 const features = [
-  { emoji: '🚀', text: 'Real micro-projects, real outcomes' },
-  { emoji: '🎯', text: 'Limit student slots for focus' },
-  { emoji: '🏆', text: 'Top work gets recognized + rewarded' },
-  { emoji: '💡', text: 'Every student gains experience' },
-  { emoji: '🤝', text: 'No hiring – pure collaboration' },
+  { text: 'Real micro-projects, real outcomes' },
+  { text: 'Limit student slots for focus' },
+  { text: 'Top work gets recognized + rewarded' },
+  { text: 'Every student gains experience' },
+  { text: 'No hiring – pure collaboration' },
 ];
 
 const HeroSection = () => {
   const [index, setIndex] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
@@ -24,6 +26,13 @@ const HeroSection = () => {
     }, 1700); // 1.7 seconds
     return () => clearInterval(interval);
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
 
   const handleExploreClick = () => {
     if (!isAuthenticated) {
@@ -98,22 +107,38 @@ const HeroSection = () => {
           </div>
           {/* Right: Why VoltWorx Stands Out Card */}
           <div className="flex-1 w-full max-w-md">
-            <div className="bg-gradient-to-br from-gray-900/80 via-purple-900/60 to-violet-900/80 rounded-2xl shadow-2xl border border-white/10 p-8 flex flex-col items-center gap-6 backdrop-blur-xl">
-              <h3 className="text-xl font-bold text-white mb-2 text-center">Why VoltWorx Stands Out</h3>
-              <ul className="space-y-3 w-full">
-                {features.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-white/90 text-base md:text-lg">
-                    <span className="text-xl md:text-2xl leading-none">{item.emoji}</span>
-                    <span>{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={handleExploreClick}
-                className="mt-4 w-full inline-block text-center px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 transition-colors text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
-              >
-                Explore How It Works
-              </button>
+            <div 
+              className="relative bg-gradient-to-br from-gray-900/80 via-purple-900/60 to-violet-900/80 rounded-2xl shadow-2xl border border-white/10 p-8 backdrop-blur-xl overflow-hidden transition-all duration-300"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              {/* Dynamic light effect */}
+              <div 
+                className={`absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300 ${
+                  isHovering ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{
+                  background: `radial-gradient(300px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0.1) 30%, transparent 70%)`
+                }}
+              />
+              {/* Content positioned above the light effect */}
+              <div className="relative z-10 flex flex-col items-center gap-6 w-full">
+                <h3 className="text-xl font-bold text-white mb-2 text-center">Why VoltWorx Stands Out</h3>
+                <ul className="space-y-3 w-full">
+                  {features.map((item, i) => (
+                    <li key={i} className="flex items-start text-white/90 text-base md:text-lg">
+                      <span>• {item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={handleExploreClick}
+                  className="mt-4 w-full inline-block text-center px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 transition-colors text-base focus:outline-none focus:ring-2 focus:ring-purple-400"
+                >
+                  Explore How It Works
+                </button>
+              </div>
             </div>
           </div>
         </div>
